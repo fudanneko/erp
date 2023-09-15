@@ -72,13 +72,13 @@
                         const note = row.note;
                         const orderState = row.orderState;
 
-                        dataTable.row.add([ `<input type="text" class="form-control" id="OrderId${i}" value="${OrderId}"readonly>`,
+                        dataTable.row.add([ OrderId,
                             `<select name="" id="customerId${i}" class="select24datatable" > </select>`,
                             `<select name="" id="customerName${i}" class="select24datatable" > </select>`,
-                            `<input type="date" class="form-control" id="orderDate${i}" value="${orderDate}">`,
-                            `<input type="date" class="form-control" id="deliveryDate${i}" value="${deliveryDate}">`,
-                            `<input type="text" class="form-control" id="quotation${i}" value="${quotation}">`,
-                            `<input type="text" class="form-control" id="note${i}" value="${note}">`,
+                            orderDate,
+                            deliveryDate,
+                            quotation,
+                            note,
                             `<button type="button" class="btn btn-primary"  id="editbutton${i}"  >修改</button>`,
                             `<a href="#"><button type="button" class="btn btn-outline-primary">詳情</button></a>`,
                             `<button type="button" class="btn btn-primary" id="delete${i}">刪除</button>`]);
@@ -147,6 +147,21 @@
                 width: '30px' // 设置宽度，可以根据需要调整
             },
         ],
+        dom: 'Qlfrtip',
+        select: 'single',
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                text: '修改',
+                action: function ( e, dt, node, config ) {
+                    console.log()
+                    alert( 'Button activated' );
+                }
+            }
+        ],
+        keys: {
+            editor: editor // 启用 Editor 插件
+        }
     });
 
 //
