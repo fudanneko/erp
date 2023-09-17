@@ -76,9 +76,9 @@
         }
 
         /*防止select2不会自动失去焦点*/
-        /*.select2-container {*/
-        /*    z-index: 16000 !important;*/
-        /*}*/
+        .select2-container {
+            z-index: 16000 !important;
+        }
 
         .select2-drop-mask {
             z-index: 15990 !important;
@@ -315,14 +315,12 @@
                                     <form>
                                         <div class="mb-3">
                                             <label for="customerId4new" class="col-form-label">客戶代號:</label>
-                                            <select name="" id="customerId4new" class="select2 ">
-
+                                            <select name="" id="customerId4new" class="select24datatable " style="width: 300px">
                                             </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="customerName4new" class="col-form-label">客戶名稱:</label>
-                                            <select name="" id="customerName4new" class="select2 ">
-
+                                            <select name="" id="customerName4new" class="select24datatable" style="width: 300px">
                                             </select>
                                         </div>
                                         <div class="mb-3">
@@ -360,12 +358,12 @@
                     <table id="all" class="display" style="width:100%">
                         <thead>
                         <tr>
-                            <th>訂單編號</th>
-                            <th>客戶代號</th>
-                            <th>客戶名稱</th>
+                            <th>編號</th>
+                            <th>代號</th>
+                            <th>名稱</th>
                             <th>下訂日</th>
                             <th>交貨日</th>
-                            <th>報價總額</th>
+                            <th>報價</th>
                             <th>備註</th>
                             <th>修改</th>
                             <th>詳情</th>

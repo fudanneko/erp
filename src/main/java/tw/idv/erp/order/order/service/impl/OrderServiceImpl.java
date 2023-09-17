@@ -28,6 +28,7 @@ public class OrderServiceImpl implements OrderService {
     }
     @Override
     public Order edit(Order order) {
+        System.out.println(order.getOrderId());
         Optional<Order> oorder = Dao.findById(order.getOrderId());
         if (oorder.isPresent()) {//確認opromotionCoupone是否為空
             Order oldorder = oorder.get();//將它取出以更改值

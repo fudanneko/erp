@@ -45,7 +45,8 @@
     let dataaccount = 0;
     console.log('aaaa');
     getAllOrder();
-    let Order =[]
+    let Order = []
+
     function getAllOrder() {
         fetch("getAllOrder")
             .then(function (response) {
@@ -58,7 +59,7 @@
                 // 解析 JSON 格式的數據
                 response.json().then(function (data) {
                     // 在此處可以處理從 API 獲取的數據
-                     Order = data;
+                    Order = data;
                     console.log('查到的訂單：', Order);
 
                     for (let i = 0; i < Order.length; i++) {
@@ -66,20 +67,83 @@
                         let row = Order[i];
 
                         const OrderId = row.orderId;
+                        const customerId = row.customerId;
+                        const customerName = row.customerName;
                         const orderDate = dateformat(new Date(row.orderDate));
                         const deliveryDate = dateformat(new Date(row.deliveryDate));
                         const quotation = row.quotation;
                         const note = row.note;
                         const orderState = row.orderState;
 
-                        dataTable.row.add([ OrderId,
-                            `<select name="" id="customerId${i}" class="select24datatable" > </select>`,
-                            `<select name="" id="customerName${i}" class="select24datatable" > </select>`,
+                        dataTable.row.add([OrderId,
+                            customerId,
+                            customerName,
                             orderDate,
                             deliveryDate,
                             quotation,
                             note,
-                            `<button type="button" class="btn btn-primary"  id="editbutton${i}"  >修改</button>`,
+                            `
+            <button type="button" class="btn btn-primary"  data-bs-toggle="modal"
+                    data-bs-target="#exampleModal${i}" data-bs-whatever="@mdo" id="editbutton${i}"  >修改</button>
+         <div class="modal fade" id="exampleModal${i}" tabIndex="-1"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel${i}">訂單修改
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label For="recipientname${i}"
+                                   class="col-form-label">訂單編號:</label>
+                            <input type="text" class="form-control" id="OrderId${i}" value="${OrderId}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label For="recipienttype${i}"
+                                   class="col-form-label">客戶代號:</label>
+                            <select name="" id="customerId${i}" class="select24datatable" style="width: 300px"> </select>
+                        </div>
+                        <div class="mb-3">
+                            <label For="recipientmethed${i}"
+                                   class="col-form-label">客戶名稱:</label>
+                            <select name="" id="customerName${i}" class="select24datatable" style="width: 300px" > </select>
+                        </div>
+                        <div class="mb-3">
+                            <label For="recipientcNo${i}"
+                                   class="col-form-label">下訂日期:</label>
+                            <input type="date" class="form-control" id="orderDate${i}" value="${orderDate}">
+                        </div>
+                        <div class="mb-3">
+                            <label For="recipientaNo${i}"
+                                   class="col-form-label">交貨日期:</label>
+                           <input type="date" class="form-control" id="deliveryDate${i}" value="${deliveryDate}">
+                        </div>
+                         <div class="mb-3">
+                            <label For="recipientaNo${i}"
+                                   class="col-form-label">報價:</label>
+                            <input type="text" class="form-control" id="quotation${i}" value="${quotation}">
+                        </div>
+                         <div class="mb-3">
+                            <label For="recipientaNo${i}"
+                                   class="col-form-label">備註:</label>
+                           <textarea  class="form-control" id="note${i}" value="${note}"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <span id="msg"> </span>
+                    <button type="button" class="btn btn-secondary editbutton"
+                            data-bs-dismiss="modal" id="cancle${i}">取消
+                    </button>
+                    <button type="button" class="btn btn-primary" id="confirm${i}">修改</button>
+                </div>
+            </div>
+        </div>
+    </div>`,
                             `<a href="#"><button type="button" class="btn btn-outline-primary">詳情</button></a>`,
                             `<button type="button" class="btn btn-primary" id="delete${i}">刪除</button>`]);
 
@@ -109,18 +173,18 @@
     let dataTable = $('#all').DataTable({
         scrollY: '600px',
         scrollCollapse: true,
-        paging: false,
-        pageLength: 10,
+        paging: true,
+        pageLength: 15,
         info: false,
         destroy: true,
         columnDefs: [
             {
                 targets: 0, // 第一列
-                width: '24px' // 设置宽度，可以根据需要调整
+                width: '20px' // 设置宽度，可以根据需要调整
             },
             {
                 targets: 1, // 第一列
-                width: '30px' // 设置宽度，可以根据需要调整
+                width: '20px' // 设置宽度，可以根据需要调整
             },
             {
                 targets: 2, // 第一列
@@ -136,40 +200,27 @@
             },
             {
                 targets: 7, // 第6列
-                width: '30px' // 设置宽度，可以根据需要调整
+                width: '50px' // 设置宽度，可以根据需要调整
             },
             {
                 targets: 8, // 第7列
-                width: '30px' // 设置宽度，可以根据需要调整
+                width: '50px' // 设置宽度，可以根据需要调整
             },
             {
                 targets: 9, // 第8列
-                width: '30px' // 设置宽度，可以根据需要调整
+                width: '50px' // 设置宽度，可以根据需要调整
             },
         ],
         dom: 'Qlfrtip',
-        select: 'single',
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                text: '修改',
-                action: function ( e, dt, node, config ) {
-                    console.log()
-                    alert( 'Button activated' );
-                }
-            }
-        ],
-        keys: {
-            editor: editor // 启用 Editor 插件
-        }
     });
 
 //
 
 //     // ============================ 客戶代號及客戶名稱切換 ========================
-    const customerId4new=$('#customerId4new');
-    const customerName4new=$('#customerName4new');
-    function customerIdName4new(){
+    const customerId4new = $('#customerId4new');
+    const customerName4new = $('#customerName4new');
+
+    function customerIdName4new() {
         customerId4new.empty();
         customerName4new.empty();
         customermap.forEach((value, key) => {
@@ -182,8 +233,8 @@
             customerName4new.append(option2);
         });
         // 重新初始化 Select2
-        customerId4new.select2({dropdownParent: $(".modal")});
-        customerName4new.select2({dropdownParent: $(".modal")});
+        customerId4new.select2();
+        customerName4new.select2();
 
         // 監聽選擇事件
         customerId4new.on('change', function () {
@@ -199,6 +250,7 @@
         });
 
     }
+
     function customerIdName() {
         for (let i = 0; i <= dataaccount; i++) {
             const customerIdInput = $(`#customerId${i}`);
@@ -215,7 +267,7 @@
                 customerIdInput.append(option1);
                 customerNameInput.append(option2);
             });
-            for(let i = 0; i < dataaccount; i++){
+            for (let i = 0; i < dataaccount; i++) {
                 let row = Order[i];
                 const customerId = row.customerId;
                 const customerName = row.customerName;
@@ -273,8 +325,6 @@
     deliveryDate4new.val(formattedDate2);
 
 
-
-
 //     // ============================ 修改資料進去 editOrder()========================
     function editOrder(i) {
         const OrderId = document.getElementById(`OrderId${i}`).value;
@@ -284,7 +334,7 @@
         const deliveryDate = document.getElementById(`deliveryDate${i}`).value;
         const quotation = document.getElementById(`quotation${i}`).value;
         const note = document.getElementById(`note${i}`).value;
-        console.log("OrderId : "+OrderId)
+        console.log("OrderId : " + OrderId)
         // if (customerId === '') {
         //     return;
         // }
@@ -294,7 +344,7 @@
             method: 'POST', headers: {
                 'Content-Type': 'application/json',
             }, body: JSON.stringify({
-                OrderId: OrderId,
+                orderId: OrderId,
                 customerId: customerId,
                 customerName: customerName,
                 orderDate: orderDate,
@@ -308,7 +358,6 @@
                 console.log(body);
                 const {successful} = body;
                 if (successful) {
-                    msgs[i].textContent = '修改成功';
                     Swal.fire({
                         position: 'center', icon: 'success', title: '修改成功!', showConfirmButton: false, timer: 1500
                     }).then(() => {
@@ -322,14 +371,15 @@
             });
 
     }
+
 //
     // ============================ 抓取所有修改的燈箱’修改‘按鈕 並綁定事件 ========================
 
     function seteditbutton() {
         for (let i = 0; i <= dataaccount; i++) {
-            const editbuttons = document.getElementById('editbuttona' + i);
-            editbuttons?.addEventListener('click',()=>{
-                console.log('修改按鈕啟動'+ i)
+            const editbuttons = document.getElementById('confirm' + i);
+            editbuttons?.addEventListener('click', () => {
+                console.log('修改按鈕啟動' + i)
                 editOrder(i);
             })
         }
@@ -394,11 +444,79 @@
 
     };
 
-    const newbutton=document.querySelector('#newbutton');
-    newbutton.addEventListener('click',()=>{
+    const newbutton = document.querySelector('#newbutton');
+    newbutton.addEventListener('click', () => {
         newOrder();
     })
 //
+
+// ============================ 修改燈箱程式碼========================
+//     const lightbox =
+//         `<button type="button" class="btn btn-primary" class="btn btn-primary" data-bs-toggle="modal"
+//                     data-bs-target="#exampleModal${i}" data-bs-whatever="@mdo" id="editbutton${i}"  >修改</button>
+//          <div className="modal fade" id="exampleModal${i}" tabIndex="-1"
+//          aria-labelledby="exampleModalLabel" aria-hidden="true">
+//         <div className="modal-dialog">
+//             <div className="modal-content">
+//                 <div className="modal-header">
+//                     <h1 className="modal-title fs-5" id="exampleModalLabel${i}">優惠活動種類修改
+//                     </h1>
+//                     <button type="button" className="btn-close" data-bs-dismiss="modal"
+//                             aria-label="Close"></button>
+//                 </div>
+//                 <div className="modal-body">
+//
+//                     <form>
+//                         <div className="mb-3">
+//                             <label htmlFor="recipientname${i}"
+//                                    className="col-form-label">訂單編號:</label>
+//                             <input type="text" class="form-control" id="OrderId${i}" value="${OrderId}"readonly>
+//                         </div>
+//                         <div className="mb-3">
+//                             <label htmlFor="recipienttype${i}"
+//                                    className="col-form-label">客戶代號:</label>
+//                             <select name="" id="customerId${i}" class="select24datatable" > </select>
+//                         </div>
+//                         <div className="mb-3">
+//                             <label htmlFor="recipientmethed${i}"
+//                                    className="col-form-label">客戶名稱:</label>
+//                             <select name="" id="customerName${i}" class="select24datatable" > </select>
+//                         </div>
+//                         <div className="mb-3">
+//                             <label htmlFor="recipientcNo${i}"
+//                                    className="col-form-label">下訂日期:</label>
+//                             <input type="date" class="form-control" id="orderDate${i}" value="${orderDate}">
+//                         </div>
+//                         <div className="mb-3">
+//                             <label htmlFor="recipientaNo${i}"
+//                                    className="col-form-label">交貨日期:</label>
+//                            <input type="date" class="form-control" id="deliveryDate${i}" value="${deliveryDate}">
+//                         </div>
+//                          <div className="mb-3">
+//                             <label htmlFor="recipientaNo${i}"
+//                                    className="col-form-label">報價:</label>
+//                             <input type="text" class="form-control" id="quotation${i}" value="${quotation}">
+//                         </div>
+//                          <div className="mb-3">
+//                             <label htmlFor="recipientaNo${i}"
+//                                    className="col-form-label">備註:</label>
+//                            <textarea  class="form-control" id="note${i}" value="${note}"></textarea>
+//                         </div>
+//                     </form>
+//                 </div>
+//                 <div className="modal-footer">
+//                     <span id="msg"> </span>
+//                     <button type="button" className="btn btn-secondary editbutton"
+//                             data-bs-dismiss="modal" id="cancle${i}">取消
+//                     </button>
+//                     <button type="button" className="btn btn-primary" id="confirm${i}">修改</button>
+//                 </div>
+//             </div>
+//         </div>
+//     </div>`
+
+    // `<!--<a href="#"><button type="button" class="btn btn-outline-primary">詳情</button></a>-->`,
+    // `<!--<button type="button" class="btn btn-primary" id="delete${i}">刪除</button>-->`]);
 //     // ============================7. 找到所有刪除按鈕========================
 //     let deletebuttons = [];
 //
