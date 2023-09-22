@@ -15,7 +15,7 @@ public class ProductCategory extends Core {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "categoryId", nullable = false)
-    private Integer id;
+    private Integer categoryId;
 
     @Size(max = 45)
     @Column(name = "categoryName", length = 45)

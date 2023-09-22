@@ -10,6 +10,9 @@ public interface OrderService {
     Order edit(Order order);
 
     List<Order> findAll();
+    List<Order> findOrderByorderState();
+
+    List<Order> findOrderByorderState1();
 
     Order findByPK(Integer OrderNo);
 

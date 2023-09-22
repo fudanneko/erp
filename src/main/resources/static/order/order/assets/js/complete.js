@@ -47,7 +47,7 @@
     let Order = []
 
     function getAllOrder() {
-        fetch("getAllOrderbystate")
+        fetch("getAllcompleteorder")
             .then(function (response) {
                 // 檢查 API 响應的狀態碼
                 if (response.status !== 200) {
@@ -73,6 +73,7 @@
                         const quotation = row.quotation;
                         const note = row.note;
                         const orderState = row.orderState;
+                        console.log(orderState)
 
                         dataTable.row.add([OrderId,
                             customerId,
@@ -134,7 +135,7 @@
                          <div class="mb-3">
                             <label For="orderState${i}"
                                    class="col-form-label">已完成:</label>
-                           <input type="checkbox"  id="orderState${i}" ${orderState === 1 ? 'checked' : ''}">
+                           <input type="checkbox"  id="orderState${i}" ${orderState === 1 ? 'checked' : ''}>
                         </div>
                     </form>
                 </div>
@@ -392,71 +393,6 @@
         }
     }
 
-//     // ============================   newOrder()新增訂單========================
-    function newOrder() {
-        const customerId4new = document.querySelector('#customerId4new').value;
-        const customerName4new = document.querySelector('#customerName4new').value;
-        const orderDate4new = document.querySelector('#orderDate4new').value;
-        const deliveryDate4new = document.querySelector('#deliveryDate4new').value;
-        const note4new = document.querySelector('#note4new').value;
-        const msg4new = document.querySelector('#msg4new');
-        const orderStateValue = 0;
-        if (customerId4new === '') {
-            msg4new.textContent = '客戶代號不可為空';
-            return;
-        }
-        if (customerName4new === '') {
-            msg4new.textContent = '客戶名稱不可為空';
-            return;
-        }
-        if (orderDate4new === '') {
-            msg4new.textContent = '訂單日期不可為空';
-            return;
-        }
-        if (deliveryDate4new === '') {
-            msg4new.textContent = '交貨日期不可為空';
-            return;
-        }
-
-        fetch('newOrder', {
-            method: 'POST', headers: {
-                'Content-Type': 'application/json',
-            }, body: JSON.stringify({
-                customerId: customerId4new,
-                customerName: customerName4new,
-                orderDate: orderDate4new,
-                deliveryDate: deliveryDate4new,
-                note: note4new,
-                orderState: orderStateValue,
-            }),
-        })
-            .then(resp => resp.json())
-            .then(body => {
-                console.log(body);
-                const {successful, message} = body;
-                if (successful) {
-
-                    Swal.fire({
-                        position: 'center', icon: 'success', title: '新增成功!', showConfirmButton: false, timer: 1500
-                    }).then(() => {
-                        location.reload()
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error', title: 'Oops...', text: `${message}`, footer: '<a href=""></a>'
-                    })
-                }
-                ;
-
-            });
-
-    };
-
-    const newbutton = document.querySelector('#newbutton');
-    newbutton.addEventListener('click', () => {
-        newOrder();
-    })
-//
 
 // ============================ 修改燈箱程式碼========================
 //     const lightbox =
@@ -525,8 +461,7 @@
 
     // `<!--<a href="#"><button type="button" class="btn btn-outline-primary">詳情</button></a>-->`,
     // `<!--<button type="button" class="btn btn-primary" id="delete${i}">刪除</button>-->`]);
-    // ============================7. 找到所有刪除按鈕並加上事件========================
-
+//
     function setdeletebutton() {
         for (let i = 0; i <= dataaccount; i++) {
             const orderId = Order[i].orderId;
@@ -566,7 +501,6 @@
                 })
         }
     };
-
 //     // ============================10.查詢折價券種類========================
 //     const select4CouponType = document.querySelector('#couponTypeNo');
 //     const dynamicSpansCouponTypeNo = document.querySelector('#dynamicSpansCouponTypeNo');

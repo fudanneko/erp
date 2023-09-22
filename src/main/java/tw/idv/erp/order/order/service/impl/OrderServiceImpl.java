@@ -13,6 +13,7 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDao Dao;
+
     @Override
     public Order add(Order order) {
 
@@ -26,6 +27,7 @@ public class OrderServiceImpl implements OrderService {
         order.setSuccessful(true);
         return result;
     }
+
     @Override
     public Order edit(Order order) {
         System.out.println(order.getOrderId());
@@ -64,19 +66,35 @@ public class OrderServiceImpl implements OrderService {
             return null;
         }
     }
+
     @Override
     public List<Order> findAll() {
         return Dao.findAll();
     }
+
+    @Override
+    public List<Order> findOrderByorderState() {
+        Integer orderstate = 0;
+        return Dao.findOrderByorderState(orderstate);
+    }
+
+    @Override
+    public List<Order> findOrderByorderState1() {
+        Integer orderstate = 1;
+        return Dao.findOrderByorderState(orderstate);
+    }
+
+
     @Override
     public Order findByPK(Integer OrderNo) {
-        Optional<Order> order=Dao.findById(OrderNo);
+        Optional<Order> order = Dao.findById(OrderNo);
         if (order.isPresent()) {
             Order order2 = order.get();
             return order2;
         }
         return null;
     }
+
     @Override
     public boolean remove(Integer orderId) {
         try {

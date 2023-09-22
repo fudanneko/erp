@@ -32,11 +32,21 @@ public class OrderController {
         return OrderSERVICE.findAll();
     }
 
+    @GetMapping("order/order/getAllOrderbystate")
+    public List<Order> findOrderByorderState() {
+        return OrderSERVICE.findOrderByorderState();
+    }
+
+    @GetMapping("order/order/getAllcompleteorder")
+    public List<Order> findOrderByorderState1() {
+        return OrderSERVICE.findOrderByorderState1();
+    }
+
 
     @PostMapping("order/order/deleteOrder")
-    public Boolean deleteOrder(@RequestBody Order OrderRequest) {
-        Integer orderNo = OrderRequest.getOrderId();
-        Boolean deletesucceed = OrderSERVICE.remove(orderNo);
+    public Boolean deleteOrder(@RequestBody Integer OrderRequest) {
+        System.out.println(OrderRequest);
+        Boolean deletesucceed = OrderSERVICE.remove(OrderRequest);
         return deletesucceed;
     }
 

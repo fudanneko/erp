@@ -6,6 +6,7 @@ import tw.idv.erp.core.Core;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -15,10 +16,14 @@ public class OrderDetail extends Core {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orderDetailId", nullable = false)
-    private Integer id;
+    private Integer orderDetailId;
 
     @Column(name = "orderId")
     private Integer orderId;
+
+    @Size(max = 45)
+    @Column(name = "customerName", length = 45)
+    private String customerName;
 
     @Column(name = "categoryId")
     private Integer categoryId;
@@ -46,8 +51,11 @@ public class OrderDetail extends Core {
     @Column(name = "productQuantity")
     private Integer productQuantity;
 
-    @Size(max = 45)
-    @Column(name = "productSubtotal", length = 45)
-    private String productSubtotal;
+    @Column(name = "productSubtotal", precision = 10, scale = 1)
+    private BigDecimal productSubtotal;
+
+    @Size(max = 500)
+    @Column(name = "note", length = 500)
+    private String note;
 
 }

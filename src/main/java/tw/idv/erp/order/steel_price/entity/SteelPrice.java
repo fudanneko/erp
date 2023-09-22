@@ -15,7 +15,7 @@ public class SteelPrice extends Core {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "steelId", nullable = false)
-    private Integer id;
+    private Integer steelId;
 
     @Size(max = 45)
     @Column(name = "steelMaterial", length = 45)
