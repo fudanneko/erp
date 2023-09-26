@@ -39,9 +39,8 @@ public class ContactController {
 
 
     @PostMapping("customer/customer/deleteContact")
-    public Boolean deleteOrder(@RequestBody Contact OrderRequest) {
-        Integer orderNo = OrderRequest.getContactId();
-        Boolean deletesucceed = SERVICE.remove(orderNo);
+    public Boolean deleteOrder(@RequestBody Integer OrderRequest) {
+        Boolean deletesucceed = SERVICE.remove(OrderRequest);
         return deletesucceed;
     }
 

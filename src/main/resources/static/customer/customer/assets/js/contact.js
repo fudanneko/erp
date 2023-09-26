@@ -25,11 +25,6 @@
                         let row = customer[i];
                         const customerId = row.customerId;
                         const customerName = row.customerName;
-                        const customerPhone = row.customerPhone;
-                        const customerFax = row.customerFax;
-                        const customerAddress = row.customerAddress;
-                        const customerMultiplier = row.customerMultiplier;
-                        const note = row.note;
                         customermap.set(customerId, customerName);
                         customermap2.set(customerName, customerId);
                     }
@@ -94,6 +89,11 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                     <div class="mb-3">
+                            <label For="contactId${i}"
+                                   class="col-form-label">編號:</label>
+                           <input type="text" class="form-control" id="contactId${i}" value="${contactId}" readonly>
+                        </div>
                     <div class="mb-3">
                             <label For="customerName${i}"
                                    class="col-form-label">客戶名稱:</label>
@@ -196,7 +196,7 @@
 
 //     // ============================ 修改資料進去 editOrder()========================
     function editContact(i) {
-        const contactId = document.getElementById(`contactId${i}`).value;
+        const contactId=document.getElementById(`contactId${i}`).value;
         const customerName = document.getElementById(`customerName${i}`).value;
         const customerId = customermap2.get(customerName);
         const contactName = document.getElementById(`contactName${i}`).value;
@@ -212,7 +212,7 @@
             method: 'POST', headers: {
                 'Content-Type': 'application/json',
             }, body: JSON.stringify({
-                contactId: contactId,
+                contactId:contactId,
                 customerId: customerId,
                 contactName: contactName,
                 contactTitle: contactTitle,
@@ -257,9 +257,7 @@
 
 //     // ============================   newOrder()新增訂單========================
     function newContact() {
-        const contactId = document.getElementById(`contactId4new`).value;
-        const customerName = document.getElementById(`customerName4new`).value;
-        const customerId = customermap2.get(customerName);
+        const customerId = document.getElementById(`customerId4new`).value;
         const contactName = document.getElementById(`contactName4new`).value;
         const contactTitle = document.getElementById(`contactTitle4new`).value;
         const contactMobile = document.getElementById(`contactMobile4new`).value;
@@ -272,7 +270,6 @@
             method: 'POST', headers: {
                 'Content-Type': 'application/json',
             }, body: JSON.stringify({
-                contactId: contactId,
                 customerId: customerId,
                 contactName: contactName,
                 contactTitle: contactTitle,

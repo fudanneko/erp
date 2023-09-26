@@ -16,11 +16,7 @@ public class ContactDetailServiceImpl implements ContactDetailService {
 
     @Override
     public Contact add(Contact contact) {
-        if (contact.getContactId() == null) {
-            contact.setMessage("未輸入");
-            contact.setSuccessful(false);
-            return contact;
-        }
+
         final Contact result = Dao.save(contact);
         if (result == null) {
             contact.setMessage("新增錯誤");
