@@ -8,6 +8,7 @@
     let categoryNamemap = new Map();
     let productNamemap = new Map();
     let productTypemap = new Map();
+    let productTypemap2 = new Map();
     let productDefaultProcessmap = new Map();
     getcategory();
 
@@ -33,6 +34,7 @@
                         categoryNamemap.set(categoryId, categoryName);
                         productNamemap.set(categoryId, productName);
                         productTypemap.set(categoryId, productType);
+                        productTypemap2.set(productType, categoryId);
                         productDefaultProcessmap.set(categoryId, productDefaultProcess);
                     }
                     ;
@@ -77,7 +79,42 @@
             });
     }
 
+    // ============================找訂單========================
+    let order = [];
+    let ordercustomermap = new Map();
+    getorder();
 
+    function getorder() {
+        fetch("getAllOrder")
+            .then(function (response) {
+                // 檢查 API 响應的狀態碼
+                if (response.status !== 200) {
+                    console.log('發生錯誤，狀態碼：' + response.status);
+                    return;
+                }
+                // 解析 JSON 格式的數據
+                response.json().then(function (data) {
+                    order = data;
+                    console.log("這是訂單", data);
+                    for (let i = 0; i < order.length; i++) {
+                        let row = order[i];
+                        const OrderId = row.orderId;
+                        const customerId = row.customerId;
+                        const customerName = row.customerName;
+                        const orderDate = dateformat(new Date(row.orderDate));
+                        const deliveryDate = dateformat(new Date(row.deliveryDate));
+                        const quotation = row.quotation;
+                        const note = row.note;
+                        const orderState = row.orderState;
+                        ordercustomermap.set(OrderId,customerName);
+                    }
+                    ;
+                });
+            })
+            .catch(function (err) {
+                console.log('錯誤：', err);
+            });
+    }
     // ============================查資料回來getAllPromotion() 拿到字串和筆數========================
     let dataaccount = 0;
     getAllOrder();
@@ -104,8 +141,9 @@
 
                         const orderDetailId = row.orderDetailId;
                         const orderId = row.orderId;
-                        const customerName = row.customerName;
+                        const customerName = ordercustomermap.get(orderId);
                         const categoryId = row.categoryId;
+                        const categorytype = productTypemap.get(categoryId);
                         const length = row.length;
                         const width = row.width;
                         const thickness = row.thickness;
@@ -118,7 +156,7 @@
 
                         dataTable.row.add([orderId,
                             customerName,
-                            categoryId,
+                            categorytype,
                             length,
                             width,
                             thickness,
@@ -372,6 +410,7 @@
     }
 
 
+    //自動選好修改內的select
     function selected4edit() {
         for (let i = 0; i < Orderdetail.length; i++) {
             const categoryNameselect = $(`#categoryName${i}`);
@@ -384,9 +423,7 @@
             const productMaterial = Orderdetail[i].productMaterial;
             categoryNameselect.val(categoryName).trigger('change.select2');
             productNameselect.val(productName).trigger('change.select2');
-            // productNameselect.select2();
             productTypeselect.val(productType).trigger('change.select2');
-            // productTypeselect.select2();
             productMaterialselect.val(productMaterial).trigger('change.select2');
         }
     }
@@ -528,7 +565,9 @@
         const orderDetailId = document.getElementById(`orderDetailId${i}`).value;
         const OrderId = document.getElementById(`OrderId${i}`).value;
         const productType = document.getElementById(`productType${i}`).value;
-        //要轉成categoryId
+        console.log(productType);
+        const categoryId = productTypemap2.get(productType);
+        console.log(categoryId)
         const length = document.getElementById(`length${i}`).value;
         const width = document.getElementById(`width${i}`).value;
         const thickness = document.getElementById(`thickness${i}`).value;
@@ -538,6 +577,7 @@
         const productQuantity = document.getElementById(`productQuantity${i}`).value;
         const productSubtotal = document.getElementById(`productSubtotal${i}`).value;
         const note = document.getElementById(`note${i}`).value;
+
         // if (customerId === '') {
         //     return;
         // }
@@ -549,7 +589,7 @@
             }, body: JSON.stringify({
                 orderDetailId: orderDetailId,
                 orderId: OrderId,
-                categoryId: productType,
+                categoryId: categoryId,
                 length: length,
                 width: width,
                 thickness: thickness,
@@ -596,8 +636,9 @@
 //     // ============================   newOrder()新增訂單========================
     function newOrder() {
         const OrderId = document.getElementById(`orderId4new`).value;
-        const productType = document.getElementById(`categoryId4new`).value;
-        //要轉成categoryId
+        const customerName = ordercustomermap.get(OrderId);
+        const productType = document.getElementById(`productType4new`).value;
+        const categoryId = productTypemap2.get(productType);
         const length = document.getElementById(`length4new`).value;
         const width = document.getElementById(`width4new`).value;
         const thickness = document.getElementById(`thickness4new`).value;
@@ -619,7 +660,8 @@
                 'Content-Type': 'application/json',
             }, body: JSON.stringify({
                 orderId: OrderId,
-                categoryId: productType,
+                customerName:customerName,
+                categoryId: categoryId,
                 length: length,
                 width: width,
                 thickness: thickness,

@@ -11,10 +11,9 @@ public interface CustomerDetailService {
 
     List<CustomerDetail> findAll();
 
-    CustomerDetail findByPK(String customerId);
+    CustomerDetail findByPK(Integer customerId);
 
-//    List<Order> findbcounterNo(Integer OrderNo);
 
-    boolean remove(String customerId);
+    boolean remove(Integer customerId);
 
 }

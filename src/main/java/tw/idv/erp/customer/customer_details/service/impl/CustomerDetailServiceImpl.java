@@ -13,29 +13,52 @@ import java.util.Optional;
 public class CustomerDetailServiceImpl implements CustomerDetailService {
     @Autowired
     private CustomerDetailDao Dao;
+
     @Override
     public CustomerDetail add(CustomerDetail customerDetail) {
-        if (customerDetail.getCustomerId() == null) {
-//            order.setMessage("種類名稱未輸入");
-//            order.setSuccessful(false);
+
+        if (customerDetail.getCustomeruk() == null) {
+            customerDetail.setMessage("未輸入");
+            customerDetail.setSuccessful(false);
             return customerDetail;
         }
+        String customeruk = customerDetail.getCustomeruk();
+        List<CustomerDetail> existingCustomers = Dao.findAll();
+        for (CustomerDetail existingCustomer : existingCustomers) {
+            if (existingCustomer.getCustomeruk().equals(customeruk)) {
+                customerDetail.setMessage("客戶代號已存在");
+                customerDetail.setSuccessful(false);
+                return customerDetail;
+            }
+        }
+
         final CustomerDetail result = Dao.save(customerDetail);
         if (result == null) {
-//            order.setMessage("新增錯誤");
-//            order.setSuccessful(false);
+            customerDetail.setMessage("新增錯誤");
+            customerDetail.setSuccessful(false);
             return customerDetail;
         }
-//        order.setMessage("新增成功");
-//        order.setSuccessful(true);
+        result.setMessage("新增成功");
+        result.setSuccessful(true);
         return result;
     }
+
     @Override
     public CustomerDetail edit(CustomerDetail customerDetail) {
         Optional<CustomerDetail> ocustomerDetail = Dao.findById(customerDetail.getCustomerId());
         if (ocustomerDetail.isPresent()) {//確認opromotionCoupone是否為空
             CustomerDetail oldentity = ocustomerDetail.get();//將它取出以更改值
-
+            if (customerDetail.getCustomeruk() != null) {//若名稱不為空則取代舊值
+                List<CustomerDetail> existingCustomers = Dao.findAll();
+                for (CustomerDetail existingCustomer : existingCustomers) {
+                    if (existingCustomer.getCustomeruk().equals(customerDetail.getCustomeruk())) {
+                        customerDetail.setMessage("客戶代號已存在");
+                        customerDetail.setSuccessful(false);
+                        return customerDetail;
+                    }
+                }
+                oldentity.setCustomeruk(customerDetail.getCustomeruk());
+            }
             if (customerDetail.getCustomerId() != null) {//若名稱不為空則取代舊值
                 oldentity.setCustomerId(customerDetail.getCustomerId());
             }
@@ -54,9 +77,12 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
             if (customerDetail.getCustomerMultiplier() != null) {
                 oldentity.setCustomerMultiplier(customerDetail.getCustomerMultiplier());
             }
+            if (customerDetail.getNote() != null) {
+                oldentity.setNote(customerDetail.getNote());
+            }
             final CustomerDetail result = Dao.save(oldentity);
-//            oldorder.setSuccessful(result != null);
-//            oldorder.setMessage("修改成功");
+            oldentity.setSuccessful(result != null);
+            oldentity.setMessage("修改成功");
             return oldentity;
         } else {
             return null;
@@ -66,9 +92,10 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
     public List<CustomerDetail> findAll() {
         return Dao.findAll();
     }
+
     @Override
-    public CustomerDetail findByPK(String customerId) {
-        Optional<CustomerDetail> order=Dao.findById(customerId);
+    public CustomerDetail findByPK(Integer customerId) {
+        Optional<CustomerDetail> order = Dao.findById(customerId);
         if (order.isPresent()) {
             CustomerDetail order2 = order.get();
             return order2;
@@ -76,29 +103,13 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
         return null;
     }
     @Override
-    public boolean remove(String customerId) {
-        try {
-            Dao.deleteById(customerId);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+    public boolean remove(Integer customerId) {
+            try {
+                Dao.deleteById(customerId);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
     }
-
-
-//
-//    @Override
-//    public List<PromotionCoupon> findbcounterNo(Integer counterNo) {
-//        List<Integer> promotionCoupons = Dao.findCouponTypeNosByCounterNo(counterNo);
-//        List<PromotionCoupon> promotionCoupons2 = Dao.findByCouponTypeNoIn(promotionCoupons);
-//        return promotionCoupons2;
-//    }
-//
-//    ;
-//
-
-//
-
-
 }

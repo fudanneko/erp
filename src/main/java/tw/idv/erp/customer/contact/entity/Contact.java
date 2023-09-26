@@ -14,8 +14,8 @@ import javax.validation.constraints.Size;
 public class Contact extends Core {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "contactIPersond", nullable = false)
-    private Integer id;
+    @Column(name = "contactId", nullable = false)
+    private Integer contactId;
 
     @Column(name = "customerId")
     private Integer customerId;

@@ -26,12 +26,12 @@
                     console.log("這是客戶", customerData);
                     for (let i = 0; i < customerData.length; i++) {
                         let row = customerData[i];
-                        const customerId = row.customerId;
+                        const customeruk = row.customeruk;
                         const customerName = row.customerName;
-                        customerId4select2.push(customerId);
+                        customerId4select2.push(customeruk);
                         customerName4select2.push(customerName);
-                        customermap.set(customerId, customerName);
-                        customermap2.set(customerName, customerId);
+                        customermap.set(customeruk, customerName);
+                        customermap2.set(customerName, customeruk);
                     }
                     ;
                 });

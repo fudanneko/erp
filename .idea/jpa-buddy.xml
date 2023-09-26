@@ -4,6 +4,6 @@
     <option name="defaultUnitInitialized" value="true" />
     <option name="renamerInitialized" value="true" />
     <option name="reverseEngineeringLastDbConnectionId" value="70303f12-7b19-408f-be65-a7c7a97a41c1__changfeng" />
-    <option name="reLastEntityCreationPackage" value="src/main/java/tw/idv/erp/order/order/entity" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/tw/idv/erp/customer/customer_details/entity" />
   </component>
 </project>

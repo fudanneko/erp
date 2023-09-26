@@ -1,0 +1,13 @@
+span.logo-name {
+    font-family: "Ubuntu";
+}
+
+.btn:hover {
+    background-color: bisque;
+    color: brown;
+    transition: 0.25s;
+}
+
+.select24datatable {
+    width: 100% !important; /* 設置寬度為100%，使用!important以優先適用此樣式 */
+}
