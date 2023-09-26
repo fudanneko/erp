@@ -212,7 +212,7 @@
             .then(resp => resp.json())
             .then(body => {
                 console.log(body);
-                const {successful} = body;
+                const {successful,message} = body;
                 if (successful) {
                     Swal.fire({
                         position: 'center', icon: 'success', title: '修改成功!', showConfirmButton: false, timer: 1500
@@ -221,7 +221,7 @@
                     })
                 } else {
                     Swal.fire({
-                        icon: 'error', title: 'Oops...', text: '修改失敗!', footer: '<a href=""></a>'
+                        icon: 'error', title: 'Oops...', text: `${message}`, footer: '<a href=""></a>'
                     })
                 }
             });

@@ -48,7 +48,8 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
         Optional<CustomerDetail> ocustomerDetail = Dao.findById(customerDetail.getCustomerId());
         if (ocustomerDetail.isPresent()) {//確認opromotionCoupone是否為空
             CustomerDetail oldentity = ocustomerDetail.get();//將它取出以更改值
-            if (customerDetail.getCustomeruk() != null) {//若名稱不為空則取代舊值
+
+            if (customerDetail.getCustomeruk() != null && !customerDetail.getCustomeruk().equals(oldentity.getCustomeruk())) {//若名稱不為空則取代舊值
                 List<CustomerDetail> existingCustomers = Dao.findAll();
                 for (CustomerDetail existingCustomer : existingCustomers) {
                     if (existingCustomer.getCustomeruk().equals(customerDetail.getCustomeruk())) {
@@ -59,7 +60,7 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
                 }
                 oldentity.setCustomeruk(customerDetail.getCustomeruk());
             }
-            if (customerDetail.getCustomerId() != null) {//若名稱不為空則取代舊值
+            if (customerDetail.getCustomerId() != null) {
                 oldentity.setCustomerId(customerDetail.getCustomerId());
             }
             if (customerDetail.getCustomerName() != null) {
