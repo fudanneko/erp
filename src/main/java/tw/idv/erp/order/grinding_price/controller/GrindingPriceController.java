@@ -1,46 +1,46 @@
-package tw.idv.erp.customer.contact.controller;
+package tw.idv.erp.order.grinding_price.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import tw.idv.erp.customer.contact.entity.Contact;
-import tw.idv.erp.customer.contact.service.ContactDetailService;
+import tw.idv.erp.order.grinding_price.entity.GrindingPrice;
+import tw.idv.erp.order.grinding_price.service.GrindingPriceService;
 
 import java.util.List;
 
 @RestController
-public class ContactController {
+public class GrindingPriceController {
     private static final long serialVersionUID = 1L;
     @Autowired
-    private ContactDetailService SERVICE;
+    private GrindingPriceService SERVICE;
 
 
-    @PostMapping("customer/customer/editContact")
-    public Contact editOrder(@RequestBody Contact OrderRequest) {
-        Contact contact = SERVICE.edit(OrderRequest);
-        return contact;
+    @PostMapping("order/order/editGrindingPrice")
+    public GrindingPrice editOrder(@RequestBody GrindingPrice OrderRequest) {
+        GrindingPrice entity = SERVICE.edit(OrderRequest);
+        return entity;
     }
 
 
-    @PostMapping("customer/customer/newContact")
-    public Contact newOrder(@RequestBody Contact OrderRequest) {
-        Contact contact = SERVICE.add(OrderRequest);
-        return contact;
+    @PostMapping("order/order/newGrindingPrice")
+    public GrindingPrice newOrder(@RequestBody GrindingPrice OrderRequest) {
+        GrindingPrice entity = SERVICE.add(OrderRequest);
+        return entity;
     }
 
 
 
-    @GetMapping("customer/customer/getAllContact")
-    public List<Contact> findAll() {
+    @GetMapping("order/order/getAllGrindingPrice")
+    public List<GrindingPrice> findAll() {
         return SERVICE.findAll();
     }
 
 
-    @PostMapping("customer/customer/deleteContact")
-    public Boolean deleteOrder(@RequestBody Integer OrderRequest) {
-        Boolean deletesucceed = SERVICE.remove(OrderRequest);
+    @PostMapping("order/order/deleteGrindingPrice")
+    public Boolean deleteOrder(@RequestBody Integer Request) {
+        Boolean deletesucceed = SERVICE.remove(Request);
         return deletesucceed;
     }
 

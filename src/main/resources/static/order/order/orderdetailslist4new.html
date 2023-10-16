@@ -296,7 +296,7 @@
         <div class="col-10 page-body">
             <div class="controll-box activity-order-controll-box">
                 <div class="back-end-box-title activity-order-controll-title">
-                    <h3 class="h2">訂單明細列表</h3>
+                    <h3 class="h2" id="titlea">訂單明細列表</h3>
                     <!-- 燈箱 -->
                     <button type="button" class="btn btn-primary" id="newbutton2" data-bs-toggle="modal"
                             data-bs-target="#exampleModal" data-bs-whatever="@mdo">新增
@@ -316,12 +316,8 @@
                                         <div class="mb-3">
                                             <label for="orderId4new"
                                                    class="col-form-label">訂單編號:</label>
-                                            <input type="text" class="form-control" id="orderId4new">
+                                            <input type="text" class="form-control" id="orderId4new" readonly>
                                         </div>
-<!--                                        <div class="mb-3">-->
-<!--                                            <label for="categoryId4new" class="col-form-label">種類編號:</label>-->
-<!--                                            <input type="text" class="form-control" id="categoryId4new" readonly>-->
-<!--                                        </div>-->
                                         <div class="mb-3">
                                             <label For="categoryName4new"
                                                    class="col-form-label">種類名稱:</label>
@@ -442,7 +438,7 @@
         crossorigin="anonymous"></script>
 
 <!-- 新引入的JS檔案或套件請由此往下放 -->
-<script src="assets/js/orderdetailslist.js"></script>
+<script src="assets/js/orderdetailslist4new.js"></script>
 <script>
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))

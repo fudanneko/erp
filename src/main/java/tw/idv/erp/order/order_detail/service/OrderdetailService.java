@@ -15,4 +15,6 @@ public interface OrderdetailService {
 
     boolean remove(Integer orderDetailId);
 
+    List<OrderDetail> findByOrderId(Integer orderId);
+
 }

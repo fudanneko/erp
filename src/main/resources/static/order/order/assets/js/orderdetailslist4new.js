@@ -2,6 +2,7 @@
     const tbody = document.querySelector('#tbody');
 
 
+
     // ===============================VVV方法區VVV====================================
     // ===============================找種類===================================
     let category = [];
@@ -106,7 +107,7 @@
                         const quotation = row.quotation;
                         const note = row.note;
                         const orderState = row.orderState;
-                        ordercustomermap.set(OrderId,customerName);
+                        ordercustomermap.set(OrderId, customerName);
                     }
                     ;
                 });
@@ -115,13 +116,21 @@
                 console.log('錯誤：', err);
             });
     }
+
     // ============================查資料回來getAllPromotion() 拿到字串和筆數========================
     let dataaccount = 0;
-    getAllOrder();
+    getOrderDetailByOrder();
     let Orderdetail = []
 
-    function getAllOrder() {
-        fetch("getAllOrderDetail")
+
+    function getOrderDetailByOrder() {
+        const orderData = JSON.parse(sessionStorage.getItem('order'));
+        const orderId = orderData.orderId;
+        fetch('getOrderDetailByOrder', {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json',
+            }, body: (orderId),
+        })
             .then(function (response) {
                 // 檢查 API 响應的狀態碼
                 if (response.status !== 200) {
@@ -134,11 +143,9 @@
                     // 在此處可以處理從 API 獲取的數據
                     Orderdetail = data;
                     console.log('查到的訂單：', Orderdetail);
-
+                    dataaccount =Orderdetail.length;
                     for (let i = 0; i < Orderdetail.length; i++) {
-                        dataaccount = i;
                         let row = Orderdetail[i];
-
                         const orderDetailId = row.orderDetailId;
                         const orderId = row.orderId;
                         const customerName = ordercustomermap.get(orderId);
@@ -268,8 +275,9 @@
 
                     }
                     dataTable.draw();
+                    orderIdinnew()
                     seteditbutton();
-                    setdeletebutton()
+                    setdeletebutton();
                     select4new();
                     select4edit();
                     selected4edit()
@@ -624,7 +632,7 @@
     // ============================ 抓取所有修改的燈箱’修改‘按鈕 並綁定事件 ========================
 
     function seteditbutton() {
-        for (let i = 0; i <= dataaccount; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const editbuttons = document.getElementById('confirm' + i);
             editbuttons?.addEventListener('click', () => {
                 console.log('修改按鈕啟動' + i)
@@ -634,9 +642,19 @@
     }
 
 //     // ============================   newOrder()新增訂單========================
+    function orderIdinnew() {
+        const orderData = JSON.parse(sessionStorage.getItem('order'));
+        const orderId = orderData.orderId;
+        const OrderIdinput = document.getElementById(`orderId4new`);
+        OrderIdinput.value = orderId;
+        const titlea = document.querySelector('#titlea');
+        titlea.textContent='訂單明細列表 訂單編號： '+orderId;
+
+    }
+
     function newOrder() {
-        const OrderId = document.getElementById(`orderId4new`).value;
-        const customerName = ordercustomermap.get(OrderId);
+        const orderId = document.getElementById(`orderId4new`).value;
+        const customerName = ordercustomermap.get(orderId);
         const productType = document.getElementById(`productType4new`).value;
         const categoryId = productTypemap2.get(productType);
         const length = document.getElementById(`length4new`).value;
@@ -659,8 +677,8 @@
             method: 'POST', headers: {
                 'Content-Type': 'application/json',
             }, body: JSON.stringify({
-                orderId: OrderId,
-                customerName:customerName,
+                orderId: orderId,
+                customerName: customerName,
                 categoryId: categoryId,
                 length: length,
                 width: width,
@@ -701,83 +719,21 @@
     })
 //
 
-// ============================ 修改燈箱程式碼========================
-//     const lightbox =
-//         `<button type="button" class="btn btn-primary" class="btn btn-primary" data-bs-toggle="modal"
-//                     data-bs-target="#exampleModal${i}" data-bs-whatever="@mdo" id="editbutton${i}"  >修改</button>
-//          <div className="modal fade" id="exampleModal${i}" tabIndex="-1"
-//          aria-labelledby="exampleModalLabel" aria-hidden="true">
-//         <div className="modal-dialog">
-//             <div className="modal-content">
-//                 <div className="modal-header">
-//                     <h1 className="modal-title fs-5" id="exampleModalLabel${i}">優惠活動種類修改
-//                     </h1>
-//                     <button type="button" className="btn-close" data-bs-dismiss="modal"
-//                             aria-label="Close"></button>
-//                 </div>
-//                 <div className="modal-body">
 //
-//                     <form>
-//                         <div className="mb-3">
-//                             <label htmlFor="recipientname${i}"
-//                                    className="col-form-label">訂單編號:</label>
-//                             <input type="text" class="form-control" id="OrderId${i}" value="${OrderId}"readonly>
-//                         </div>
-//                         <div className="mb-3">
-//                             <label htmlFor="recipienttype${i}"
-//                                    className="col-form-label">客戶代號:</label>
-//                             <select name="" id="customerId${i}" class="select24datatable" > </select>
-//                         </div>
-//                         <div className="mb-3">
-//                             <label htmlFor="recipientmethed${i}"
-//                                    className="col-form-label">客戶名稱:</label>
-//                             <select name="" id="customerName${i}" class="select24datatable" > </select>
-//                         </div>
-//                         <div className="mb-3">
-//                             <label htmlFor="recipientcNo${i}"
-//                                    className="col-form-label">下訂日期:</label>
-//                             <input type="date" class="form-control" id="orderDate${i}" value="${orderDate}">
-//                         </div>
-//                         <div className="mb-3">
-//                             <label htmlFor="recipientaNo${i}"
-//                                    className="col-form-label">交貨日期:</label>
-//                            <input type="date" class="form-control" id="deliveryDate${i}" value="${deliveryDate}">
-//                         </div>
-//                          <div className="mb-3">
-//                             <label htmlFor="recipientaNo${i}"
-//                                    className="col-form-label">報價:</label>
-//                             <input type="text" class="form-control" id="quotation${i}" value="${quotation}">
-//                         </div>
-//                          <div className="mb-3">
-//                             <label htmlFor="recipientaNo${i}"
-//                                    className="col-form-label">備註:</label>
-//                            <textarea  class="form-control" id="note${i}" value="${note}"></textarea>
-//                         </div>
-//                     </form>
-//                 </div>
-//                 <div className="modal-footer">
-//                     <span id="msg"> </span>
-//                     <button type="button" className="btn btn-secondary editbutton"
-//                             data-bs-dismiss="modal" id="cancle${i}">取消
-//                     </button>
-//                     <button type="button" className="btn btn-primary" id="confirm${i}">修改</button>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>`
-
-    // `<!--<a href="#"><button type="button" class="btn btn-outline-primary">詳情</button></a>-->`,
-    // `<!--<button type="button" class="btn btn-primary" id="delete${i}">刪除</button>-->`]);
     // ============================7. 找到所有刪除按鈕並加上事件========================
 
     function setdeletebutton() {
-        for (let i = 0; i <= dataaccount; i++) {
-            const orderDetailId = Orderdetail[i].orderDetailId;
-            const deletebutton = document.getElementById('delete' + i);
-            deletebutton?.addEventListener('click', () => {
-                console.log('第' + i + '個的ｉｄ:' + orderDetailId)
-                deledtbyPK(orderDetailId);
-            })
+
+        if (dataaccount !== 0) {
+            for (let i = 0; i < dataaccount; i++) {
+                let row = Orderdetail[i];
+                const orderDetailId = row.orderDetailId;
+                const deletebutton = document.getElementById('delete' + i);
+                deletebutton?.addEventListener('click', () => {
+                    console.log('第' + i + '個的ｉｄ:' + orderDetailId)
+                    deledtbyPK(orderDetailId);
+                })
+            }
         }
     }
 

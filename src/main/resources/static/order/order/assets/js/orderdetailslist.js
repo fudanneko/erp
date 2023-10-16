@@ -134,9 +134,9 @@
                     // 在此處可以處理從 API 獲取的數據
                     Orderdetail = data;
                     console.log('查到的訂單：', Orderdetail);
-
+                    dataaccount = Orderdetail.length;
                     for (let i = 0; i < Orderdetail.length; i++) {
-                        dataaccount = i;
+
                         let row = Orderdetail[i];
 
                         const orderDetailId = row.orderDetailId;
@@ -270,9 +270,9 @@
                     dataTable.draw();
                     seteditbutton();
                     setdeletebutton()
-                    select4new();
                     select4edit();
                     selected4edit()
+
 
                 });
             })
@@ -327,87 +327,6 @@
         ],
         dom: 'Qlfrtip',
     });
-
-//
-
-//     // ============================ 客戶代號及客戶名稱切換 ========================
-    const categoryId4new = $('#categoryId4new');
-    const categoryName4new = $('#categoryName4new');
-    const productName4new = $('#productName4new');
-    const productType4new = $('#productType4new');
-    const productMaterial4new = $('#productMaterial4new');
-    const productName4newdiv = $('#productName4newdiv');
-    const productType4newdiv = $('#productType4newdiv');
-
-
-    function select4new() {
-        //新增的select清空
-        categoryId4new.empty();
-        productMaterial4new.empty();
-        //種類select動態放入
-        const uniqueCategoryNames = new Set();
-        category.forEach(function (row) {
-            const categoryName = row.categoryName;
-            uniqueCategoryNames.add(categoryName);
-        })
-        uniqueCategoryNames.forEach(function (row) {
-            const option = new Option(row, row);
-            categoryName4new.append(option);
-        })
-        categoryName4new.select2();
-        //材質select動態放入
-        const uniquesteelMaterial = new Set();
-        meterail.forEach(function (row) {
-            const steelMaterial = row.steelMaterial;
-            uniquesteelMaterial.add(steelMaterial);
-        })
-        uniquesteelMaterial.forEach(function (row) {
-            const option = new Option(row, row);
-            productMaterial4new.append(option);
-        })
-        productMaterial4new.select2();
-
-        // 監聽種類名稱選擇事件
-        categoryName4new.on('change', function () {
-            productName4newdiv.css('display', 'block');
-            productType4newdiv.css('display', 'none');
-            const optiond = new Option('請選擇', '');
-            productName4new.empty();
-            productName4new.append(optiond);
-            const selectedValue = categoryName4new.val();
-            const uniquesteelMaterial = new Set();
-            category.forEach(function (row) {
-                const categoryName = row.categoryName;
-                const productName = row.productName;
-                if (categoryName === selectedValue) {
-                    uniquesteelMaterial.add(productName);
-                }
-            })
-            uniquesteelMaterial.forEach(function (row) {
-                const option = new Option(row, row);
-                productName4new.append(option);
-            })
-
-            productName4new.select2();
-        });
-        // 監聽產品名稱選擇事件
-        productName4new.on('change', function () {
-            productType4newdiv.css('display', 'block');
-            productType4new.empty();
-            const optiond = new Option('請選擇', '');
-            productType4new.append(optiond);
-            const selectedValue = productName4new.val();
-            category.forEach(function (row) {
-                const productName = row.productName;
-                const productType = row.productType;
-                if (productName === selectedValue) {
-                    const option = new Option(productType, productType);
-                    productType4new.append(option);
-                }
-            })
-            productType4new.select2();
-        });
-    }
 
 
     //自動選好修改內的select
@@ -624,7 +543,7 @@
     // ============================ 抓取所有修改的燈箱’修改‘按鈕 並綁定事件 ========================
 
     function seteditbutton() {
-        for (let i = 0; i <= dataaccount; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const editbuttons = document.getElementById('confirm' + i);
             editbuttons?.addEventListener('click', () => {
                 console.log('修改按鈕啟動' + i)
@@ -634,72 +553,7 @@
     }
 
 //     // ============================   newOrder()新增訂單========================
-    function newOrder() {
-        const OrderId = document.getElementById(`orderId4new`).value;
-        const customerName = ordercustomermap.get(OrderId);
-        const productType = document.getElementById(`productType4new`).value;
-        const categoryId = productTypemap2.get(productType);
-        const length = document.getElementById(`length4new`).value;
-        const width = document.getElementById(`width4new`).value;
-        const thickness = document.getElementById(`thickness4new`).value;
-        const productMaterial = document.getElementById(`productMaterial4new`).value;
-        const manufacturingProcess = document.getElementById(`manufacturingProcess4new`).value;
-        const productQuotationUnitPrice = document.getElementById(`productQuotationUnitPrice4new`).value;
-        const productQuantity = document.getElementById(`productQuantity4new`).value;
-        const productSubtotal = document.getElementById(`productSubtotal4new`).value;
-        const note = document.getElementById(`note4new`).value;
 
-        // if (customerId4new === '') {
-        //     msg4new.textContent = '客戶代號不可為空';
-        //     return;
-        // }
-
-
-        fetch('newOrderDetail', {
-            method: 'POST', headers: {
-                'Content-Type': 'application/json',
-            }, body: JSON.stringify({
-                orderId: OrderId,
-                customerName:customerName,
-                categoryId: categoryId,
-                length: length,
-                width: width,
-                thickness: thickness,
-                productMaterial: productMaterial,
-                manufacturingProcess: manufacturingProcess,
-                productQuotationUnitPrice: productQuotationUnitPrice,
-                productQuantity: productQuantity,
-                productSubtotal: productSubtotal,
-                note: note,
-            }),
-        })
-            .then(resp => resp.json())
-            .then(body => {
-                console.log(body);
-                const {successful, message} = body;
-                if (successful) {
-
-                    Swal.fire({
-                        position: 'center', icon: 'success', title: '新增成功!', showConfirmButton: false, timer: 1500
-                    }).then(() => {
-                        location.reload()
-                    })
-                } else {
-                    Swal.fire({
-                        icon: 'error', title: 'Oops...', text: `${message}`, footer: '<a href=""></a>'
-                    })
-                }
-                ;
-
-            });
-
-    };
-
-    const newbutton = document.querySelector('#newbutton');
-    newbutton.addEventListener('click', () => {
-        newOrder();
-    })
-//
 
 // ============================ 修改燈箱程式碼========================
 //     const lightbox =
@@ -771,7 +625,7 @@
     // ============================7. 找到所有刪除按鈕並加上事件========================
 
     function setdeletebutton() {
-        for (let i = 0; i <= dataaccount; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const orderDetailId = Orderdetail[i].orderDetailId;
             const deletebutton = document.getElementById('delete' + i);
             deletebutton?.addEventListener('click', () => {

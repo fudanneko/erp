@@ -62,9 +62,7 @@
 
                         const contactId = row.contactId;
                         const customerId = row.customerId;
-                        console.log(customerId);
                         const customerName = customermap.get(customerId);
-                        console.log(customerName);
                         const contactName = row.contactName;
                         const contactTitle = row.contactTitle;
                         const contactMobile = row.contactMobile;

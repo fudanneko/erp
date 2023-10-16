@@ -60,11 +60,9 @@
                     // 在此處可以處理從 API 獲取的數據
                     Order = data;
                     console.log('查到的訂單：', Order);
-
+                    dataaccount = Order.length;
                     for (let i = 0; i < Order.length; i++) {
-                        dataaccount = i;
                         let row = Order[i];
-
                         const OrderId = row.orderId;
                         const customerId = row.customerId;
                         const customerName = row.customerName;
@@ -257,7 +255,7 @@
     }
 
     function customerIdName() {
-        for (let i = 0; i <= dataaccount; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const customerIdInput = $(`#customerId${i}`);
             const customerNameInput = $(`#customerName${i}`);
             // 先清空原有的選項
@@ -384,7 +382,7 @@
     // ============================ 抓取所有修改的燈箱’修改‘按鈕 並綁定事件 ========================
 
     function seteditbutton() {
-        for (let i = 0; i <= dataaccount; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const editbuttons = document.getElementById('confirm' + i);
             editbuttons?.addEventListener('click', () => {
                 console.log('修改按鈕啟動' + i)
@@ -463,7 +461,7 @@
     // `<!--<button type="button" class="btn btn-primary" id="delete${i}">刪除</button>-->`]);
 //
     function setdeletebutton() {
-        for (let i = 0; i <= dataaccount; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const orderId = Order[i].orderId;
             const deletebutton = document.getElementById('delete' + i);
             deletebutton?.addEventListener('click', () => {

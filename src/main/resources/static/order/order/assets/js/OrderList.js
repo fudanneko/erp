@@ -1,4 +1,3 @@
-
 (() => {
     const tbody = document.querySelector('#tbody');
 
@@ -61,11 +60,9 @@
                     // 在此處可以處理從 API 獲取的數據
                     Order = data;
                     console.log('查到的訂單：', Order);
-
+                    dataaccount = Order.length;
                     for (let i = 0; i < Order.length; i++) {
-                        dataaccount = i;
                         let row = Order[i];
-
                         const OrderId = row.orderId;
                         const customerId = row.customerId;
                         const customerName = row.customerName;
@@ -149,7 +146,7 @@
             </div>
         </div>
     </div>`,
-                            `<a href="#"><button type="button" class="btn btn-outline-primary">詳情</button></a>`,
+                            `<a href="orderdetailslist4new.html"><button type="button" class="btn btn-outline-primary" id="detail${i}">詳情</button></a>`,
                             `<button type="button" class="btn btn-primary" id="delete${i}">刪除</button>`]);
 
                     }
@@ -157,7 +154,8 @@
                     customerIdName();
                     customerIdName4new();
                     seteditbutton();
-                    setdeletebutton()
+                    setdeletebutton();
+                    detailbutton();
                 });
             })
             .catch(function (err) {
@@ -250,7 +248,7 @@
     }
 
     function customerIdName() {
-        for (let i = 0; i <= dataaccount; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const customerIdInput = $(`#customerId${i}`);
             const customerNameInput = $(`#customerName${i}`);
             customerIdInput.select2();
@@ -332,7 +330,7 @@
         const deliveryDate = document.getElementById(`deliveryDate${i}`).value;
         const quotation = document.getElementById(`quotation${i}`).value;
         const note = document.getElementById(`note${i}`).value;
-        const orderState = document.getElementById(`orderState${i}`).checked? 1 : 0;
+        const orderState = document.getElementById(`orderState${i}`).checked ? 1 : 0;
 
         console.log("OrderId : " + OrderId)
         // if (customerId === '') {
@@ -377,7 +375,7 @@
     // ============================ 抓取所有修改的燈箱’修改‘按鈕 並綁定事件 ========================
 
     function seteditbutton() {
-        for (let i = 0; i <= dataaccount; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const editbuttons = document.getElementById('confirm' + i);
             editbuttons?.addEventListener('click', () => {
                 console.log('修改按鈕啟動' + i)
@@ -456,15 +454,16 @@
     // ============================7. 找到所有刪除按鈕並加上事件========================
 
     function setdeletebutton() {
-        for (let i = 0; i <= dataaccount; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const orderId = Order[i].orderId;
             const deletebutton = document.getElementById('delete' + i);
             deletebutton?.addEventListener('click', () => {
-                console.log('第'+i+'個的ｉｄ:'+orderId)
+                console.log('第' + i + '個的ｉｄ:' + orderId)
                 deledtbyPK(orderId);
             })
         }
     }
+
     // ============================9. 刪除方法========================
     function deledtbyPK(orderId) {
         const confirmed = confirm("確定要刪除嗎？");
@@ -501,19 +500,25 @@
         return formattedDate;
     }
 
+    // ===============================詳情按鈕 資料寫入storage===================================
+
     // ===============================^^^方法區^^^====================================
 
     // ===============================VVV使用方法區VVV================================
 
     //=================================1. 總之先查一次=================================
-
+    function detailbutton() {
+        for (let i = 0; i < dataaccount; i++) {
+            const detailbutton = document.getElementById('detail' + i);
+            detailbutton?.addEventListener('click', () => {
+                sessionStorage.setItem('order',JSON.stringify(Order[i]));
+            })
+        }
+    }
 
     // ===============================2. 確認新增按鈕================================
 
-    // const button4new = document.querySelector('#newbutton');
-    // button4new?.addEventListener('click', () => {
-    //     newAPromotion();
-    // })
+
 //=================================3. 圖片檔案上傳按鈕=============================
 
 

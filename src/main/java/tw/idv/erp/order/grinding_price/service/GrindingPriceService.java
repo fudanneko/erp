@@ -1,19 +1,19 @@
-package tw.idv.erp.customer.contact.service;
+package tw.idv.erp.order.grinding_price.service;
 
-import tw.idv.erp.customer.contact.entity.Contact;
+import tw.idv.erp.order.grinding_price.entity.GrindingPrice;
 
 import java.util.List;
 
-public interface ContactDetailService {
-    Contact add(Contact contact);
+public interface GrindingPriceService {
+    GrindingPrice add(GrindingPrice grindingPrice);
 
-    Contact edit(Contact contact);
+    GrindingPrice edit(GrindingPrice grindingPrice);
 
-    List<Contact> findAll();
+    List<GrindingPrice> findAll();
 
-    Contact findByPK(Integer contactId);
+    GrindingPrice findByPK(Integer getGrindingId);
 
 
-    boolean remove(Integer contactId);
+    boolean remove(Integer getGrindingId);
 
 }

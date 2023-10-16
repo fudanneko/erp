@@ -16,7 +16,7 @@ public class GrindingPrice extends Core {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "grindingId", nullable = false)
-    private Integer id;
+    private Integer grindingId;
 
     @Size(max = 45)
     @Column(name = "grindingVendor", length = 45)

@@ -10,7 +10,7 @@
     let grindingPriceData = [];
 
     function getgrindingPrice() {
-        fetch("getAllgrindingPrice")
+        fetch("getAllGrindingPrice")
             .then(function (response) {
                 // 檢查 API 响應的狀態碼
                 if (response.status !== 200) {
@@ -23,8 +23,8 @@
                     // 在此處可以處理從 API 獲取的數據
                     grindingPriceData = data;
                     console.log("這是研磨資料", grindingPriceData);
+                    dataaccount=grindingPriceData.length;
                     for (let i = 0; i < grindingPriceData.length; i++) {
-                        i=dataaccount;
                         let row = grindingPriceData[i];
                         const grindingId = row.grindingId;
                         const grindingVendor = row.grindingVendor;
@@ -57,7 +57,7 @@
                         <div class="mb-3">
                             <label For="grindingId${i}"
                                    class="col-form-label">編號:</label>
-                            <input type="text" class="form-control" id="grindingId${i}" value="${OrderId}" readonly>
+                            <input type="text" class="form-control" id="grindingId${i}" value="${grindingId}" readonly>
                         </div>
                         <div class="mb-3">
                             <label For="grindingVendor${i}"
@@ -78,17 +78,17 @@
                         <div class="mb-3">
                             <label For="grindingMinSize${i}"
                                    class="col-form-label">最低尺寸:</label>
-                            <input type="date" class="form-control" id="grindingMinSize${i}" value="${orderDate}">
+                            <input type="date" class="form-control" id="grindingMinSize${i}" value="${grindingMinSize}">
                         </div>
                         <div class="mb-3">
                             <label For="grindingMaxSize${i}"
                                    class="col-form-label">最高尺寸:</label>
-                           <input type="date" class="form-control" id="grindingMaxSize${i}" value="${deliveryDate}">
+                           <input type="date" class="form-control" id="grindingMaxSize${i}" value="${grindingMaxSize}">
                         </div>
                          <div class="mb-3">
                             <label For="grindingUnitPrice${i}"
                                    class="col-form-label">單價:</label>
-                            <input type="text" class="form-control" id="grindingUnitPrice${i}" value="${quotation}">
+                            <input type="text" class="form-control" id="grindingUnitPrice${i}" value="${grindingUnitPrice}">
                         </div>
                     </form>
                 </div>
@@ -142,7 +142,7 @@
         // }
         // 檢查結束
 
-        fetch('editgrindingPrice', {
+        fetch('editGrindingPrice', {
             method: 'POST', headers: {
                 'Content-Type': 'application/json',
             }, body: JSON.stringify({
@@ -177,7 +177,7 @@
     // ============================ 抓取所有修改的燈箱’修改‘按鈕 並綁定事件 ========================
 
     function seteditbutton() {
-        for (let i = 0; i <= dataaccount; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const editbuttons = document.getElementById('confirm' + i);
             editbuttons?.addEventListener('click', () => {
                 console.log('修改按鈕啟動' + i)
@@ -209,7 +209,7 @@
             return;
         }
 
-        fetch('newgrindingPrice', {
+        fetch('newGrindingPrice', {
             method: 'POST', headers: {
                 'Content-Type': 'application/json',
             }, body: JSON.stringify({
@@ -252,7 +252,7 @@
     // ============================7. 找到所有刪除按鈕並加上事件========================
 
     function setdeletebutton() {
-        for (let i = 0; i <= dataaccount; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const grindingId = grindingPriceData[i].grindingId;
             const deletebutton = document.getElementById('delete' + i);
             deletebutton?.addEventListener('click', () => {
@@ -267,7 +267,7 @@
         const confirmed = confirm("確定要刪除嗎？");
         console.log(grindingId)
         if (confirmed) {
-            fetch('deleteOrder', {
+            fetch('deleteGrindingPrice', {
                 method: 'POST', headers: {
                     'Content-Type': 'application/json',
                 }, body: JSON.stringify(grindingId),

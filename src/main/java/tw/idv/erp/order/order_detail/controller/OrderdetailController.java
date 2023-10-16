@@ -35,6 +35,12 @@ public class OrderdetailController {
         return SERVICE.findAll();
     }
 
+    @PostMapping("order/order/getOrderDetailByOrder")
+    public List<OrderDetail> findByPk(@RequestBody  Integer Request) {
+        List<OrderDetail> result=SERVICE.findByOrderId(Request);
+        return result;
+    }
+
 
     @PostMapping("order/order/deleteOrderDetail")
     public Boolean deleteOrder(@RequestBody Integer Request) {

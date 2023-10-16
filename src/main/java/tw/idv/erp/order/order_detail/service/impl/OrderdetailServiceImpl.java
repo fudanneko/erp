@@ -103,4 +103,9 @@ public class OrderdetailServiceImpl implements OrderdetailService {
     }
 
 
+    @Override
+    public List<OrderDetail> findByOrderId(Integer orderId) {
+       List<OrderDetail> orderDetail = Dao.findByOrderId(orderId);
+       return orderDetail;
+    }
 }

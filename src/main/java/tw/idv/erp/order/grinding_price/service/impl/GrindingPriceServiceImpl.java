@@ -1,27 +1,27 @@
-package tw.idv.erp.customer.contact.service.impl;
+package tw.idv.erp.order.grinding_price.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tw.idv.erp.customer.contact.dao.ContactDao;
-import tw.idv.erp.customer.contact.entity.Contact;
-import tw.idv.erp.customer.contact.service.ContactDetailService;
+import tw.idv.erp.order.grinding_price.dao.GrindingPriceDao;
+import tw.idv.erp.order.grinding_price.entity.GrindingPrice;
+import tw.idv.erp.order.grinding_price.service.GrindingPriceService;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ContactDetailServiceImpl implements ContactDetailService {
+public class GrindingPriceServiceImpl implements GrindingPriceService {
     @Autowired
-    private ContactDao Dao;
+    private GrindingPriceDao Dao;
 
     @Override
-    public Contact add(Contact contact) {
+    public GrindingPrice add(GrindingPrice entity) {
 
-        final Contact result = Dao.save(contact);
+        final GrindingPrice result = Dao.save(entity);
         if (result == null) {
-            contact.setMessage("新增錯誤");
-            contact.setSuccessful(false);
-            return contact;
+            entity.setMessage("新增錯誤");
+            entity.setSuccessful(false);
+            return entity;
         }
         result.setMessage("新增成功");
         result.setSuccessful(true);
@@ -29,24 +29,27 @@ public class ContactDetailServiceImpl implements ContactDetailService {
     }
 
     @Override
-    public Contact edit(Contact contact) {
-        Optional<Contact> ocontact = Dao.findById(contact.getContactId());
-        if (ocontact.isPresent()) {//確認opromotionCoupone是否為空
-            Contact oldentity = ocontact.get();//將它取出以更改值
+    public GrindingPrice edit(GrindingPrice entity) {
+        Optional<GrindingPrice> oentity = Dao.findById(entity.getGrindingId());
+        if (oentity.isPresent()) {//確認opromotionCoupone是否為空
+            GrindingPrice oldentity = oentity.get();//將它取出以更改值
 
-            if (contact.getCustomerId() != null) {//若名稱不為空則取代舊值
-                oldentity.setCustomerId(contact.getCustomerId());
+            if (entity.getGrindingVendor() != null) {//若名稱不為空則取代舊值
+                oldentity.setGrindingVendor(entity.getGrindingVendor());
             }
-            if (contact.getContactName() != null) {
-                oldentity.setContactName(contact.getContactName());
+            if (entity.getGrindingType() != null) {
+                oldentity.setGrindingType(entity.getGrindingType());
             }
-            if (contact.getContactTitle() != null) {
-                oldentity.setContactTitle(contact.getContactTitle());
+            if (entity.getGrindingMinSize() != null) {
+                oldentity.setGrindingMinSize(entity.getGrindingMinSize());
             }
-            if (contact.getContactMobile() != null) {
-                oldentity.setContactMobile(contact.getContactMobile());
+            if (entity.getGrindingMaxSize() != null) {
+                oldentity.setGrindingMaxSize(entity.getGrindingMaxSize());
             }
-            final Contact result = Dao.save(oldentity);
+            if (entity.getGrindingUnitPrice() != null) {
+                oldentity.setGrindingUnitPrice(entity.getGrindingUnitPrice());
+            }
+            final GrindingPrice result = Dao.save(oldentity);
             oldentity.setSuccessful(result != null);
             oldentity.setMessage("修改成功");
             return oldentity;
@@ -56,24 +59,24 @@ public class ContactDetailServiceImpl implements ContactDetailService {
     }
 
     @Override
-    public List<Contact> findAll() {
+    public List<GrindingPrice> findAll() {
         return Dao.findAll();
     }
 
     @Override
-    public Contact findByPK(Integer contactId) {
-        Optional<Contact> order = Dao.findById(contactId);
+    public GrindingPrice findByPK(Integer grindingId) {
+        Optional<GrindingPrice> order = Dao.findById(grindingId);
         if (order.isPresent()) {
-            Contact order2 = order.get();
+            GrindingPrice order2 = order.get();
             return order2;
         }
         return null;
     }
 
     @Override
-    public boolean remove(Integer contactId) {
+    public boolean remove(Integer grindingId) {
             try {
-                Dao.deleteById(contactId);
+                Dao.deleteById(grindingId);
                 return true;
             } catch (Exception e) {
                 e.printStackTrace();
