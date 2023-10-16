@@ -108,6 +108,7 @@
                     dataTable.draw();
                     seteditbutton();
                     setdeletebutton();
+                    selected4edit();
                 });
             })
             .catch(function (err) {
@@ -127,6 +128,17 @@
         destroy: true,
     });
 
+    //自動選好修改內的select
+    function selected4edit() {
+        for (let i = 0; i < dataaccount; i++) {
+            const grindingVendorselect = $(`#grindingVendor${i}`);
+            const grindingTypeselect = $(`#grindingType${i}`);
+            const grindingVendor =grindingPriceData[i].grindingVendor;
+            const grindingType =grindingPriceData[i].grindingType;
+            grindingVendorselect.val(grindingVendor).trigger('change.select2');
+            grindingTypeselect.val(grindingType).trigger('change.select2');
+        }
+    }
   // ============================ 修改資料進去 editOrder()========================
     function editOrder(i) {
         const grindingId = document.getElementById(`grindingId${i}`).value;

@@ -40,6 +40,7 @@
                     }
                     ;
                 });
+                getmaterial();
             })
             .catch(function (err) {
                 console.log('錯誤：', err);
@@ -49,7 +50,7 @@
     // ===============================找材質===================================
     let meterail = [];
     let meterailmap = new Map();
-    getmaterial()
+
 
     function getmaterial() {
         fetch("getAllSteelPrice")
@@ -74,6 +75,7 @@
                     }
                     ;
                 });
+                getorder();
             })
             .catch(function (err) {
                 console.log('錯誤：', err);
@@ -83,7 +85,7 @@
     // ============================找訂單========================
     let order = [];
     let ordercustomermap = new Map();
-    getorder();
+
 
     function getorder() {
         fetch("getAllOrder")
@@ -101,16 +103,18 @@
                         let row = order[i];
                         const OrderId = row.orderId;
                         const customerId = row.customerId;
+                        const customeruk = row.customeruk;
                         const customerName = row.customerName;
                         const orderDate = dateformat(new Date(row.orderDate));
                         const deliveryDate = dateformat(new Date(row.deliveryDate));
                         const quotation = row.quotation;
                         const note = row.note;
                         const orderState = row.orderState;
-                        ordercustomermap.set(OrderId, customerName);
+                        ordercustomermap.set(customeruk, customerName);
                     }
                     ;
                 });
+                getOrderDetailByOrder();
             })
             .catch(function (err) {
                 console.log('錯誤：', err);
@@ -119,7 +123,7 @@
 
     // ============================查資料回來getAllPromotion() 拿到字串和筆數========================
     let dataaccount = 0;
-    getOrderDetailByOrder();
+
     let Orderdetail = []
 
 
@@ -148,7 +152,7 @@
                         let row = Orderdetail[i];
                         const orderDetailId = row.orderDetailId;
                         const orderId = row.orderId;
-                        const customerName = ordercustomermap.get(orderId);
+                        const customerName = row.customerName;
                         const categoryId = row.categoryId;
                         const categorytype = productTypemap.get(categoryId);
                         const length = row.length;
@@ -642,9 +646,12 @@
     }
 
 //     // ============================   newOrder()新增訂單========================
+    const orderData = JSON.parse(sessionStorage.getItem('order'));
+    const orderId = orderData.orderId;
+    const customerId = orderData.customerId;
+    const customerName = orderData.customerName;
     function orderIdinnew() {
-        const orderData = JSON.parse(sessionStorage.getItem('order'));
-        const orderId = orderData.orderId;
+
         const OrderIdinput = document.getElementById(`orderId4new`);
         OrderIdinput.value = orderId;
         const titlea = document.querySelector('#titlea');
@@ -654,7 +661,6 @@
 
     function newOrder() {
         const orderId = document.getElementById(`orderId4new`).value;
-        const customerName = ordercustomermap.get(orderId);
         const productType = document.getElementById(`productType4new`).value;
         const categoryId = productTypemap2.get(productType);
         const length = document.getElementById(`length4new`).value;

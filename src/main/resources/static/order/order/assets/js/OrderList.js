@@ -35,6 +35,7 @@
                     }
                     ;
                 });
+                getAllOrder();
             })
             .catch(function (err) {
                 console.log('錯誤：', err);
@@ -43,7 +44,7 @@
 
     // ============================查資料回來getAllPromotion() 拿到字串和筆數========================
     let dataaccount = 0;
-    getAllOrder();
+
     let Order = []
 
     function getAllOrder() {

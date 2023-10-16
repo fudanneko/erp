@@ -39,6 +39,7 @@
                     }
                     ;
                 });
+                getmaterial()
             })
             .catch(function (err) {
                 console.log('錯誤：', err);
@@ -48,7 +49,7 @@
     // ===============================找材質===================================
     let meterail = [];
     let meterailmap = new Map();
-    getmaterial()
+
 
     function getmaterial() {
         fetch("getAllSteelPrice")
@@ -73,6 +74,7 @@
                     }
                     ;
                 });
+                getorder();
             })
             .catch(function (err) {
                 console.log('錯誤：', err);
@@ -82,7 +84,7 @@
     // ============================找訂單========================
     let order = [];
     let ordercustomermap = new Map();
-    getorder();
+
 
     function getorder() {
         fetch("getAllOrder")
@@ -110,6 +112,7 @@
                     }
                     ;
                 });
+                getAllOrder();
             })
             .catch(function (err) {
                 console.log('錯誤：', err);
@@ -117,7 +120,7 @@
     }
     // ============================查資料回來getAllPromotion() 拿到字串和筆數========================
     let dataaccount = 0;
-    getAllOrder();
+
     let Orderdetail = []
 
     function getAllOrder() {
@@ -208,7 +211,7 @@
                         
                         <div class="mb-3">
                             <label For="length${i}"
-                                   class="col-form-label">:長度/外徑</label>
+                                   class="col-form-label">長度/外徑:</label>
                             <input type="text" class="form-control" id="length${i}" value="${length}">
                         </div>
                         <div class="mb-3">
@@ -271,7 +274,7 @@
                     seteditbutton();
                     setdeletebutton()
                     select4edit();
-                    selected4edit()
+                    selected4edit();
 
 
                 });
@@ -331,7 +334,8 @@
 
     //自動選好修改內的select
     function selected4edit() {
-        for (let i = 0; i < Orderdetail.length; i++) {
+        console.log(dataaccount)
+        for (let i = 0; i < dataaccount; i++) {
             const categoryNameselect = $(`#categoryName${i}`);
             const productNameselect = $(`#productName${i}`);
             const productTypeselect = $(`#productType${i}`);
@@ -349,7 +353,7 @@
 
     function select4edit() {
         //修改的select清空
-        for (let i = 0; i < category.length; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const productNamediv = $('#productNamediv' + i)
             const productTypediv = $('#productTypediv' + i)
             const categoryName = $('#categoryName' + i);
@@ -369,7 +373,7 @@
                 const option = new Option(row, row);
                 categoryName.append(option);
             })
-            categoryName.select2();
+            // categoryName.select2();
 
             //產品名稱select動態放入
             const uniqueproductNames = new Set();
@@ -381,7 +385,7 @@
                 const option = new Option(row, row);
                 productName.append(option);
             })
-            productName.select2();
+            // productName.select2();
 
             //產品形式select動態放入
             const uniqueproductTypes = new Set();
@@ -393,7 +397,7 @@
                 const option = new Option(row, row);
                 productType.append(option);
             })
-            productType.select2();
+            // productType.select2();
 
             //材質select動態放入
             const uniquesteelMaterial = new Set();
@@ -405,7 +409,7 @@
                 const option = new Option(row, row);
                 productMaterial.append(option);
             })
-            productMaterial.select2();
+            // productMaterial.select2();
 
             // 監聽種類名稱選擇事件
             categoryName.on('change', function () {
@@ -427,7 +431,7 @@
                     const option = new Option(row, row);
                     productName.append(option);
                 })
-                productName.select2();
+                // productName.select2();
             });
             // 監聽產品名稱選擇事件
             productName.on('change', function () {
@@ -444,7 +448,7 @@
                         productType.append(option);
                     }
                 })
-                productType.select2();
+                // productType.select2();
             });
         }
     }

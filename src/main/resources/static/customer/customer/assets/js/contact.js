@@ -30,6 +30,7 @@
                     }
                     ;
                 });
+                getAllContact();
             })
             .catch(function (err) {
                 console.log('錯誤：', err);
@@ -39,7 +40,7 @@
     // ============================查資料回來getAll() 拿到字串和筆數========================
     let dataaccount = 0;
     let contact = [];
-    getAllContact();
+
 
 
     function getAllContact() {
@@ -57,7 +58,7 @@
                     contact = data;
                     console.log('查到的聯絡人：', contact);
                     for (let i = 0; i < contact.length; i++) {
-                        dataaccount = i;
+                        dataaccount = contact.length;
                         let row = contact[i];
 
                         const contactId = row.contactId;
@@ -131,8 +132,9 @@
                     seteditbutton();
                     setdeletebutton()
                     select4new();
+                    select4edit();
                     selected4edit();
-                    select4edit()
+
                 });
             })
             .catch(function (err) {
@@ -241,6 +243,7 @@
     }
 
 //
+
     // ============================ 抓取所有修改的燈箱’修改‘按鈕 並綁定事件 ========================
 
     function seteditbutton() {
@@ -306,7 +309,7 @@
     // ============================7. 找到所有刪除按鈕並加上事件========================
 
     function setdeletebutton() {
-        for (let i = 0; i <= dataaccount; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const contactId = contact[i].contactId;
             const deletebutton = document.getElementById('delete' + i);
             deletebutton?.addEventListener('click', () => {
@@ -360,21 +363,22 @@
             const option = new Option(customerName, customerId);
             customerId4new.append(option)
         })
-        customerId4new.select2();
+        // customerId4new.select2();
     }
 
     //自動選好修改內的select
     function selected4edit() {
-        for (let i = 0; i < contact.length; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const customerNameselect = $(`#customerName${i}`);
-            const customerName = customermap.get(contact[i].customerId);
-            customerNameselect.val(customerName).trigger('change.select2');
+            let row = contact[i];
+            const customerId = row.customerId;
+            customerNameselect.val(customerId).trigger('change.select2');
         }
     }
 
     function select4edit() {
         //修改的select清空
-        for (let i = 0; i < contact.length; i++) {
+        for (let i = 0; i < dataaccount; i++) {
             const customerName = $('#customerName' + i);
             customerName.empty();
             //種類名稱select動態放入
@@ -384,7 +388,7 @@
                 const option = new Option(customerName2, customerId);
                 customerName.append(option);
             })
-            customerName.select2();
+            // customerName.select2();
         }
     }
     // ===============================14日期轉換====================================
