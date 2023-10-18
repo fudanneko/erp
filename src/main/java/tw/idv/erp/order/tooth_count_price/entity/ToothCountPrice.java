@@ -14,7 +14,7 @@ public class ToothCountPrice extends Core {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "toothId", nullable = false)
-    private Integer id;
+    private Integer toothId;
 
     @Column(name = "toothMinThickness")
     private Integer toothMinThickness;
