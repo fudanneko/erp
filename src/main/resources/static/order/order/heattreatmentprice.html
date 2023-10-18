@@ -296,7 +296,7 @@
         <div class="col-10 page-body">
             <div class="controll-box activity-order-controll-box">
                 <div class="back-end-box-title activity-order-controll-title">
-                    <h3 class="h2">爪數價目列表</h3>
+                    <h3 class="h2">熱處理價目列表</h3>
                     <!-- 燈箱 -->
                     <button type="button" class="btn btn-primary" id="newbutton2" data-bs-toggle="modal"
                             data-bs-target="#exampleModal" data-bs-whatever="@mdo">新增
@@ -314,19 +314,22 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="mb-3">
-                                            <label for="toothMinThickness4new"
-                                                   class="col-form-label">最低厚度:</label>
-                                            <input type="text" class="form-control" id="toothMinThickness4new">
+                                            <label for="heatTreatmentMaterial4new"
+                                                   class="col-form-label">材質:</label>
+                                            <input type="text" class="form-control" id="heatTreatmentMaterial4new">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="heatTreatmentType4new" class="col-form-label">種類:</label>
+                                            <select name="" id="heatTreatmentType4new" class="select24datatable " style="width: 300px">
+                                                <option>一般</option>
+                                                <option>調質</option>
+                                            </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="toothMaxThickness4new"
-                                                   class="col-form-label">最高厚度:</label>
-                                            <input type="text" class="form-control" id="toothMaxThickness4new">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="toothUnitPrice4new"
-                                                   class="col-form-label">單價:</label>
-                                            <input type="text" class="form-control" id="toothUnitPrice4new">
+                                            <label for="heatTreatmentUnitPrice4new"
+                                                   class="col-form-label">每公斤單價:</label>
+                                            <input type="text" class="form-control" id="heatTreatmentUnitPrice4new">
                                         </div>
                                     </form>
                                 </div>
@@ -347,8 +350,8 @@
                     <table id="all" class="display" style="width:100%">
                         <thead>
                         <tr>
-                            <th>最低厚度</th>
-                            <th>最高厚度</th>
+                            <th>材質</th>
+                            <th>種類</th>
                             <th>單價</th>
                             <th>修改</th>
                             <th>刪除</th>
@@ -372,7 +375,7 @@
         crossorigin="anonymous"></script>
 
 <!-- 新引入的JS檔案或套件請由此往下放 -->
-<script src="assets/js/toothCountPrice.js"></script>
+<script src="assets/js/heatTreatmentPrice.js"></script>
 <script>
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))

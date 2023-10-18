@@ -16,7 +16,7 @@ public class HeatTreatmentPrice extends Core {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "heatTreatmentId", nullable = false)
-    private Integer id;
+    private Integer heatTreatmentId;
 
     @Size(max = 45)
     @Column(name = "heatTreatmentMaterial", length = 45)
