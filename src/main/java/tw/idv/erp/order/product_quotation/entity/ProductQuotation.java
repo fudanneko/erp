@@ -16,7 +16,7 @@ public class ProductQuotation extends Core {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "productQuotationId", nullable = false)
-    private Integer id;
+    private Integer productQuotationId;
 
     @Column(name = "orderDetailId")
     private Integer orderDetailId;

@@ -266,7 +266,7 @@
             </div>
         </div>
     </div>`,
-                            `<a href="#"><button type="button" class="btn btn-outline-primary">詳情</button></a>`,
+                            `<button type="button" class="btn btn-outline-primary" id="detail${i}">詳情</button>`,
                             `<button type="button" class="btn btn-primary" id="delete${i}">刪除</button>`]);
 
                     }
@@ -275,6 +275,7 @@
                     setdeletebutton()
                     select4edit();
                     selected4edit();
+                    detailbutton();
 
 
                 });
@@ -679,17 +680,17 @@
     // ===============================^^^方法區^^^====================================
 
     // ===============================VVV使用方法區VVV================================
+// ===============================詳情按鈕 資料寫入storage===================================
 
-    //=================================1. 總之先查一次=================================
-
-
-    // ===============================2. 確認新增按鈕================================
-
-    // const button4new = document.querySelector('#newbutton');
-    // button4new?.addEventListener('click', () => {
-    //     newAPromotion();
-    // })
-//=================================3. 圖片檔案上傳按鈕=============================
+    function detailbutton() {
+        for (let i = 0; i < dataaccount; i++) {
+            const detailbutton = document.getElementById('detail' + i);
+            detailbutton?.addEventListener('click', () => {
+                sessionStorage.setItem('Orderdetail',JSON.stringify(Orderdetail[i]));
+                window.open('orderdetails.html', '_blank');
+            })
+        }
+    }
 
 
     // ===============================^^^使用方法區^^^==============================

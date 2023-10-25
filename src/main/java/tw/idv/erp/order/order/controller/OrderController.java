@@ -25,7 +25,12 @@ public class OrderController {
         Order order = OrderSERVICE.add(OrderRequest);
         return order;
     }
-
+    @PostMapping("order/order/getOrderbyorderId")
+    public Order getOrderbyorderId(@RequestBody Order Request) {
+        Integer orderId=Request.getOrderId();
+        Order order = OrderSERVICE.findByPK(orderId);
+        return order;
+    }
 
     @GetMapping("order/order/getAllOrder")
     public List<Order> findAll() {

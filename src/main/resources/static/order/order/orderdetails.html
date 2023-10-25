@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700;800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap"
           rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--分頁表頭css-->
     <link rel="stylesheet" href="assets/css/title.css">
     <!--    //分頁內容bootstarp-->
@@ -63,6 +64,7 @@
 </nav>
 <!--//分頁表頭-->
 <!--分頁內容-->
+<h1 id="tital4product" style="padding-left: 150px;padding-top: 10px"> 客戶名稱長寬厚</h1>
 <!--訂單資料分頁 orderpage-->
 <div id="orderpage" style="display: block" class="paging">
     <div class="col-8 page-body">
@@ -86,29 +88,31 @@
                             </div>
                             <div class="input-group mt-3">
                                 <label for="oporderDate" class="input-group-text">下訂日</label>
-                                <input type="date" class="form-control" id="oporderDate" readonly>
+                                <input type="date" class="form-control" id="oporderDate" >
                             </div>
                             <div class="input-group mt-3">
                                 <label for="opdeliveryDate" class="input-group-text">交貨日</label>
-                                <input type="date" class="form-control" id="opdeliveryDate" readonly>
+                                <input type="date" class="form-control" id="opdeliveryDate" >
                             </div>
                             <div class="input-group mt-3">
                                 <label for="opquotation" class="input-group-text">報價總金額</label>
-                                <input type="text" class="form-control" id="opquotation" readonly>
+                                <input type="text" class="form-control" id="opquotation" >
+                                <label for="opquotation2" class="input-group-text">參考值</label>
+                                <input type="number" class="form-control" id="opquotation2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="opnote" class="input-group-text">備註</label>
                                 <input type="text" class="form-control" id="opnote" readonly>
                             </div>
+                            <div class="input-group mt-3">
+                                <label for="oporderState" class="input-group-text">訂單狀態</label>
+                                <input type="text" class="form-control" id="oporderState" readonly>
+                            </div>
                             <!-- 按鈕區-->
-                            <!--                            <div class="button-group mt-2">-->
-                            <!--                                <button type="button" class="btn revise-btn btn-outline-primary"-->
-                            <!--                                        id="confirmbtn">-->
-                            <!--                                    確認修改-->
-                            <!--                                </button>-->
-                            <!--                                <button type="button" class="btn btn-outline-secondary ml-2" id="canslebtn">重設-->
-                            <!--                                </button>-->
-                            <!--                            </div>-->
+                            <div class="button-group mt-2">
+                                <button type="button" class="btn revise-btn btn-outline-primary" id="opconfirmbtn">確認修改</button>
+                                <button type="button" class="btn btn-outline-secondary ml-2" id="opcanslebtn">重設</button>
+                            </div>
                             <hr>
                         </form>
                     </div>
@@ -137,7 +141,7 @@
                                 <input type="text" class="form-control" id="pporderId" readonly>
                             </div>
                             <div class="input-group mt-3">
-                                <label for="ppcategoryId" class="input-group-text">種類編號</label>
+                                <label for="ppcategoryId" class="input-group-text">種類</label>
                                 <input type="text" class="form-control" id="ppcategoryId" readonly>
                             </div>
                             <div class="input-group mt-3">
@@ -197,7 +201,7 @@
 <div id="qoatationpage" style="display: none" class="paging">
     <div class="col-8 page-body">
         <div class="container2 d-flex">
-            <div class="col-8">
+            <div class="col-12">
                 <div class="controll-box counter-alter-controll-box">
                     <div class="controll-content counter-alter-controll-content">
                         <form action="" id="qoatationpageform">
@@ -213,81 +217,103 @@
                             <div class="input-group mt-3">
                                 <label for="qpquotationDate" class="input-group-text">填寫日期</label>
                                 <input type="date" class="form-control" id="qpquotationDate" readonly>
+                                <label for="qpquotationDate2" class="input-group-text" style="display: none">填寫日期</label>
+                                <input type="date" class="form-control" id="qpquotationDate2" readonly style="display: none">
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpmaterialUnitPrice" class="input-group-text">鋼料價格</label>
-                                <input type="text" class="form-control" id="qpmaterialUnitPrice" readonly>
+                                <input type="number" class="form-control" id="qpmaterialUnitPrice">
+                                <label for="qpmaterialUnitPrice2" class="input-group-text">參考值</label>
+                                <input type="number" class="form-control" id="qpmaterialUnitPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpgrindingPrice" class="input-group-text">研磨價格</label>
-                                <input type="text" class="form-control" id="qpgrindingPrice" readonly>
+                                <input type="number" class="form-control" id="qpgrindingPrice">
+                                <label for="qpgrindingPrice2" class="input-group-text">參考值</label>
+                                <input type="number" class="form-control" id="qpgrindingPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpheatTreatmentPrice" class="input-group-text">熱處理價格</label>
-                                <input type="text" class="form-control" id="qpheatTreatmentPrice" readonly>
+                                <input type="number" class="form-control" id="qpheatTreatmentPrice">
+                                <label for="qpheatTreatmentPrice2" class="input-group-text">參考值</label>
+                                <input type="number" class="form-control" id="qpheatTreatmentPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpwasherProcessingPrice" class="input-group-text">墊圈加工價格</label>
-                                <input type="text" class="form-control" id="qpwasherProcessingPrice" readonly>
+                                <input type="number" class="form-control" id="qpwasherProcessingPrice">
+                                <label for="qpwasherProcessingPrice2" class="input-group-text">參考值</label>
+                                <input type="number" class="form-control" id="qpwasherProcessingPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpbreakingKnifeProcessingPrice"
                                        class="input-group-text">破碎刀加工價格</label>
-                                <input type="text" class="form-control" id="qpbreakingKnifeProcessingPrice" readonly>
+                                <input type="number" class="form-control" id="qpbreakingKnifeProcessingPrice">
+                                <label for="qpbreakingKnifeProcessingPrice2" class="input-group-text">參考值</label>
+                                <input type="number" class="form-control" id="qpbreakingKnifeProcessingPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpcrushingKnifeProcessingPrice"
                                        class="input-group-text">粉碎刀加工價格</label>
-                                <input type="text" class="form-control" id="qpcrushingKnifeProcessingPrice" readonly>
+                                <input type="number" class="form-control" id="qpcrushingKnifeProcessingPrice">
+                                <label for="qpcrushingKnifeProcessingPrice2" class="input-group-text">參考值</label>
+                                <input type="number" class="form-control" id="qpcrushingKnifeProcessingPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qptoothCount" class="input-group-text">爪數價格</label>
-                                <input type="text" class="form-control" id="qptoothCount" readonly>
+                                <input type="number" class="form-control" id="qptoothCount">
+                                <label for="qptoothCount2" class="input-group-text">參考值</label>
+                                <input type="number" class="form-control" id="qptoothCount2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpwireCuttingPrice" class="input-group-text">線切割價格</label>
-                                <input type="text" class="form-control" id="qpwireCuttingPrice" readonly>
+                                <input type="number" class="form-control" id="qpwireCuttingPrice">
+                                <label for="qpwireCuttingPrice2" class="input-group-text">參考值</label>
+                                <input type="number" class="form-control" id="qpwireCuttingPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qphezhenQuotation" class="input-group-text">合振報價</label>
-                                <input type="text" class="form-control" id="qphezhenQuotation" readonly>
+                                <input type="number" class="form-control" id="qphezhenQuotation">
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpguofengQuotation" class="input-group-text">國豐報價</label>
-                                <input type="text" class="form-control" id="qpguofengQuotation" readonly>
+                                <input type="number" class="form-control" id="qpguofengQuotation">
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpguoshengQuotation" class="input-group-text">國聖報價</label>
-                                <input type="number" class="form-control" id="qpguoshengQuotation" readonly>
+                                <input type="number" class="form-control" id="qpguoshengQuotation">
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qphuataiQuotation" class="input-group-text">華泰報價</label>
-                                <input type="number" class="form-control" id="qphuataiQuotation" readonly>
+                                <input type="number" class="form-control" id="qphuataiQuotation">
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpjinjiQuotation" class="input-group-text">進佶報價</label>
-                                <input type="number" class="form-control" id="qpjinjiQuotation" readonly>
+                                <input type="number" class="form-control" id="qpjinjiQuotation">
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpotherQuotation" class="input-group-text">其他報價</label>
-                                <input type="number" class="form-control" id="qpotherQuotation" readonly>
+                                <input type="number" class="form-control" id="qpotherQuotation">
                             </div>
 
                             <div class="input-group mt-3">
                                 <label for="qpholeMultiplier" class="input-group-text">孔倍率</label>
-                                <input type="number" class="form-control" id="qpholeMultiplier" readonly>
+                                <input type="number" class="form-control" id="qpholeMultiplier">
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpholeCount" class="input-group-text">孔數</label>
-                                <input type="number" class="form-control" id="qpholeCount" readonly>
+                                <input type="number" class="form-control" id="qpholeCount">
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpotherProcessingPrice" class="input-group-text">加工價格</label>
-                                <input type="number" class="form-control" id="qpotherProcessingPrice" readonly>
+                                <input type="number" class="form-control" id="qpotherProcessingPrice">
+                                <label for="qpotherProcessingPrice2" class="input-group-text">參考值</label>
+                                <input type="number" class="form-control" id="qpotherProcessingPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qptotalCost" class="input-group-text">報價總金額</label>
-                                <input type="number" class="form-control" id="qptotalCost" readonly>
+                                <input type="number" class="form-control" id="qptotalCost">
+                                <label for="qptotalCost2" class="input-group-text">參考值</label>
+                                <input type="number" class="form-control" id="qptotalCost2" readonly>
                             </div>
                             <!--                            按鈕區-->
                             <div class="button-group mt-2">
@@ -365,5 +391,7 @@
 <script src="assets/js/title.js"></script>
 <!--分頁js-->
 <script src="assets/js/paging.js"></script>
+<!--導入js-->
+<script src="assets/js/orderdetails.js"></script>
 
 </html>
