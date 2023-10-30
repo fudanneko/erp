@@ -45,11 +45,11 @@
     // =========================產品分頁=========================
     const pporderDetailId = document.getElementById('pporderDetailId')
     const pporderId = document.getElementById('pporderId')
-    const ppcategoryId = document.getElementById('ppcategoryId')
+    const ppproductType = document.getElementById('productType')
     const pplength = document.getElementById('pplength')
     const ppwidth = document.getElementById('ppwidth')
     const ppthickness = document.getElementById('ppthickness')
-    const ppproductMaterial = document.getElementById('ppproductMaterial')
+    const ppproductMaterial = document.getElementById('productMaterial')
     const ppmanufacturingProcess = document.getElementById('ppmanufacturingProcess')
     const ppproductQuotationUnitPrice = document.getElementById('ppproductQuotationUnitPrice')
     const ppproductQuantity = document.getElementById('ppproductQuantity')
@@ -101,7 +101,7 @@
                         productQuotationData = jsonData;
                         console.log("這是報價資料", productQuotationData);
                         const productQuotationId = productQuotationData.productQuotationId;
-                        const quotationDate = dateformat(new Date( productQuotationData.quotationDate));
+                        const quotationDate = dateformat(new Date(productQuotationData.quotationDate));
                         const materialUnitPrice = productQuotationData.materialUnitPrice;
                         const grindingPrice = productQuotationData.grindingPrice;
                         const heatTreatmentPrice = productQuotationData.heatTreatmentPrice;
@@ -168,10 +168,11 @@
     }
 
     // ============================ 修改資料進去 edit()========================
+    // 報價表修改
 
     function editproductQuotation() {
         const qpproductQuotationId = document.getElementById('qpproductQuotationId').value;
-        const qporderDetailId =  document.getElementById('qporderDetailId').value;
+        const qporderDetailId = document.getElementById('qporderDetailId').value;
         const quotationDate = document.getElementById('qpquotationDate2').value;
         const qpmaterialUnitPrice = document.getElementById('qpmaterialUnitPrice').value;
         const qpgrindingPrice = document.getElementById('qpgrindingPrice').value;
@@ -227,7 +228,40 @@
             .then(resp => resp.json())
             .then(body => {
                 console.log(body);
-                const {successful,message} = body;
+                const {successful, message} = body;
+                if (successful) {
+                    Swal.fire({
+                        position: 'center', icon: 'success', title: `${message}`, showConfirmButton: false, timer: 1500
+                    }).then(() => {
+                        location.reload()
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error', title: 'Oops...', text: '修改失敗!', footer: '<a href=""></a>'
+                    })
+                }
+            });
+
+    }
+
+// 訂單資訊修改
+    function editOrderquotation() {
+        const orderId = orderDetailObject.orderId;
+        const qptotalCost = document.getElementById('qptotalCost').value;
+
+
+        fetch('editOrder', {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json',
+            }, body: JSON.stringify({
+                orderId: orderId,
+                quotation: qptotalCost,
+            }),
+        })
+            .then(resp => resp.json())
+            .then(body => {
+                console.log(body);
+                const {successful, message} = body;
                 if (successful) {
                     Swal.fire({
                         position: 'center', icon: 'success', title: `${message}`, showConfirmButton: false, timer: 1500
@@ -245,16 +279,14 @@
 
 //
     // ============================ 抓取’修改‘按鈕 並綁定事件 ========================
-
-
     function setqpeditbutton() {
         const editbuttons = document.getElementById('qpconfirmbtn');
         editbuttons?.addEventListener('click', () => {
             console.log('修改按鈕啟動')
             editproductQuotation();
+            editOrderquotation();
         })
     }
-
 
     // ============================ 日期預設 ========================
 
@@ -321,6 +353,11 @@
                     const quotation = orderdata.quotation;
                     const note = orderdata.note;
                     const orderState = orderdata.orderState;
+                    if (orderState === 0) {
+                        oporderState.value = '未完成';
+                    } else {
+                        oporderState.value = '已完成';
+                    }
 
                     oporderId.value = OrderId;
                     opcustomerId.value = customerId;
@@ -329,12 +366,60 @@
                     opdeliveryDate.value = deliveryDate;
                     opquotation.value = quotation;
                     opnote.value = note;
-                    oporderState.value = orderState;
+
                 });
             })
             .catch(function (err) {
                 console.log('錯誤：', err);
             });
+    }
+
+
+    // ============================ 修改資料進去 editOrder()========================
+    function editopOrder() {
+        const oporderId = orderDetailObject.orderId;
+        console.log('訂單編號', oporderId);
+        const oporderDate = document.getElementById(`oporderDate`).value;
+        const opdeliveryDate = document.getElementById(`opdeliveryDate`).value;
+        const opnote = document.getElementById(`opnote`).value;
+
+        fetch('editOrder', {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json',
+            }, body: JSON.stringify({
+                orderId: oporderId,
+                orderDate: oporderDate,
+                deliveryDate: opdeliveryDate,
+                note: opnote,
+            }),
+        })
+            .then(resp => resp.json())
+            .then(body => {
+                console.log(body);
+                const {successful} = body;
+                if (successful) {
+                    Swal.fire({
+                        position: 'center', icon: 'success', title: '修改成功!', showConfirmButton: false, timer: 1500
+                    }).then(() => {
+                        location.reload()
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error', title: 'Oops...', text: '修改失敗!', footer: '<a href=""></a>'
+                    })
+                }
+            });
+
+    }
+
+//
+    // ============================ 抓取所有修改的燈箱’修改‘按鈕 並綁定事件 ========================
+
+    function setopeditbutton() {
+        const editbuttons = document.getElementById('opconfirmbtn');
+        editbuttons?.addEventListener('click', () => {
+            editopOrder();
+        })
     }
 
 
@@ -347,6 +432,7 @@
     let productTypemap2 = new Map();
     let productDefaultProcessmap = new Map();
 
+    getcategory();
 
     function getcategory() {
         fetch("getAllProductCategory")
@@ -373,7 +459,11 @@
                         productTypemap2.set(productType, categoryId);
                         productDefaultProcessmap.set(categoryId, productDefaultProcess);
                     }
-                    ;
+                    storage2input();
+                    getmeterail();
+                    getorderdata();
+                    getproductQuotation();
+
                 });
 
             })
@@ -382,19 +472,179 @@
             });
     }
 
-    // ===================產品明細資料填入==========================
+    // ===============================找材質===================================
+    let meterail = [];
+    let meterailmap = new Map();
 
-    storage2input();
+
+    function getmeterail() {
+        fetch("getAllSteelPrice")
+            .then(function (response) {
+                // 檢查 API 响應的狀態碼
+                if (response.status !== 200) {
+                    console.log('發生錯誤，狀態碼：' + response.status);
+                    return;
+                }
+                // 解析 JSON 格式的數據
+                response.json().then(function (data) {
+                    meterail = data;
+                    console.log("這是材質", data);
+                    for (let i = 0; i < meterail.length; i++) {
+                        let row = meterail[i];
+                        const steelId = row.steelId;
+                        const steelMaterial = row.steelMaterial;
+                        const steelMinSize = row.steelMinSize;
+                        const steelMaxSize = row.steelMaxSize;
+                        const steelUnitPrice = row.steelUnitPrice;
+                        meterailmap.set(steelId, steelUnitPrice);
+                    }
+                    ;
+                    select4edit();
+                    selected4edit();
+                    setqpeditbutton();
+                    setReferenceValue();
+                    setopeditbutton();
+                    setppeditbutton();
+                });
+            })
+            .catch(function (err) {
+                console.log('錯誤：', err);
+            });
+    }
+
+
+    //自動選好修改內的select
+    function selected4edit() {
+        const categoryNameselect = $(`#categoryName`);
+        const productNameselect = $(`#productName`);
+        const productTypeselect = $(`#productType`);
+        const productMaterialselect = $(`#productMaterial`);
+        const productMaterial = orderDetailObject.productMaterial;
+        const categoryId = orderDetailObject.categoryId;
+        const categoryName = categoryNamemap.get(categoryId);
+        const productName = productNamemap.get(categoryId);
+        const productType = productTypemap.get(categoryId);
+        categoryNameselect.val(categoryName).trigger('change.select2');
+        productNameselect.val(productName).trigger('change.select2');
+        productTypeselect.val(productType).trigger('change.select2');
+        productMaterialselect.val(productMaterial).trigger('change.select2');
+    }
+
+    function select4edit() {
+        //修改的select清空
+        const productNamediv = $('#productNamediv')
+        const productTypediv = $('#productTypediv')
+        const categoryName = $('#categoryName');
+        const productMaterial = $('#productMaterial');
+        const productName = $('#productName');
+        const productType = $('#productType');
+        categoryName.empty();
+        productMaterial.empty();
+
+        //種類名稱select動態放入
+        const uniqueCategoryNames = new Set();
+        category.forEach(function (row) {
+            const categoryName = row.categoryName;
+            uniqueCategoryNames.add(categoryName);
+        })
+        uniqueCategoryNames.forEach(function (row) {
+            const option = new Option(row, row);
+            categoryName.append(option);
+        })
+
+        categoryName.select2();
+
+        //產品名稱select動態放入
+        const uniqueproductNames = new Set();
+        category.forEach(function (row) {
+            const productName = row.productName;
+            uniqueproductNames.add(productName);
+        })
+        uniqueproductNames.forEach(function (row) {
+            const option = new Option(row, row);
+            productName.append(option);
+        })
+        productName.select2();
+
+        //產品形式select動態放入
+        const uniqueproductTypes = new Set();
+        category.forEach(function (row) {
+            const productType = row.productType;
+            uniqueproductTypes.add(productType);
+        })
+        uniqueproductTypes.forEach(function (row) {
+            const option = new Option(row, row);
+            productType.append(option);
+        })
+        productType.select2();
+
+        //材質select動態放入
+        const uniquesteelMaterial = new Set();
+        console.log(meterail)
+        meterail.forEach(function (row) {
+            const steelMaterial = row.steelMaterial;
+            uniquesteelMaterial.add(steelMaterial);
+        })
+        uniquesteelMaterial.forEach(function (row) {
+            const option = new Option(row, row);
+            productMaterial.append(option);
+        })
+        console.log(uniquesteelMaterial)
+        productMaterial.select2();
+
+        // 監聽種類名稱選擇事件
+        categoryName.on('change', function () {
+            productNamediv.css('display', '');
+            productTypediv.css('display', 'none');
+            const optiond = new Option('請選擇', '');
+            productName.empty();
+            productName.append(optiond);
+            const selectedValue = categoryName.val();
+            const uniquesteelMaterial = new Set();
+            category.forEach(function (row) {
+                const categoryName = row.categoryName;
+                const productName = row.productName;
+                if (categoryName === selectedValue) {
+                    uniquesteelMaterial.add(productName);
+                }
+            })
+            uniquesteelMaterial.forEach(function (row) {
+                const option = new Option(row, row);
+                productName.append(option);
+            })
+            productName.select2();
+        });
+        // 監聽產品名稱選擇事件
+        productName.on('change', function () {
+            productTypediv.css('display', '');
+            productType.empty();
+            const optiond = new Option('請選擇', '');
+            productType.append(optiond);
+            const selectedValue = productName.val();
+            category.forEach(function (row) {
+                const productName = row.productName;
+                const productType1 = row.productType;
+                if (productName === selectedValue) {
+                    const option = new Option(productType1, productType1);
+                    productType.append(option);
+                }
+            })
+            productType.select2();
+        });
+    }
+
+
+    // ===================產品明細資料填入==========================
 
     function storage2input() {
 
         const orderId = orderDetailObject.orderId;
-        const categoryId = orderDetailObject.categoryId;
-        const categorytype = productTypemap.get(categoryId);
+        // const categoryId = orderDetailObject.categoryId;
+        // const categorytype = productTypemap.get(categoryId);
         const length = orderDetailObject.length;
         const width = orderDetailObject.width;
         const thickness = orderDetailObject.thickness;
-        const productMaterial = orderDetailObject.productMaterial;
+        // const productMaterial = orderDetailObject.productMaterial;
         const manufacturingProcess = orderDetailObject.manufacturingProcess;
         const productQuotationUnitPrice = orderDetailObject.productQuotationUnitPrice;
         const productQuantity = orderDetailObject.productQuantity;
@@ -404,11 +654,11 @@
 
         pporderDetailId.value = orderDetailId ?? 0;
         pporderId.value = orderId ?? 0;
-        ppcategoryId.value = categorytype ?? 0;
+        // ppcategoryId.value = categorytype ?? 0;
         pplength.value = length ?? 0;
         ppwidth.value = width ?? 0;
         ppthickness.value = thickness ?? 0;
-        ppproductMaterial.value = productMaterial ?? 0;
+        // ppproductMaterial.value = productMaterial ?? 0;
         ppmanufacturingProcess.value = manufacturingProcess ?? 0;
         ppproductQuotationUnitPrice.value = productQuotationUnitPrice ?? 0;
         ppproductQuantity.value = productQuantity ?? 0;
@@ -418,15 +668,78 @@
         const tital4product = document.getElementById('tital4product');
         tital4product.textContent = orderDetailObject.customerName + "  " + orderDetailObject.length + " ＊ " + orderDetailObject.width + " ＊ " + orderDetailObject.thickness;
 
-        getcategory();
-        getorderdata();
-        setqpeditbutton();
-        getproductQuotation();
-        setReferenceValue();
+
     }
 
+    // ============================ 修改資料進去 editOrder()========================
+    function editppOrder() {
+        const orderDetailId = pporderDetailId.value;
+        const OrderId = pporderId.value;
+        const productType = ppproductType.value;
+        const categoryId = productTypemap2.get(productType);
+        console.log(categoryId)
+        const length = pplength.value;
+        const width = ppwidth.value;
+        const thickness = ppthickness.value;
+        const productMaterial = ppproductMaterial.value;
+        const manufacturingProcess = ppmanufacturingProcess.value;
+        const productQuotationUnitPrice = ppproductQuotationUnitPrice.value;
+        const productQuantity = ppproductQuantity.value;
+        const productSubtotal = ppproductSubtotal.value;
+        const note = ppnote.value;
 
-    // 更改標頭
+        // if (customerId === '') {
+        //     return;
+        // }
+        // 檢查結束
+
+        fetch('editOrderDetail', {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json',
+            }, body: JSON.stringify({
+                orderDetailId: orderDetailId,
+                orderId: OrderId,
+                categoryId: categoryId,
+                length: length,
+                width: width,
+                thickness: thickness,
+                productMaterial: productMaterial,
+                manufacturingProcess: manufacturingProcess,
+                productQuotationUnitPrice: productQuotationUnitPrice,
+                productQuantity: productQuantity,
+                productSubtotal: productSubtotal,
+                note: note,
+            }),
+        })
+            .then(resp => resp.json())
+            .then(body => {
+                console.log(body);
+                const {successful} = body;
+                if (successful) {
+                    Swal.fire({
+                        position: 'center', icon: 'success', title: '修改成功!', showConfirmButton: false, timer: 1500
+                    }).then(() => {
+                        sessionStorage.setItem('Orderdetail',JSON.stringify(body));
+                        location.reload();
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error', title: 'Oops...', text: '修改失敗!', footer: '<a href=""></a>'
+                    })
+                }
+            });
+
+    }
+
+//
+    // ============================ 抓取’修改‘按鈕 並綁定事件 ========================
+
+    function setppeditbutton() {
+        const editbuttons = document.getElementById('ppconfirmbtn');
+        editbuttons?.addEventListener('click', () => {
+            editppOrder();
+        })
+    }
 
 
 })();
