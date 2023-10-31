@@ -29,13 +29,13 @@ public class OrderDetail extends Core {
     private Integer categoryId;
 
     @Column(name = "length")
-    private Integer length;
+    private BigDecimal length;
 
     @Column(name = "width")
-    private Integer width;
+    private BigDecimal width;
 
     @Column(name = "thickness")
-    private Integer thickness;
+    private BigDecimal thickness;
 
     @Size(max = 50)
     @Column(name = "productMaterial", length = 50)

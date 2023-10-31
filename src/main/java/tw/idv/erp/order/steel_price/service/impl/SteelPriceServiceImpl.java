@@ -38,6 +38,9 @@ public class SteelPriceServiceImpl implements SteelPriceService {
             if (steelPrice.getSteelMaterial() != null) {//若名稱不為空則取代舊值
                 oldsteelPrice.setSteelMaterial(steelPrice.getSteelMaterial());
             }
+            if (steelPrice.getSteelType() != null) {//若名稱不為空則取代舊值
+                oldsteelPrice.setSteelType(steelPrice.getSteelType());
+            }
             if (steelPrice.getSteelMinSize() != null) {
                 oldsteelPrice.setSteelMinSize(steelPrice.getSteelMinSize());
             }

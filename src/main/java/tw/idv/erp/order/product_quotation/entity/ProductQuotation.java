@@ -5,6 +5,7 @@ import lombok.Setter;
 import tw.idv.erp.core.Core;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.Instant;
 
@@ -25,57 +26,63 @@ public class ProductQuotation extends Core {
     private Timestamp quotationDate;
 
     @Column(name = "materialUnitPrice")
-    private Integer materialUnitPrice;
+    private BigDecimal materialUnitPrice;
+
+    @Column(name = "breakingKnifegrindingPrice")
+    private BigDecimal breakingKnifegrindingPrice;
 
     @Column(name = "grindingPrice")
-    private Integer grindingPrice;
+    private BigDecimal grindingPrice;
 
     @Column(name = "heatTreatmentPrice")
-    private Integer heatTreatmentPrice;
+    private BigDecimal heatTreatmentPrice;
 
     @Column(name = "washerProcessingPrice")
-    private Integer washerProcessingPrice;
+    private BigDecimal washerProcessingPrice;
 
     @Column(name = "breakingKnifeProcessingPrice")
-    private Integer breakingKnifeProcessingPrice;
+    private BigDecimal breakingKnifeProcessingPrice;
 
     @Column(name = "crushingKnifeProcessingPrice")
-    private Integer crushingKnifeProcessingPrice;
+    private BigDecimal crushingKnifeProcessingPrice;
 
     @Column(name = "toothCount")
     private Integer toothCount;
 
     @Column(name = "wireCuttingPrice")
-    private Integer wireCuttingPrice;
+    private BigDecimal wireCuttingPrice;
 
     @Column(name = "hezhenQuotation")
-    private Integer hezhenQuotation;
+    private BigDecimal hezhenQuotation;
 
     @Column(name = "guofengQuotation")
-    private Integer guofengQuotation;
+    private BigDecimal guofengQuotation;
 
     @Column(name = "guoshengQuotation")
-    private Integer guoshengQuotation;
+    private BigDecimal guoshengQuotation;
 
     @Column(name = "huataiQuotation")
-    private Integer huataiQuotation;
+    private BigDecimal huataiQuotation;
 
     @Column(name = "jinjiQuotation")
-    private Integer jinjiQuotation;
+    private BigDecimal jinjiQuotation;
 
     @Column(name = "otherQuotation")
-    private Integer otherQuotation;
+    private BigDecimal otherQuotation;
 
     @Column(name = "holeMultiplier")
-    private Integer holeMultiplier;
+    private BigDecimal holeMultiplier;
 
     @Column(name = "holeCount")
     private Integer holeCount;
 
+    @Column(name = "holeMachiningPrice")
+    private BigDecimal holeMachiningPrice;
+
     @Column(name = "otherProcessingPrice")
-    private Integer otherProcessingPrice;
+    private BigDecimal otherProcessingPrice;
 
     @Column(name = "totalCost")
-    private Integer totalCost;
+    private BigDecimal totalCost;
 
 }

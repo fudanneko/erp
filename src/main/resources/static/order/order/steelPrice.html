@@ -34,7 +34,7 @@
     <!--搜尋選擇框select2-->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 
-    <title>熱處理價目列表</title>
+    <title>金屬價目列表</title>
     <!--    select2-->
     <style>
         #th2container {
@@ -314,14 +314,49 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="mb-3">
-                                            <label for="heatTreatmentMaterial4new"
-                                                   class="col-form-label">材質:</label>
-                                            <input type="text" class="form-control" id="heatTreatmentMaterial4new">
+                                            <label for="steelType4new" class="col-form-label">種類:</label>
+                                            <select name="" id="steelType4new" class="select24datatable "
+                                                    style="width: 300px">
+                                                <option value="圓型">圓型</option>
+                                                <option value="方型">方型</option>
+                                            </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="heatTreatmentUnitPrice4new"
+                                            <label for="steelMaterial4new" class="col-form-label">材質:</label>
+                                            <select name="" id="steelMaterial4new" class="select24datatable "
+                                                    style="width: 300px">
+                                                <option value="中碳鋼(S45C)">中碳鋼(S45C)</option>
+                                                <option value="中碳鋼(S50C)">中碳鋼(S50C)</option>
+                                                <option value="紅十字(SCM440)">紅十字(SCM440)</option>
+                                                <option value="白十字(SNCM220)">白十字(SNCM220)</option>
+                                                <option value="模具鋼(K105)">模具鋼(K105)</option>
+                                                <option value="高強度模具鋼(K340)">高強度模具鋼(K340)</option>
+                                                <option value="高鉻模具鋼(K110)">高鉻模具鋼(K110)</option>
+                                                <option value="特殊鋼(DC53)">特殊鋼(DC53)</option>
+                                                <option value="高速鋼(S600)">高速鋼(S600)</option>
+                                                <option value="高碳鉻合金鋼(SKD11)">高碳鉻合金鋼(SKD11)</option>
+                                                <option value="工具鋼(SKD61)">工具鋼(SKD61)</option>
+                                                <option value="高速工具鋼(SKS93)">高速工具鋼(SKS93)</option>
+                                                <option value="鎳鉻鉬合金鋼(SNCM439)">鎳鉻鉬合金鋼(SNCM439)</option>
+                                                <option value="耐磨鋼板(SAE1345)">耐磨鋼板(SAE1345)</option>
+                                                <option value="合金鋼(QC11)">合金鋼(QC11)</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="steelMinSize4new"
+                                                   class="col-form-label">最低尺寸:</label>
+                                            <input type="text" class="form-control" id="steelMinSize4new">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="steelMaxSize4new"
+                                                   class="col-form-label">最高尺寸:</label>
+                                            <input type="text" class="form-control" id="steelMaxSize4new">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="steelUnitPrice4new"
                                                    class="col-form-label">每公斤單價:</label>
-                                            <input type="text" class="form-control" id="heatTreatmentUnitPrice4new">
+                                            <input type="text" class="form-control" id="steelUnitPrice4new">
                                         </div>
                                     </form>
                                 </div>
@@ -334,29 +369,34 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 燈箱結束 -->
                 </div>
-            </div>
-            <!-- 燈箱結束 -->
-            <div class="controll-content activity-order-controll-content">
-                <table id="all" class="display" style="width:100%">
-                    <thead>
-                    <tr>
-                        <th>材質</th>
-                        <th>單價</th>
-                        <th>修改</th>
-                        <th>刪除</th>
-                    </tr>
-                    </thead>
-                    <tbody id="tbody">
 
-                    </tbody>
-                </table>
-                <!---------------------------------主體結束-------------------------------->
+
+                <div class="controll-content activity-order-controll-content">
+                    <table id="all" class="display" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>種類</th>
+                            <th>材質</th>
+                            <th>最低尺寸</th>
+                            <th>最高尺寸</th>
+                            <th>每公斤單價</th>
+                            <th>修改</th>
+                            <th>刪除</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbody">
+
+                        </tbody>
+                    </table>
+                    <!---------------------------------主體結束-------------------------------->
+                </div>
             </div>
         </div>
     </div>
 </div>
-
+</div>
 
 <!-- 引入bootstrap CDN -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
@@ -364,7 +404,7 @@
         crossorigin="anonymous"></script>
 
 <!-- 新引入的JS檔案或套件請由此往下放 -->
-<script src="assets/js/heatTreatmentPrice.js"></script>
+<script src="assets/js/steelPrice.js"></script>
 <script>
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))

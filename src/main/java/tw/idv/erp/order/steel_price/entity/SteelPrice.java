@@ -6,6 +6,7 @@ import tw.idv.erp.core.Core;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -21,13 +22,17 @@ public class SteelPrice extends Core {
     @Column(name = "steelMaterial", length = 45)
     private String steelMaterial;
 
+    @Size(max = 45)
+    @Column(name = "steelType", length = 45)
+    private String steelType;
+
     @Column(name = "steelMinSize")
-    private Integer steelMinSize;
+    private BigDecimal steelMinSize;
 
     @Column(name = "steelMaxSize")
-    private Integer steelMaxSize;
+    private BigDecimal steelMaxSize;
 
     @Column(name = "steelUnitPrice")
-    private Integer steelUnitPrice;
+    private BigDecimal steelUnitPrice;
 
 }

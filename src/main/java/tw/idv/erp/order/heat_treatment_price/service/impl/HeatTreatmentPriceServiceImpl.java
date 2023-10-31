@@ -37,9 +37,6 @@ public class HeatTreatmentPriceServiceImpl implements HeatTreatmentPriceService 
             if (entity.getHeatTreatmentMaterial() != null) {//若名稱不為空則取代舊值
                 oldentity.setHeatTreatmentMaterial(entity.getHeatTreatmentMaterial());
             }
-            if (entity.getHeatTreatmentType() != null) {
-                oldentity.setHeatTreatmentType(entity.getHeatTreatmentType());
-            }
             if (entity.getHeatTreatmentUnitPrice() != null) {
                 oldentity.setHeatTreatmentUnitPrice(entity.getHeatTreatmentUnitPrice());
             }

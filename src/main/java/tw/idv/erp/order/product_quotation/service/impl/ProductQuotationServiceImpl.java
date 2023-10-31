@@ -46,6 +46,9 @@ public class ProductQuotationServiceImpl implements ProductQuotationService {
                 if (entity.getGrindingPrice() != null) {
                     oldentity.setGrindingPrice(entity.getGrindingPrice());
                 }
+                if (entity.getBreakingKnifegrindingPrice() != null) {
+                    oldentity.setBreakingKnifegrindingPrice(entity.getBreakingKnifegrindingPrice());
+                }
                 if (entity.getHeatTreatmentPrice() != null) {
                     oldentity.setHeatTreatmentPrice(entity.getHeatTreatmentPrice());
                 }
@@ -87,6 +90,9 @@ public class ProductQuotationServiceImpl implements ProductQuotationService {
                 }
                 if (entity.getHoleCount() != null) {
                     oldentity.setHoleCount(entity.getHoleCount());
+                }
+                if (entity.getHoleMachiningPrice() != null) {
+                    oldentity.setHoleMachiningPrice(entity.getHoleMachiningPrice());
                 }
                 if (entity.getOtherProcessingPrice() != null) {
                     oldentity.setOtherProcessingPrice(entity.getOtherProcessingPrice());

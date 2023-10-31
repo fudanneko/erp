@@ -28,12 +28,10 @@
                         let row =  heatTreatmentPriceData[i];
                         const heatTreatmentId = row.heatTreatmentId;
                         const heatTreatmentMaterial = row.heatTreatmentMaterial;
-                        const heatTreatmentType = row.heatTreatmentType;
                         const heatTreatmentUnitPrice = row.heatTreatmentUnitPrice;
 
                         dataTable.row.add([
                             heatTreatmentMaterial,
-                            heatTreatmentType,
                             heatTreatmentUnitPrice,
                             `
             <button type="button" class="btn btn-primary"  data-bs-toggle="modal"
@@ -60,14 +58,7 @@
                                    class="col-form-label">材質:</label>
                             <input type="text" class="form-control" id="heatTreatmentMaterial${i}" value="${heatTreatmentMaterial}">
                         </div>
-                        <div class="mb-3">
-                                            <label for="heatTreatmentType${i}" class="col-form-label">種類:</label>
-                                            <select name="" id="heatTreatmentType${i}" class="select24datatable " style="width: 300px">
-                                                <option>一般</option>
-                                                <option>調質</option>
-                                            </select>
-                                        </div>
-                         <div class="mb-3">
+                       <div class="mb-3">
                             <label For="heatTreatmentUnitPrice${i}"
                                    class="col-form-label">單價:</label>
                             <input type="text" class="form-control" id="heatTreatmentUnitPrice${i}" value="${heatTreatmentUnitPrice}">
@@ -83,7 +74,7 @@
                 </div>
             </div>
         </div>
-    </div>`,
+    `,
                             `<button type="button" class="btn btn-primary" id="delete${i}">刪除</button>`]);
 
                     }
@@ -104,7 +95,7 @@
     let dataTable = $('#all').DataTable({
         scrollY: '600px',
         scrollCollapse: true,
-        paging: true,
+        paging: false,
         pageLength: 15,
         info: false,
         destroy: true,
@@ -123,7 +114,6 @@
     function editOrder(i) {
         const heatTreatmentId = document.getElementById(`heatTreatmentId${i}`).value;
         const heatTreatmentMaterial = document.getElementById(`heatTreatmentMaterial${i}`).value;
-        const heatTreatmentType = document.getElementById(`heatTreatmentType${i}`).value;
         const heatTreatmentUnitPrice = document.getElementById(`heatTreatmentUnitPrice${i}`).value;
 
         // if (customerId === '') {
@@ -137,7 +127,6 @@
             }, body: JSON.stringify({
                 heatTreatmentId: heatTreatmentId,
                 heatTreatmentMaterial: heatTreatmentMaterial,
-                heatTreatmentType: heatTreatmentType,
                 heatTreatmentUnitPrice: heatTreatmentUnitPrice,
             }),
         })
@@ -176,12 +165,8 @@
 //     // ============================   newOrder()新增訂單========================
     function newOrder() {
         const heatTreatmentMaterial4new = document.querySelector('#heatTreatmentMaterial4new').value;
-        const heatTreatmentType4new = document.querySelector('#heatTreatmentType4new').value;
         const heatTreatmentUnitPrice4new = document.querySelector('#heatTreatmentUnitPrice4new').value;
         if (heatTreatmentMaterial4new === '') {
-            return;
-        }
-        if (heatTreatmentType4new === '') {
             return;
         }
         if (heatTreatmentUnitPrice4new === '') {
@@ -193,7 +178,6 @@
                 'Content-Type': 'application/json',
             }, body: JSON.stringify({
                 heatTreatmentMaterial: heatTreatmentMaterial4new,
-                heatTreatmentType: heatTreatmentType4new,
                 heatTreatmentUnitPrice: heatTreatmentUnitPrice4new,
             }),
         })

@@ -22,10 +22,6 @@ public class HeatTreatmentPrice extends Core {
     @Column(name = "heatTreatmentMaterial", length = 45)
     private String heatTreatmentMaterial;
 
-    @Size(max = 45)
-    @Column(name = "heatTreatmentType", length = 45)
-    private String heatTreatmentType;
-
     @Column(name = "heatTreatmentUnitPrice", precision = 6, scale = 1)
     private BigDecimal heatTreatmentUnitPrice;
 
