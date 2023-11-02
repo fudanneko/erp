@@ -78,12 +78,12 @@
                         <div class="mb-3">
                             <label For="grindingMinSize${i}"
                                    class="col-form-label">最低尺寸:</label>
-                            <input type="date" class="form-control" id="grindingMinSize${i}" value="${grindingMinSize}">
+                            <input type="text" class="form-control" id="grindingMinSize${i}" value="${grindingMinSize}">
                         </div>
                         <div class="mb-3">
                             <label For="grindingMaxSize${i}"
                                    class="col-form-label">最高尺寸:</label>
-                           <input type="date" class="form-control" id="grindingMaxSize${i}" value="${grindingMaxSize}">
+                           <input type="text" class="form-control" id="grindingMaxSize${i}" value="${grindingMaxSize}">
                         </div>
                          <div class="mb-3">
                             <label For="grindingUnitPrice${i}"
@@ -122,7 +122,7 @@
     let dataTable = $('#all').DataTable({
         scrollY: '600px',
         scrollCollapse: true,
-        paging: true,
+        paging: false,
         pageLength: 15,
         info: false,
         destroy: true,

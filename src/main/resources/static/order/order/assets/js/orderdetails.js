@@ -8,8 +8,8 @@
     const qpmaterialUnitPrice2 = document.getElementById('qpmaterialUnitPrice2')
     const qpgrindingPrice = document.getElementById('qpgrindingPrice')
     const qpgrindingPrice2 = document.getElementById('qpgrindingPrice2')
-    const qpProcessingPrice = document.getElementById('qpProcessingPrice')
-    const qpProcessingPrice2 = document.getElementById('qpProcessingPrice2')
+    const qpbreakingKnifegrindingPrice = document.getElementById('qpbreakingKnifegrindingPrice')
+    const qpbreakingKnifegrindingPrice2 = document.getElementById('qpbreakingKnifegrindingPrice2')
     const qpheatTreatmentPrice = document.getElementById('qpheatTreatmentPrice')
     const qpheatTreatmentPrice2 = document.getElementById('qpheatTreatmentPrice2')
     const qpwasherProcessingPrice = document.getElementById('qpwasherProcessingPrice')
@@ -36,6 +36,8 @@
     const qpotherProcessingPrice2 = document.getElementById('qpotherProcessingPrice2')
     const qptotalCost = document.getElementById('qptotalCost')
     const qptotalCost2 = document.getElementById('qptotalCost2')
+    const qpgrindingthickness = document.getElementById('qpgrindingthickness')
+    const qpReferenceValue = document.getElementById('qpReferenceValue')
     // =========================訂單分頁=========================
     const oporderId = document.getElementById('oporderId')
     const opcustomerId = document.getElementById('opcustomerId')
@@ -108,7 +110,7 @@
                         const quotationDate = dateformat(new Date(productQuotationData.quotationDate));
                         const materialUnitPrice = productQuotationData.materialUnitPrice;
                         const grindingPrice = productQuotationData.grindingPrice;
-                        const ProcessingPrice = productQuotationData.breakingKnifegrindingPrice;
+                        const breakingKnifegrindingPrice = productQuotationData.breakingKnifegrindingPrice;
                         const heatTreatmentPrice = productQuotationData.heatTreatmentPrice;
                         const washerProcessingPrice = productQuotationData.washerProcessingPrice;
                         const breakingKnifeProcessingPrice = productQuotationData.breakingKnifeProcessingPrice;
@@ -130,7 +132,7 @@
                         qpquotationDate.value = quotationDate ?? 0;
                         qpmaterialUnitPrice.value = materialUnitPrice ?? 0;
                         qpgrindingPrice.value = grindingPrice ?? 0;
-                        qpProcessingPrice.value = ProcessingPrice ?? 0;
+                        qpbreakingKnifegrindingPrice.value = breakingKnifegrindingPrice ?? 0;
                         qpheatTreatmentPrice.value = heatTreatmentPrice ?? 0;
                         qpwasherProcessingPrice.value = washerProcessingPrice ?? 0;
                         qpbreakingKnifeProcessingPrice.value = breakingKnifeProcessingPrice ?? 0;
@@ -148,6 +150,7 @@
                         qpholeMachiningPrice.value = holeMachiningPrice ?? 0;
                         qpotherProcessingPrice.value = otherProcessingPrice ?? 0;
                         qptotalCost.value = totalCost ?? 0;
+                        qpgrindingthickness.value = 1;
 
                     } else {
                         console.log('無報價資料');
@@ -163,13 +166,8 @@
     // =======================參考值=====================================
     function setReferenceValue() {
         const productMaterial = ppproductMaterial.value;
-        console.log(productMaterial);
         const categoryId = orderDetailObject.categoryId;
         const categorytype = productTypemap.get(categoryId);
-        console.log(categorytype)
-        console.log(categorytype === "破碎刀" )
-
-
         // 1.料價格
         if (categorytype === "破碎刀" || categorytype === "墊圈" || categorytype === "零件(圓)" || categorytype === "齒輪" || categorytype === "軸心") {
             // 1-1.圓形算法
@@ -179,7 +177,7 @@
             const weight = (length / 2) * (length / 2) * 24.8 * thickness / 1000000;
             const weight4c = parseFloat(weight.toFixed(1));
 
-            for (const row of meterail){
+            for (const row of meterail) {
                 const steelMaterial = row.steelMaterial;
                 const steelType = row.steelType;
                 const steelMinSize = row.steelMinSize;
@@ -192,7 +190,8 @@
                     qpmaterialUnitPrice2.value = "查無資料";
                 }
             }
-        } else {
+        }
+        if (categorytype === "粉碎刀" || categorytype === "清潔指板" || categorytype === "零件(方)") {
             // 1-2.方型算法
             const length = parseFloat(pplength.value) + 5;
             const width = parseFloat(ppwidth.value) + 5;
@@ -218,9 +217,25 @@
             })
         }
         //
+        // 2.研磨價格
+        //    2-1 圓形算法
+        const grindingthickness = qpgrindingthickness.value;
 
-        qpgrindingPrice2.value = 0;
-        qpProcessingPrice2.value = 0;
+        if (categorytype === "墊圈" || categorytype === "零件(圓)" || categorytype === "") {
+            const length = parseFloat(pplength.value) + 10;
+            qpgrindingPrice2.value = (length * length * 2 / 645 * grindingthickness).toFixed(2).toString();
+        }
+        //    2-2 方形算法
+        if (categorytype === "粉碎刀" || categorytype === "零件(方)" || categorytype === "") {
+            const length = parseFloat(pplength.value) + 5;
+            qpgrindingPrice2.value = (length / 25.4 * 12 * 1.3).toFixed(2).toString();
+        }
+
+
+        // 3.破碎刀研磨價格
+        qpbreakingKnifegrindingPrice2.value = 0
+
+
         qpheatTreatmentPrice2.value = 0;
         qpwasherProcessingPrice2.value = 0;
         qpbreakingKnifeProcessingPrice2.value = 0;
@@ -242,6 +257,12 @@
     }
 
 
+    function setautoReferenceValue() {
+        qpgrindingthickness.addEventListener('change', function () {
+            setReferenceValue();
+        })
+    }
+
     // ============================ 修改資料進去 edit()========================
     // 報價表修改
 
@@ -251,8 +272,7 @@
         const quotationDate = document.getElementById('qpquotationDate2').value;
         const qpmaterialUnitPrice = document.getElementById('qpmaterialUnitPrice').value;
         const qpgrindingPrice = document.getElementById('qpgrindingPrice').value;
-        const qpbreakingKnifegrindingPricee = document.getElementById('qpProcessingPrice').value;
-        console.log(qpbreakingKnifegrindingPricee)
+        const qpbreakingKnifegrindingPricee = document.getElementById('qpbreakingKnifegrindingPrice').value;
         const qpheatTreatmentPrice = document.getElementById('qpheatTreatmentPrice').value;
         const qpwasherProcessingPrice = document.getElementById('qpwasherProcessingPrice').value;
         const qpbreakingKnifeProcessingPrice = document.getElementById('qpbreakingKnifeProcessingPrice').value;
@@ -507,7 +527,7 @@
 
 // ============================找熱處理=============================
     getHeatTreatmentPrice();
-    let  heatTreatmentPriceData = [];
+    let heatTreatmentPriceData = [];
 
     function getHeatTreatmentPrice() {
         fetch("getAllHeatTreatmentPrice")
@@ -522,10 +542,10 @@
                 response.json().then(function (data) {
                     // 在此處可以處理從 API 獲取的數據
                     heatTreatmentPriceData = data;
-                    console.log("這是研磨資料",  heatTreatmentPriceData);
-                    dataaccount= heatTreatmentPriceData.length;
-                    for (let i = 0; i <  heatTreatmentPriceData.length; i++) {
-                        let row =  heatTreatmentPriceData[i];
+                    console.log("這是研磨資料", heatTreatmentPriceData);
+                    dataaccount = heatTreatmentPriceData.length;
+                    for (let i = 0; i < heatTreatmentPriceData.length; i++) {
+                        let row = heatTreatmentPriceData[i];
                         const heatTreatmentId = row.heatTreatmentId;
                         const heatTreatmentMaterial = row.heatTreatmentMaterial;
                         const heatTreatmentUnitPrice = row.heatTreatmentUnitPrice;
@@ -545,7 +565,6 @@
     let productTypemap = new Map();
     let productTypemap2 = new Map();
     let productDefaultProcessmap = new Map();
-
 
 
     function getcategory() {
@@ -618,6 +637,7 @@
                     selected4edit();
                     setqpeditbutton();
                     setReferenceValue();
+                    setautoReferenceValue();
                     setopeditbutton();
                     setppeditbutton();
                 });
