@@ -58,6 +58,9 @@ public class ProductQuotationServiceImpl implements ProductQuotationService {
                 if (entity.getBreakingKnifeProcessingPrice() != null) {
                     oldentity.setBreakingKnifeProcessingPrice(entity.getBreakingKnifeProcessingPrice());
                 }
+                if (entity.getBreakingknifeRepairPrice() != null) {
+                    oldentity.setBreakingknifeRepairPrice(entity.getBreakingknifeRepairPrice());
+                }
                 if (entity.getCrushingKnifeProcessingPrice() != null) {
                     oldentity.setCrushingKnifeProcessingPrice(entity.getCrushingKnifeProcessingPrice());
                 }

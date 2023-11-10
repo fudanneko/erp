@@ -43,6 +43,9 @@ public class ProductQuotation extends Core {
     @Column(name = "breakingKnifeProcessingPrice")
     private BigDecimal breakingKnifeProcessingPrice;
 
+    @Column(name = "breakingknifeRepairPrice")
+    private BigDecimal breakingknifeRepairPrice;
+
     @Column(name = "crushingKnifeProcessingPrice")
     private BigDecimal crushingKnifeProcessingPrice;
 

@@ -247,7 +247,7 @@
                                 <input type="text" class="form-control" id="qpmaterialUnitPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
-                                <label for="qpgrindingPrice" class="input-group-text">研磨價格</label>
+                                <label for="qpgrindingPrice" class="input-group-text" >研磨價格</label>
                                 <input type="text" class="form-control" id="qpgrindingPrice">
                                 <label for="qpgrindingthickness" class="input-group-text">研磨厚度</label>
                                 <input type="text" class="form-control" id="qpgrindingthickness" >
@@ -257,13 +257,21 @@
                             <div class="input-group mt-3">
                                 <label for="qpbreakingKnifegrindingPrice" class="input-group-text">破碎刀研磨價格</label>
                                 <input type="text" class="form-control" id="qpbreakingKnifegrindingPrice">
+                                <label For="qptype" class="input-group-text">研磨種類種類</label>
+                                <select name="" id="qptype" class="select24datatable">
+                                    <option value="" selected disabled>請選擇</option>
+                                    <option value="平面">平面</option>
+                                    <option value="悍補">悍補</option>
+                                </select>
+                                <label for="qpgrindingthickness2" class="input-group-text">研磨厚度</label>
+                                <input type="text" class="form-control" id="qpgrindingthickness2" >
                                 <label for="qpbreakingKnifegrindingPrice2" class="input-group-text">參考值</label>
                                 <input type="text" class="form-control" id="qpbreakingKnifegrindingPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpheatTreatmentPrice" class="input-group-text">熱處理價格</label>
                                 <input type="text" class="form-control" id="qpheatTreatmentPrice">
-                                <label For="httype" class="input-group-text">熱處理種類種類</label>
+                                <label For="httype" class="input-group-text">熱處理種類</label>
                                 <select name="" id="httype" class="select24datatable"
                                         style="width:200px;">
                                 </select>
@@ -280,8 +288,19 @@
                                 <label for="qpbreakingKnifeProcessingPrice"
                                        class="input-group-text">破碎刀加工價格</label>
                                 <input type="text" class="form-control" id="qpbreakingKnifeProcessingPrice">
+                                <label for="qptoothCount" class="input-group-text">爪數</label>
+                                <input type="text" class="form-control" id="qptoothCount">
                                 <label for="qpbreakingKnifeProcessingPrice2" class="input-group-text">參考值</label>
                                 <input type="text" class="form-control" id="qpbreakingKnifeProcessingPrice2" readonly>
+                            </div>
+                            <div class="input-group mt-3">
+                                <label for="qpbreakingknifeRepairPrice"
+                                       class="input-group-text">破碎刀悍補價格</label>
+                                <input type="text" class="form-control" id="qpbreakingknifeRepairPrice">
+                                <label for="qptoothCount2" class="input-group-text">爪數</label>
+                                <input type="text" class="form-control" id="qptoothCount2">
+                                <label for="qpbreakingknifeRepairPrice2" class="input-group-text">參考值</label>
+                                <input type="text" class="form-control" id="qpbreakingknifeRepairPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qpcrushingKnifeProcessingPrice"
@@ -290,15 +309,12 @@
                                 <label for="qpcrushingKnifeProcessingPrice2" class="input-group-text">參考值</label>
                                 <input type="text" class="form-control" id="qpcrushingKnifeProcessingPrice2" readonly>
                             </div>
-                            <div class="input-group mt-3">
-                                <label for="qptoothCount" class="input-group-text">爪數價格</label>
-                                <input type="text" class="form-control" id="qptoothCount">
-                                <label for="qptoothCount2" class="input-group-text">參考值</label>
-                                <input type="text" class="form-control" id="qptoothCount2" readonly>
-                            </div>
+
                             <div class="input-group mt-3">
                                 <label for="qpwireCuttingPrice" class="input-group-text">線切割價格</label>
                                 <input type="text" class="form-control" id="qpwireCuttingPrice">
+                                <label for="qpperimeter" class="input-group-text">周長</label>
+                                <input type="text" class="form-control" id="qpperimeter" >
                                 <label for="qpwireCuttingPrice2" class="input-group-text">參考值</label>
                                 <input type="text" class="form-control" id="qpwireCuttingPrice2" readonly>
                             </div>
@@ -326,26 +342,19 @@
                                 <label for="qpotherQuotation" class="input-group-text">其他報價</label>
                                 <input type="text" class="form-control" id="qpotherQuotation">
                             </div>
-
-                            <div class="input-group mt-3">
-                                <label for="qpholeMultiplier" class="input-group-text">孔倍率</label>
-                                <input type="text" class="form-control" id="qpholeMultiplier">
-                            </div>
-                            <div class="input-group mt-3">
-                                <label for="qpholeCount" class="input-group-text">孔數</label>
-                                <input type="text" class="form-control" id="qpholeCount">
-                            </div>
                             <div class="input-group mt-3">
                                 <label for="qpholeMachiningPrice" class="input-group-text">孔加工價格</label>
                                 <input type="text" class="form-control" id="qpholeMachiningPrice">
+                                <label for="qpholeMultiplier" class="input-group-text">孔深度</label>
+                                <input type="text" class="form-control" id="qpholeMultiplier">
+                                <label for="qpholeCount" class="input-group-text">孔數</label>
+                                <input type="text" class="form-control" id="qpholeCount">
                                 <label for="qpholeMachiningPrice2" class="input-group-text">參考值</label>
                                 <input type="text" class="form-control" id="qpholeMachiningPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
-                                <label for="qpotherProcessingPrice" class="input-group-text">加工價格</label>
+                                <label for="qpotherProcessingPrice" class="input-group-text">其他加工價格</label>
                                 <input type="text" class="form-control" id="qpotherProcessingPrice">
-                                <label for="qpotherProcessingPrice2" class="input-group-text">參考值</label>
-                                <input type="text" class="form-control" id="qpotherProcessingPrice2" readonly>
                             </div>
                             <div class="input-group mt-3">
                                 <label for="qptotalCost" class="input-group-text">報價總金額</label>

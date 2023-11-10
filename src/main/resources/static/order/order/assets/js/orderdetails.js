@@ -16,10 +16,11 @@
     const qpwasherProcessingPrice2 = document.getElementById('qpwasherProcessingPrice2')
     const qpbreakingKnifeProcessingPrice = document.getElementById('qpbreakingKnifeProcessingPrice')
     const qpbreakingKnifeProcessingPrice2 = document.getElementById('qpbreakingKnifeProcessingPrice2')
+    const qpbreakingknifeRepairPrice = document.getElementById('qpbreakingknifeRepairPrice')
+    const qpbreakingknifeRepairPrice2 = document.getElementById('qpbreakingknifeRepairPrice2')
     const qpcrushingKnifeProcessingPrice = document.getElementById('qpcrushingKnifeProcessingPrice')
     const qpcrushingKnifeProcessingPrice2 = document.getElementById('qpcrushingKnifeProcessingPrice2')
     const qptoothCount = document.getElementById('qptoothCount')
-    const qptoothCount2 = document.getElementById('qptoothCount2')
     const qpwireCuttingPrice = document.getElementById('qpwireCuttingPrice')
     const qpwireCuttingPrice2 = document.getElementById('qpwireCuttingPrice2')
     const qphezhenQuotation = document.getElementById('qphezhenQuotation')
@@ -33,11 +34,53 @@
     const qpholeMachiningPrice = document.getElementById('qpholeMachiningPrice')
     const qpholeMachiningPrice2 = document.getElementById('qpholeMachiningPrice2')
     const qpotherProcessingPrice = document.getElementById('qpotherProcessingPrice')
-    const qpotherProcessingPrice2 = document.getElementById('qpotherProcessingPrice2')
     const qptotalCost = document.getElementById('qptotalCost')
     const qptotalCost2 = document.getElementById('qptotalCost2')
     const qpgrindingthickness = document.getElementById('qpgrindingthickness')
-    const qpReferenceValue = document.getElementById('qpReferenceValue')
+    // const qpReferenceValue = document.getElementById('qpReferenceValue')
+    const qpperimeter = document.getElementById('qpperimeter')
+    const qptype = document.getElementById('qptype')
+    const httype = document.getElementById('httype')
+    const qpgrindingthickness2 = document.getElementById('qpgrindingthickness2')
+    const qptoothCount2 = document.getElementById('qptoothCount2')
+// label
+    const qpmaterialUnitPricelabel = document.querySelector('label[for="qpmaterialUnitPrice"]')
+    const qpmaterialUnitPrice2label = document.querySelector('label[for="qpmaterialUnitPrice2"]');
+    const qpgrindingPricelabel = document.querySelector('label[for="qpgrindingPrice"]');
+    const qpgrindingPrice2label = document.querySelector('label[for="qpgrindingPrice2"]');
+    const qpbreakingKnifegrindingPricelabel = document.querySelector('label[for="qpbreakingKnifegrindingPrice"]');
+    const qpbreakingKnifegrindingPrice2label = document.querySelector('label[for="qpbreakingKnifegrindingPrice2"]');
+    const qpheatTreatmentPricelabel = document.querySelector('label[for="qpheatTreatmentPrice"]');
+    const qpheatTreatmentPrice2label = document.querySelector('label[for="qpheatTreatmentPrice2"]');
+    const qpwasherProcessingPricelabel = document.querySelector('label[for="qpwasherProcessingPrice"]');
+    const qpwasherProcessingPrice2label = document.querySelector('label[for="qpwasherProcessingPrice2"]');
+    const qpbreakingKnifeProcessingPricelabel = document.querySelector('label[for="qpbreakingKnifeProcessingPrice"]');
+    const qpbreakingKnifeProcessingPrice2label = document.querySelector('label[for="qpbreakingKnifeProcessingPrice2"]');
+    const qpbreakingknifeRepairPricelabel = document.querySelector('label[for="qpbreakingknifeRepairPrice"]');
+    const qpbreakingknifeRepairPrice2label = document.querySelector('label[for="qpbreakingknifeRepairPrice2"]');
+    const qpcrushingKnifeProcessingPricelabel = document.querySelector('label[for="qpcrushingKnifeProcessingPrice"]');
+    const qpcrushingKnifeProcessingPrice2label = document.querySelector('label[for="qpcrushingKnifeProcessingPrice2"]');
+    const qptoothCountlabel = document.querySelector('label[for="qptoothCount"]');
+    const qpwireCuttingPricelabel = document.querySelector('label[for="qpwireCuttingPrice"]');
+    const qpwireCuttingPrice2label = document.querySelector('label[for="qpwireCuttingPrice2"]');
+    const qphezhenQuotationlabel = document.querySelector('label[for="qphezhenQuotation"]');
+    const qpguofengQuotationlabel = document.querySelector('label[for="qpguofengQuotation"]');
+    const qpguoshengQuotationlabel = document.querySelector('label[for="qpguoshengQuotation"]');
+    const qphuataiQuotationlabel = document.querySelector('label[for="qphuataiQuotation"]');
+    const qpjinjiQuotationlabel = document.querySelector('label[for="qpjinjiQuotation"]');
+    const qpotherQuotationlabel = document.querySelector('label[for="qpotherQuotation"]');
+    const qpholeMultiplierlabel = document.querySelector('label[for="qpholeMultiplier"]');
+    const qpholeCountlabel = document.querySelector('label[for="qpholeCount"]');
+    const qpholeMachiningPricelabel = document.querySelector('label[for="qpholeMachiningPrice"]');
+    const qpholeMachiningPrice2label = document.querySelector('label[for="qpholeMachiningPrice2"]');
+    const qpotherProcessingPricelabel = document.querySelector('label[for="qpotherProcessingPrice"]');
+    const qpgrindingthicknesslabel = document.querySelector('label[for="qpgrindingthickness"]');
+    const qptoothCount2label = document.querySelector('label[for="qptoothCount2"]');
+    const qpperimeterlabel = document.querySelector('label[for="qpperimeter"]');
+    const qptypelabel = document.querySelector('label[for="qptype"]');
+    const httypelabel = document.querySelector('label[for="httype"]');
+    const qpgrindingthickness2label = document.querySelector('label[for="qpgrindingthickness2"]');
+
     // =========================訂單分頁=========================
     const oporderId = document.getElementById('oporderId')
     const opcustomerId = document.getElementById('opcustomerId')
@@ -114,6 +157,7 @@
                         const heatTreatmentPrice = productQuotationData.heatTreatmentPrice;
                         const washerProcessingPrice = productQuotationData.washerProcessingPrice;
                         const breakingKnifeProcessingPrice = productQuotationData.breakingKnifeProcessingPrice;
+                        const breakingknifeRepairPrice = productQuotationData.breakingknifeRepairPrice;
                         const crushingKnifeProcessingPrice = productQuotationData.crushingKnifeProcessingPrice;
                         const toothCount = productQuotationData.toothCount;
                         const wireCuttingPrice = productQuotationData.wireCuttingPrice;
@@ -136,6 +180,7 @@
                         qpheatTreatmentPrice.value = heatTreatmentPrice ?? 0;
                         qpwasherProcessingPrice.value = washerProcessingPrice ?? 0;
                         qpbreakingKnifeProcessingPrice.value = breakingKnifeProcessingPrice ?? 0;
+                        qpbreakingknifeRepairPrice.value = breakingknifeRepairPrice ?? 0;
                         qpcrushingKnifeProcessingPrice.value = crushingKnifeProcessingPrice ?? 0;
                         qptoothCount.value = toothCount ?? 0;
                         qpwireCuttingPrice.value = wireCuttingPrice ?? 0;
@@ -151,7 +196,9 @@
                         qpotherProcessingPrice.value = otherProcessingPrice ?? 0;
                         qptotalCost.value = totalCost ?? 0;
                         qpgrindingthickness.value = 1;
-
+                        qpperimeter.value = 0;
+                        qpgrindingthickness2.value = 1;
+                        qptoothCount2.value = toothCount ?? 0;
                     } else {
                         console.log('無報價資料');
                         // 在这里处理数据不存在的情况
@@ -164,7 +211,115 @@
     }
 
     // =======================參考值=====================================
+    function displaynone() {
+        const elements2display = [
+            // 料
+            qpmaterialUnitPrice,
+            qpmaterialUnitPrice2,
+            qpmaterialUnitPricelabel,
+            qpmaterialUnitPrice2label,
+            // 研磨
+            qpgrindingPrice,
+            qpgrindingPrice2,
+            qpgrindingthickness,
+            qpgrindingthicknesslabel,
+            qpgrindingPricelabel,
+            qpgrindingPrice2label,
+
+            // 破碎研磨
+            qpbreakingKnifegrindingPrice,
+            qpbreakingKnifegrindingPrice2,
+            qptypelabel,
+            qptype,
+            qpgrindingthickness2,
+            qpgrindingthickness2label,
+            qpbreakingKnifegrindingPricelabel,
+            qpbreakingKnifegrindingPrice2label,
+            // 熱處理
+            qpheatTreatmentPrice,
+            qpheatTreatmentPrice2,
+            httype,
+            httypelabel,
+            qpheatTreatmentPricelabel,
+            qpheatTreatmentPrice2label,
+            // 墊圈加工
+            qpwasherProcessingPrice,
+            qpwasherProcessingPrice2,
+            qpwasherProcessingPricelabel,
+            qpwasherProcessingPrice2label,
+            // 破碎加工
+            qpbreakingKnifeProcessingPrice,
+            qpbreakingKnifeProcessingPrice2,
+            qpbreakingKnifeProcessingPricelabel,
+            qpbreakingKnifeProcessingPrice2label,
+            qptoothCount,
+            qptoothCountlabel,
+            // 破碎悍補
+            qpbreakingknifeRepairPrice,
+            qpbreakingknifeRepairPrice2,
+            qpbreakingknifeRepairPricelabel,
+            qpbreakingknifeRepairPrice2label,
+            qptoothCount2,
+            qptoothCount2label,
+            // 粉碎加工
+            qpcrushingKnifeProcessingPrice,
+            qpcrushingKnifeProcessingPrice2,
+            qpcrushingKnifeProcessingPricelabel,
+            qpcrushingKnifeProcessingPrice2label,
+            // 線切割
+            qpwireCuttingPrice,
+            qpwireCuttingPrice2,
+            qpperimeter,
+            qpperimeterlabel,
+            qpwireCuttingPricelabel,
+            qpwireCuttingPrice2label,
+
+            // 合振
+            qphezhenQuotation,
+            qphezhenQuotationlabel,
+            // 國豐
+            qpguofengQuotation,
+            qpguofengQuotationlabel,
+            // 國聖
+            qpguoshengQuotation,
+            qpguoshengQuotationlabel,
+            // 華泰
+            qphuataiQuotation,
+            qphuataiQuotationlabel,
+            // 進佶
+            qpjinjiQuotation,
+            qpjinjiQuotationlabel,
+            // 其他
+            // qpotherQuotation,
+            // qpotherQuotationlabel,
+            // 孔加工
+            qpholeMultiplier,
+            qpholeMultiplierlabel,
+            qpholeCount,
+            qpholeCountlabel,
+            qpholeMachiningPrice,
+            qpholeMachiningPrice2,
+            qpholeMachiningPricelabel,
+            qpholeMachiningPrice2label,
+            // 其他加工
+            // qpotherProcessingPrice,
+            // qpotherProcessingPricelabel,
+
+        ];
+        elements2display.forEach(element => {
+            element.style.display = 'none';
+        });
+    }
+
+    function displayblock(element) {
+        element.forEach(e => {
+            e.style.removeProperty('display'); // 删除 display: none
+        });
+    }
+
     function setReferenceValue() {
+        displaynone();
+
         const productMaterial = ppproductMaterial.value;
         const categoryId = orderDetailObject.categoryId;
         const categorytype = productTypemap.get(categoryId);
@@ -190,6 +345,14 @@
                     qpmaterialUnitPrice2.value = "查無資料";
                 }
             }
+            const element = [
+                qpmaterialUnitPrice,
+                qpmaterialUnitPrice2,
+                qpmaterialUnitPricelabel,
+                qpmaterialUnitPrice2label
+            ]
+            displayblock(element);
+
         }
         if (categorytype === "粉碎刀" || categorytype === "清潔指板" || categorytype === "零件(方)") {
             // 1-2.方型算法
@@ -197,71 +360,549 @@
             const width = parseFloat(ppwidth.value) + 5;
             const thickness = parseFloat(ppthickness.value) + 5;
             const weight = parseFloat((length * width * thickness * 8 / 1000000).toFixed(1));
-            meterail.forEach(function (row) {
+            for (let i = 0; i < meterail.length; i++) {
+                const row = meterail[i];
                 const steelMaterial = row.steelMaterial;
                 const steelType = row.steelType;
                 const steelMinSize = row.steelMinSize;
                 const steelMaxSize = row.steelMaxSize;
                 let steelUnitPrice = row.steelUnitPrice;
-                if (productMaterial === steelMaterial && steelType === "方型" && length > steelMinSize && length <= steelMaxSize) {
+
+                if (steelType === "方型" && productMaterial === steelMaterial && thickness > steelMinSize && thickness <= steelMaxSize) {
                     if (width <= 100 && length >= 300 && length < 1000) {
-                        steelUnitPrice = steelUnitPrice + 3
+                        steelUnitPrice = steelUnitPrice + 3;
                     }
                     if (width <= 100 && length >= 1000) {
-                        steelUnitPrice = steelUnitPrice + 5
+                        steelUnitPrice = steelUnitPrice + 5;
                     }
                     qpmaterialUnitPrice2.value = (weight * steelUnitPrice).toFixed(2).toString();
+                    break; // 在這裡使用 break
                 } else {
                     qpmaterialUnitPrice2.value = "查無資料";
                 }
-            })
+            }
+
+            const element = [
+                qpmaterialUnitPrice,
+                qpmaterialUnitPrice2,
+                qpmaterialUnitPricelabel,
+                qpmaterialUnitPrice2label
+            ]
+            displayblock(element);
         }
         //
         // 2.研磨價格
         //    2-1 圓形算法
         const grindingthickness = qpgrindingthickness.value;
 
-        if (categorytype === "墊圈" || categorytype === "零件(圓)" || categorytype === "") {
+        if (categorytype === "墊圈" || categorytype === "零件(圓)") {
             const length = parseFloat(pplength.value) + 10;
             qpgrindingPrice2.value = (length * length * 2 / 645 * grindingthickness).toFixed(2).toString();
+            const element = [
+                qpgrindingPrice,
+                qpgrindingPrice2,
+                qpgrindingthickness,
+                qpgrindingthicknesslabel,
+                qpgrindingPricelabel,
+                qpgrindingPrice2label
+            ]
+            displayblock(element);
         }
         //    2-2 方形算法
-        if (categorytype === "粉碎刀" || categorytype === "零件(方)" || categorytype === "") {
+        if (categorytype === "粉碎刀" || categorytype === "零件(方)" || categorytype === "清潔指板") {
             const length = parseFloat(pplength.value) + 5;
             qpgrindingPrice2.value = (length / 25.4 * 12 * 1.3).toFixed(2).toString();
+            const element = [
+                qpgrindingPrice,
+                qpgrindingPrice2,
+                qpgrindingthickness,
+                qpgrindingthicknesslabel,
+                qpgrindingPricelabel,
+                qpgrindingPrice2label,
+            ]
+            displayblock(element);
         }
 
 
         // 3.破碎刀研磨價格
-        qpbreakingKnifegrindingPrice2.value = 0
+        if (categorytype === "破碎刀" || categorytype === "破碎刀悍補") {
+            const length = parseFloat(pplength.value) + 10;
+            for (const row of grindingPrice) {
+                const grindingType = row.grindingType;
+                const grindingMinSize = row.grindingMinSize;
+                const grindingMaxSize = row.grindingMaxSize;
+                const grindingUnitPrice = row.grindingUnitPrice;
+                const grindingthickness = qpgrindingthickness2.value;
+                if (qptype.value === grindingType && length > grindingMinSize && length <= grindingMaxSize) {
+                    qpbreakingKnifegrindingPrice2.value = grindingUnitPrice * grindingthickness;
+                    break;
+                } else {
+                    qpbreakingKnifegrindingPrice2.value = "查無資料";
+                }
+            }
+            const element = [
+                qpbreakingKnifegrindingPrice,
+                qpbreakingKnifegrindingPrice2,
+                qptypelabel,
+                qptype,
+                qpgrindingthickness2,
+                qpgrindingthickness2label,
+                qpbreakingKnifegrindingPricelabel,
+                qpbreakingKnifegrindingPrice2label
+            ]
+            displayblock(element);
+        }
+
+        // 4.熱處理
+        // 4-1 圓形
+        if (categorytype === "破碎刀" || categorytype === "墊圈" || categorytype === "零件(圓)" || categorytype === "齒輪" || categorytype === "軸心") {
+            const length = parseFloat(pplength.value) + 10;
+            const width = parseFloat(ppwidth.value);
+            const thickness = parseFloat(ppthickness.value) + 5;
+            const finalproductweight = ((((length / 2) * (length / 2) * 24.8 * thickness) - ((width / 2) * (width / 2) * 24.8 * thickness)) / 1000000);
+            for (const row of heatTreatmentPriceData) {
+                const heatTreatmentMaterial = row.heatTreatmentMaterial;
+                const heatTreatmentUnitPrice = row.heatTreatmentUnitPrice;
+                if (httype.value === heatTreatmentMaterial) {
+                    qpheatTreatmentPrice2.value = (heatTreatmentUnitPrice * finalproductweight).toFixed(2).toString();
+                    break;
+                } else {
+                    qpheatTreatmentPrice2.value = "查無資料";
+                }
+            }
+            const element = [
+                qpheatTreatmentPrice,
+                qpheatTreatmentPrice2,
+                httype,
+                httypelabel,
+                qpheatTreatmentPricelabel,
+                qpheatTreatmentPrice2label,
+            ]
+            displayblock(element);
+
+        }
+        // 4-2 方形
+
+        if (categorytype === "粉碎刀" || categorytype === "零件(方)") {
+            const length = parseFloat(pplength.value) + 5;
+            const width = parseFloat(ppwidth.value) + 5;
+            const thickness = parseFloat(ppthickness.value) + 5;
+            const finalproductweight = (length * width * thickness * 8 / 1000000) * 0.9;
+
+            for (const row of heatTreatmentPriceData) {
+                const heatTreatmentMaterial = row.heatTreatmentMaterial;
+                const heatTreatmentUnitPrice = row.heatTreatmentUnitPrice;
+                if (httype.value === heatTreatmentMaterial) {
+                    console.log("單價", heatTreatmentUnitPrice)
+                    qpheatTreatmentPrice2.value = heatTreatmentUnitPrice * finalproductweight;
+                    break;
+                } else {
+                    qpheatTreatmentPrice2.value = "查無資料";
+                }
+            }
+            const element = [
+                qpheatTreatmentPrice,
+                qpheatTreatmentPrice2,
+                httype,
+                httypelabel,
+                qpheatTreatmentPricelabel,
+                qpheatTreatmentPrice2label,
+            ]
+            displayblock(element);
+
+        }
+        // 5.墊圈加工價格
+
+        if (categorytype === "墊圈") {
+            const length = parseFloat(pplength.value) + 10;
+            const thickness = parseFloat(ppthickness.value) + 5;
+            qpwasherProcessingPrice2.value = (length * thickness / 15).toFixed(2).toString();
+            const element = [
+                qpwasherProcessingPrice,
+                qpwasherProcessingPrice2,
+                qpwasherProcessingPricelabel,
+                qpwasherProcessingPrice2label,
+            ]
+            displayblock(element);
+        }
+
+        // 6.破碎刀加工價格
+        if (categorytype === "破碎刀") {
+            const length = parseFloat(pplength.value) + 10;
+            const thickness = parseFloat(ppthickness.value) + 5;
+            for (const row of toothCountPriceData) {
+                const toothMinThickness = row.toothMinThickness;
+                const toothMaxThickness = row.toothMaxThickness;
+                const toothUnitPrice = row.toothUnitPrice;
+                const toothCount = qptoothCount.value - 3;
+                if (thickness > toothMinThickness && thickness <= toothMaxThickness) {
+                    if (toothCount <= 0) {
+                        qpbreakingKnifeProcessingPrice2.value = (length * thickness / 8).toFixed(2).toString();
+                        break;
+                    } else {
+                        qpbreakingKnifeProcessingPrice2.value = ((length * thickness / 8) + (toothUnitPrice * toothCount)).toFixed(2).toString();
+                        break;
+                    }
+                } else {
+                    qpbreakingKnifeProcessingPrice2.value = "查無資料";
+                }
+            }
+            const element = [
+                qpbreakingKnifeProcessingPrice,
+                qpbreakingKnifeProcessingPrice2,
+                qpbreakingKnifeProcessingPricelabel,
+                qpbreakingKnifeProcessingPrice2label,
+                qptoothCount,
+                qptoothCountlabel,
+            ]
+            displayblock(element);
+        }
+        // 7.破碎刀悍補價格
+        if (categorytype === "破碎刀悍補") {
+            const length = parseFloat(pplength.value) + 10;
+            const toothCount = qptoothCount2.value - 3;
+            if (toothCount <= 0) {
+                qpbreakingknifeRepairPrice2.value = (length / 25.4 * 270).toFixed(2).toString();
+            } else {
+                qpbreakingknifeRepairPrice2.value = ((length / 25.4 * 270) + (toothCount * 300)).toFixed(2).toString();
+            }
+            const element = [
+                qpbreakingknifeRepairPrice,
+                qpbreakingknifeRepairPrice2,
+                qpbreakingknifeRepairPricelabel,
+                qpbreakingknifeRepairPrice2label,
+                qptoothCount2,
+                qptoothCount2label,
+            ]
+            displayblock(element);
+        }
+
+        // 8.粉碎刀加工價格
+        if (categorytype === "粉碎刀") {
+            const length = parseFloat(pplength.value) + 5;
+            const width = parseFloat(ppwidth.value) + 5;
+            const thickness = parseFloat(ppthickness.value) + 5;
+            qpcrushingKnifeProcessingPrice2.value = (length * width * thickness / 2260 * 1.3).toFixed(2).toString();
+            const element = [
+                qpcrushingKnifeProcessingPrice,
+                qpcrushingKnifeProcessingPrice2,
+                qpcrushingKnifeProcessingPricelabel,
+                qpcrushingKnifeProcessingPrice2label,
+            ]
+            displayblock(element);
+        }
+
+        // 9.線切割加工價格
+        if (categorytype === "破碎刀" || categorytype === "墊圈" || categorytype === "零件(圓)" || categorytype === "齒輪" || categorytype === "粉碎刀" || categorytype === "零件(方)") {
+
+            let thickness = parseFloat(ppthickness.value);
+            const perimeter = parseFloat(qpperimeter.value);
+            if (perimeter === 0) {
+                qpwireCuttingPrice2.value = 0;
+            } else {
+                if (thickness <= 20) {
+                    thickness = 20;
+                }
+                qpwireCuttingPrice2.value = ((thickness * perimeter / 50 * 5) + (30 * 6.9)).toFixed(2).toString();
+            }
+            const element = [
+                qpwireCuttingPrice,
+                qpwireCuttingPrice2,
+                qpperimeter,
+                qpperimeterlabel,
+                qpwireCuttingPricelabel,
+                qpwireCuttingPrice2label,
+            ]
+            displayblock(element);
+
+        }
 
 
-        qpheatTreatmentPrice2.value = 0;
-        qpwasherProcessingPrice2.value = 0;
-        qpbreakingKnifeProcessingPrice2.value = 0;
-        qpcrushingKnifeProcessingPrice2.value = 0;
-        qptoothCount2.value = 0;
-        qpwireCuttingPrice2.value = 0;
-        qpotherProcessingPrice2.value = 0;
-        qpholeMachiningPrice2.value = 0;
-        qptotalCost2.value = 0;
-        // 破碎刀悍補
-        // 墊圈
-        // 零件（圓）
-        // 齒輪
-        // 軸心
-        // 粉碎刀
-        // 零件（方）
-        // 清潔指板
-        // 線切割
+        // 10.孔加工價格
+        if (categorytype === "墊圈" || categorytype === "零件(圓)" || categorytype === "齒輪" || categorytype === "粉碎刀" || categorytype === "零件(方)" || categorytype === "軸心" || categorytype === "清潔指板") {
+            const holeMultiplier = parseFloat(qpholeMultiplier.value);
+            const holeCount = parseFloat(qpholeCount.value);
+            qpholeMachiningPrice2.value = 35 * (holeMultiplier * 0.01 + 1) * holeCount;
+
+            const element = [
+                qpholeMultiplier,
+                qpholeMultiplierlabel,
+                qpholeCount,
+                qpholeCountlabel,
+                qpholeMachiningPrice,
+                qpholeMachiningPrice2,
+                qpholeMachiningPricelabel,
+                qpholeMachiningPrice2label,
+            ]
+            displayblock(element);
+        }
+
+
+        // 11.總金額
+
+        // 11-1 破碎刀
+        if (categorytype === "破碎刀") {
+            // 總金額
+            qptotalCost2.value =
+                (
+                    // 材料
+                    parseFloat(qpmaterialUnitPrice.value) +
+                    // 破碎刀研磨
+                    parseFloat(qpbreakingKnifegrindingPrice.value) +
+                    // 熱處理
+                    parseFloat(qpheatTreatmentPrice.value) +
+                    // 破碎刀加工
+                    parseFloat(qpbreakingKnifeProcessingPrice.value) +
+                    // 線切割
+                    parseFloat(qpwireCuttingPrice.value) +
+                    // 其他報價
+                    parseFloat(qpotherQuotation.value) +
+                    // 其他加工
+                    parseFloat(qpotherProcessingPrice.value)
+                );
+        }
+
+        // 11-2 破碎刀悍補
+        if (categorytype === "破碎刀悍補") {
+            // 總金額
+            qptotalCost2.value =
+                // 破碎刀研磨
+                parseFloat(qpbreakingKnifegrindingPrice.value) +
+                // 破碎刀悍補
+                parseFloat(qpbreakingknifeRepairPrice.value) +
+                // 其他報價
+                parseFloat(qpotherQuotation.value) +
+                // 其他加工
+                parseFloat(qpotherProcessingPrice.value);
+        }
+        // 11-3 墊圈
+        if (categorytype === "墊圈") {
+            // 總金額
+            qptotalCost2.value =
+                // 材料
+                parseFloat(qpmaterialUnitPrice.value) +
+                // 研磨
+                parseFloat(qpgrindingPrice.value) +
+                // 熱處理
+                parseFloat(qpheatTreatmentPrice.value) +
+                // 墊圈加工
+                parseFloat(qpwasherProcessingPrice.value) +
+                // 線切割
+                parseFloat(qpwireCuttingPrice.value) +
+                // 合振
+                parseFloat(qphezhenQuotation.value) +
+                // 孔加工
+                parseFloat(qpholeMachiningPrice.value) +
+                // 其他報價
+                parseFloat(qpotherQuotation.value) +
+                // 其他加工
+                parseFloat(qpotherProcessingPrice.value);
+            const element = [
+                // 合振
+                qphezhenQuotation,
+                qphezhenQuotationlabel,
+            ]
+            displayblock(element);
+        }
+        // 11-4 零件(圓)
+        if (categorytype === "零件(圓)") {
+            // 總金額
+            qptotalCost2.value =
+                // 材料
+                parseFloat(qpmaterialUnitPrice.value) +
+                // 研磨
+                parseFloat(qpgrindingPrice.value) +
+                // 熱處理
+                parseFloat(qpheatTreatmentPrice.value) +
+                // 墊圈加工
+                parseFloat(qpwasherProcessingPrice.value) +
+                // 線切割
+                parseFloat(qpwireCuttingPrice.value) +
+                // 合振
+                parseFloat(qphezhenQuotation.value) +
+                // 其他報價
+                parseFloat(qpotherQuotation.value) +
+                // 孔加工
+                parseFloat(qpholeMachiningPrice.value) +
+                // 其他加工
+                parseFloat(qpotherProcessingPrice.value);
+            const element = [
+                // 合振
+                qphezhenQuotation,
+                qphezhenQuotationlabel,
+            ]
+            displayblock(element);
+
+        }
+        // 11-5 齒輪
+        if (categorytype === "齒輪") {
+            // 總金額
+            qptotalCost2.value =
+                // 材料
+                parseFloat(qpmaterialUnitPrice.value) +
+                // 熱處理
+                parseFloat(qpheatTreatmentPrice.value) +
+                // 線切割
+                parseFloat(qpwireCuttingPrice.value) +
+                // 合振
+                parseFloat(qphezhenQuotation.value) +
+                // 國豐
+                parseFloat(qpguofengQuotation.value) +
+                // 國聖
+                parseFloat(qpguoshengQuotation.value) +
+                // 其他報價
+                parseFloat(qpotherQuotation.value) +
+                // 孔加工
+                parseFloat(qpholeMachiningPrice.value) +
+                // 其他加工
+                parseFloat(qpotherProcessingPrice.value);
+            const element = [
+                // 合振
+                qphezhenQuotation,
+                qphezhenQuotationlabel,
+                // 國豐
+                qpguofengQuotation,
+                qpguofengQuotationlabel,
+                // 國聖
+                qpguoshengQuotation,
+                qpguoshengQuotationlabel,
+            ]
+            displayblock(element);
+
+        }
+        // 11-6 軸心
+        if (categorytype === "軸心") {
+            // 總金額
+            qptotalCost2.value =
+                // 材料
+                parseFloat(qpmaterialUnitPrice.value) +
+                // 熱處理
+                parseFloat(qpheatTreatmentPrice.value) +
+                // 合振
+                parseFloat(qphezhenQuotation.value) +
+                // 國聖
+                parseFloat(qpguoshengQuotation.value) +
+                // 華泰
+                parseFloat(qphuataiQuotation.value) +
+                // 進佶
+                parseFloat(qpjinjiQuotation.value) +
+                // 其他報價
+                parseFloat(qpotherQuotation.value) +
+                // 孔加工
+                parseFloat(qpholeMachiningPrice.value) +
+                // 其他加工
+                parseFloat(qpotherProcessingPrice.value);
+            const element = [
+                // 合振
+                qphezhenQuotation,
+                qphezhenQuotationlabel,
+                // 國聖
+                qpguoshengQuotation,
+                qpguoshengQuotationlabel,
+                // 華泰
+                qphuataiQuotation,
+                qphuataiQuotationlabel,
+                // 進佶
+                qpjinjiQuotation,
+                qpjinjiQuotationlabel,
+            ]
+            displayblock(element);
+
+        }
+        // 11-7 粉碎刀
+        if (categorytype === "粉碎刀") {
+            // 總金額
+            qptotalCost2.value =
+                // 材料
+                parseFloat(qpmaterialUnitPrice.value) +
+                // 研磨
+                parseFloat(qpgrindingPrice.value) +
+                // 熱處理
+                parseFloat(qpheatTreatmentPrice.value) +
+                // 粉碎刀加工
+                parseFloat(qpcrushingKnifeProcessingPrice.value) +
+                // 線切割
+                parseFloat(qpwireCuttingPrice.value) +
+                // 其他報價
+                parseFloat(qpotherQuotation.value) +
+                // 孔加工
+                parseFloat(qpholeMachiningPrice.value) +
+                // 其他加工
+                parseFloat(qpotherProcessingPrice.value);
+        }
+        //11-8 零件(方)
+        if (categorytype === "零件(方)") {
+            // 總金額
+            qptotalCost2.value =
+                // 材料
+                parseFloat(qpmaterialUnitPrice.value) +
+                // 研磨
+                parseFloat(qpgrindingPrice.value) +
+                // 熱處理
+                parseFloat(qpheatTreatmentPrice.value) +
+                // 線切割
+                parseFloat(qpwireCuttingPrice.value) +
+                // 其他報價
+                parseFloat(qpotherQuotation.value) +
+                // 孔加工
+                parseFloat(qpholeMachiningPrice.value) +
+                // 其他加工
+                parseFloat(qpotherProcessingPrice.value);
+        }
+        // 11-9 清潔指板
+        if (categorytype === "清潔指板") {
+            // 總金額
+            qptotalCost2.value =
+                // 材料
+                parseFloat(qpmaterialUnitPrice.value) +
+                // 研磨
+                parseFloat(qpgrindingPrice.value) +
+                // 線切割
+                parseFloat(qpwireCuttingPrice.value) +
+                // 其他報價
+                parseFloat(qpotherQuotation.value) +
+                // 孔加工
+                parseFloat(qpholeMachiningPrice.value) +
+                // 其他加工
+                parseFloat(qpotherProcessingPrice.value);
+        }
     }
 
 
+    // 動態計算
     function setautoReferenceValue() {
-        qpgrindingthickness.addEventListener('change', function () {
-            setReferenceValue();
-        })
+        const elementsToWatch = [
+            qpholeMultiplier,
+            qpholeCount,
+            qpholeMachiningPrice,
+            qpmaterialUnitPrice,
+            qpgrindingPrice,
+            qpbreakingKnifegrindingPrice,
+            qpheatTreatmentPrice,
+            qpwasherProcessingPrice,
+            qpbreakingKnifeProcessingPrice,
+            qpbreakingknifeRepairPrice,
+            qpcrushingKnifeProcessingPrice,
+            qptoothCount,
+            qpwireCuttingPrice,
+            qphezhenQuotation,
+            qpguofengQuotation,
+            qpguoshengQuotation,
+            qphuataiQuotation,
+            qpjinjiQuotation,
+            qpotherQuotation,
+            qpgrindingthickness,
+            qpperimeter,
+            qptype,
+            httype,
+            qpotherProcessingPrice,
+        ];
+
+        elementsToWatch.forEach(element => {
+            element.addEventListener('change', setReferenceValue);
+        });
     }
+
 
     // ============================ 修改資料進去 edit()========================
     // 報價表修改
@@ -542,14 +1183,7 @@
                 response.json().then(function (data) {
                     // 在此處可以處理從 API 獲取的數據
                     heatTreatmentPriceData = data;
-                    console.log("這是研磨資料", heatTreatmentPriceData);
-                    dataaccount = heatTreatmentPriceData.length;
-                    for (let i = 0; i < heatTreatmentPriceData.length; i++) {
-                        let row = heatTreatmentPriceData[i];
-                        const heatTreatmentId = row.heatTreatmentId;
-                        const heatTreatmentMaterial = row.heatTreatmentMaterial;
-                        const heatTreatmentUnitPrice = row.heatTreatmentUnitPrice;
-                    }
+
                     getcategory();
                 });
             })
@@ -596,6 +1230,7 @@
                     getmeterail();
                     getorderdata();
                     getproductQuotation();
+                    getgrindingPrice();
 
                 });
 
@@ -693,7 +1328,7 @@
             httype.append(option);
         })
 
-        httype.select2();
+        // httype.select2();
 
         //種類名稱select動態放入
         const uniqueCategoryNames = new Set();
@@ -792,6 +1427,56 @@
 
 
     // ===================產品明細資料填入==========================
+
+    // ===============================找研磨===================================
+    let grindingPrice = [];
+
+
+    function getgrindingPrice() {
+        fetch("getAllGrindingPrice")
+            .then(function (response) {
+                // 檢查 API 响應的狀態碼
+                if (response.status !== 200) {
+                    console.log('發生錯誤，狀態碼：' + response.status);
+                    return;
+                }
+                // 解析 JSON 格式的數據
+                response.json().then(function (data) {
+                    grindingPrice = data;
+                    console.log("這是研磨價格", data);
+                    ;
+                    gettoothCountPrice();
+                });
+            })
+            .catch(function (err) {
+                console.log('錯誤：', err);
+            });
+    }
+
+    // ===============================找爪數===================================
+
+    let toothCountPriceData = [];
+
+    function gettoothCountPrice() {
+        fetch("getAllToothCountPrice")
+            .then(function (response) {
+                // 檢查 API 响應的狀態碼
+                if (response.status !== 200) {
+                    console.log('發生錯誤，狀態碼：' + response.status);
+                    return;
+                }
+
+                // 解析 JSON 格式的數據
+                response.json().then(function (data) {
+                    // 在此處可以處理從 API 獲取的數據
+                    toothCountPriceData = data;
+                });
+            })
+            .catch(function (err) {
+                console.log('錯誤：', err);
+            });
+    }
+
 
     function storage2input() {
 
