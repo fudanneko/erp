@@ -42,41 +42,23 @@
     const httype = document.getElementById('httype')
     const qpgrindingthickness2 = document.getElementById('qpgrindingthickness2')
     const qptoothCount2 = document.getElementById('qptoothCount2')
-// label
-    const qpmaterialUnitPricelabel = document.querySelector('label[for="qpmaterialUnitPrice"]')
-    const qpmaterialUnitPrice2label = document.querySelector('label[for="qpmaterialUnitPrice2"]');
-    const qpgrindingPricelabel = document.querySelector('label[for="qpgrindingPrice"]');
-    const qpgrindingPrice2label = document.querySelector('label[for="qpgrindingPrice2"]');
-    const qpbreakingKnifegrindingPricelabel = document.querySelector('label[for="qpbreakingKnifegrindingPrice"]');
-    const qpbreakingKnifegrindingPrice2label = document.querySelector('label[for="qpbreakingKnifegrindingPrice2"]');
-    const qpheatTreatmentPricelabel = document.querySelector('label[for="qpheatTreatmentPrice"]');
-    const qpheatTreatmentPrice2label = document.querySelector('label[for="qpheatTreatmentPrice2"]');
-    const qpwasherProcessingPricelabel = document.querySelector('label[for="qpwasherProcessingPrice"]');
-    const qpwasherProcessingPrice2label = document.querySelector('label[for="qpwasherProcessingPrice2"]');
-    const qpbreakingKnifeProcessingPricelabel = document.querySelector('label[for="qpbreakingKnifeProcessingPrice"]');
-    const qpbreakingKnifeProcessingPrice2label = document.querySelector('label[for="qpbreakingKnifeProcessingPrice2"]');
-    const qpbreakingknifeRepairPricelabel = document.querySelector('label[for="qpbreakingknifeRepairPrice"]');
-    const qpbreakingknifeRepairPrice2label = document.querySelector('label[for="qpbreakingknifeRepairPrice2"]');
-    const qpcrushingKnifeProcessingPricelabel = document.querySelector('label[for="qpcrushingKnifeProcessingPrice"]');
-    const qpcrushingKnifeProcessingPrice2label = document.querySelector('label[for="qpcrushingKnifeProcessingPrice2"]');
-    const qptoothCountlabel = document.querySelector('label[for="qptoothCount"]');
-    const qpwireCuttingPricelabel = document.querySelector('label[for="qpwireCuttingPrice"]');
-    const qpwireCuttingPrice2label = document.querySelector('label[for="qpwireCuttingPrice2"]');
-    const qphezhenQuotationlabel = document.querySelector('label[for="qphezhenQuotation"]');
-    const qpguofengQuotationlabel = document.querySelector('label[for="qpguofengQuotation"]');
-    const qpguoshengQuotationlabel = document.querySelector('label[for="qpguoshengQuotation"]');
-    const qphuataiQuotationlabel = document.querySelector('label[for="qphuataiQuotation"]');
-    const qpjinjiQuotationlabel = document.querySelector('label[for="qpjinjiQuotation"]');
-    const qpholeMultiplierlabel = document.querySelector('label[for="qpholeMultiplier"]');
-    const qpholeCountlabel = document.querySelector('label[for="qpholeCount"]');
-    const qpholeMachiningPricelabel = document.querySelector('label[for="qpholeMachiningPrice"]');
-    const qpholeMachiningPrice2label = document.querySelector('label[for="qpholeMachiningPrice2"]');
-    const qpgrindingthicknesslabel = document.querySelector('label[for="qpgrindingthickness"]');
-    const qptoothCount2label = document.querySelector('label[for="qptoothCount2"]');
-    const qpperimeterlabel = document.querySelector('label[for="qpperimeter"]');
-    const qptypelabel = document.querySelector('label[for="qptype"]');
-    const httypelabel = document.querySelector('label[for="httype"]');
-    const qpgrindingthickness2label = document.querySelector('label[for="qpgrindingthickness2"]');
+
+// div
+    const qpmaterialUnitPricediv = document.getElementById('qpmaterialUnitPricediv')
+    const qpgrindingPricediv = document.getElementById('qpgrindingPricediv')
+    const qpbreakingKnifegrindingPricediv = document.getElementById('qpbreakingKnifegrindingPricediv')
+    const qpheatTreatmentPricediv = document.getElementById('qpheatTreatmentPricediv')
+    const qpwasherProcessingPricediv = document.getElementById('qpwasherProcessingPricediv')
+    const qpbreakingKnifeProcessingPricediv = document.getElementById('qpbreakingKnifeProcessingPricediv')
+    const qpbreakingknifeRepairPricediv = document.getElementById('qpbreakingknifeRepairPricediv')
+    const qpcrushingKnifeProcessingPricediv = document.getElementById('qpcrushingKnifeProcessingPricediv')
+    const qpwireCuttingPricediv = document.getElementById('qpwireCuttingPricediv')
+    const qphezhenQuotationdiv = document.getElementById('qphezhenQuotationdiv')
+    const qpguofengQuotationdiv = document.getElementById('qpguofengQuotationdiv')
+    const qpguoshengQuotationdiv = document.getElementById('qpguoshengQuotationdiv')
+    const qphuataiQuotationdiv = document.getElementById('qphuataiQuotationdiv')
+    const qpjinjiQuotationdiv = document.getElementById('qpjinjiQuotationdiv')
+    const qpholeMachiningPricediv = document.getElementById('qpholeMachiningPricediv')
 
     // =========================訂單分頁=========================
     const oporderId = document.getElementById('oporderId')
@@ -212,96 +194,35 @@
     function displaynone() {
         const elements2display = [
             // 料
-            qpmaterialUnitPrice,
-            qpmaterialUnitPrice2,
-            qpmaterialUnitPricelabel,
-            qpmaterialUnitPrice2label,
+            qpmaterialUnitPricediv,
             // 研磨
-            qpgrindingPrice,
-            qpgrindingPrice2,
-            qpgrindingthickness,
-            qpgrindingthicknesslabel,
-            qpgrindingPricelabel,
-            qpgrindingPrice2label,
-
+            qpgrindingPricediv,
             // 破碎研磨
-            qpbreakingKnifegrindingPrice,
-            qpbreakingKnifegrindingPrice2,
-            qptypelabel,
-            qptype,
-            qpgrindingthickness2,
-            qpgrindingthickness2label,
-            qpbreakingKnifegrindingPricelabel,
-            qpbreakingKnifegrindingPrice2label,
+            qpbreakingKnifegrindingPricediv,
             // 熱處理
-            qpheatTreatmentPrice,
-            qpheatTreatmentPrice2,
-            httype,
-            httypelabel,
-            qpheatTreatmentPricelabel,
-            qpheatTreatmentPrice2label,
+            qpheatTreatmentPricediv,
             // 墊圈加工
-            qpwasherProcessingPrice,
-            qpwasherProcessingPrice2,
-            qpwasherProcessingPricelabel,
-            qpwasherProcessingPrice2label,
+            qpwasherProcessingPricediv,
             // 破碎加工
-            qpbreakingKnifeProcessingPrice,
-            qpbreakingKnifeProcessingPrice2,
-            qpbreakingKnifeProcessingPricelabel,
-            qpbreakingKnifeProcessingPrice2label,
-            qptoothCount,
-            qptoothCountlabel,
+            qpbreakingKnifeProcessingPricediv,
             // 破碎悍補
-            qpbreakingknifeRepairPrice,
-            qpbreakingknifeRepairPrice2,
-            qpbreakingknifeRepairPricelabel,
-            qpbreakingknifeRepairPrice2label,
-            qptoothCount2,
-            qptoothCount2label,
+            qpbreakingknifeRepairPricediv,
             // 粉碎加工
-            qpcrushingKnifeProcessingPrice,
-            qpcrushingKnifeProcessingPrice2,
-            qpcrushingKnifeProcessingPricelabel,
-            qpcrushingKnifeProcessingPrice2label,
+            qpcrushingKnifeProcessingPricediv,
             // 線切割
-            qpwireCuttingPrice,
-            qpwireCuttingPrice2,
-            qpperimeter,
-            qpperimeterlabel,
-            qpwireCuttingPricelabel,
-            qpwireCuttingPrice2label,
-
+            qpwireCuttingPricediv,
             // 合振
-            qphezhenQuotation,
-            qphezhenQuotationlabel,
+            qphezhenQuotationdiv,
             // 國豐
-            qpguofengQuotation,
-            qpguofengQuotationlabel,
+            qpguofengQuotationdiv,
             // 國聖
-            qpguoshengQuotation,
-            qpguoshengQuotationlabel,
+            qpguoshengQuotationdiv,
             // 華泰
-            qphuataiQuotation,
-            qphuataiQuotationlabel,
+            qphuataiQuotationdiv,
             // 進佶
-            qpjinjiQuotation,
-            qpjinjiQuotationlabel,
-            // 其他
-            // qpotherQuotation,
-            // qpotherQuotationlabel,
+            qpjinjiQuotationdiv,
             // 孔加工
-            qpholeMultiplier,
-            qpholeMultiplierlabel,
-            qpholeCount,
-            qpholeCountlabel,
-            qpholeMachiningPrice,
-            qpholeMachiningPrice2,
-            qpholeMachiningPricelabel,
-            qpholeMachiningPrice2label,
-            // 其他加工
-            // qpotherProcessingPrice,
-            // qpotherProcessingPricelabel,
+            qpholeMachiningPricediv,
 
         ];
         elements2display.forEach(element => {
@@ -314,6 +235,7 @@
             e.style.removeProperty('display'); // 删除 display: none
         });
     }
+
 
     function setReferenceValue() {
         displaynone();
@@ -347,10 +269,7 @@
                 }
             }
             const element = [
-                qpmaterialUnitPrice,
-                qpmaterialUnitPrice2,
-                qpmaterialUnitPricelabel,
-                qpmaterialUnitPrice2label
+                qpmaterialUnitPricediv
             ]
             displayblock(element);
 
@@ -384,10 +303,7 @@
             }
 
             const element = [
-                qpmaterialUnitPrice,
-                qpmaterialUnitPrice2,
-                qpmaterialUnitPricelabel,
-                qpmaterialUnitPrice2label
+                qpmaterialUnitPricediv
             ]
             displayblock(element);
         }
@@ -400,12 +316,7 @@
             const length = parseFloat(pplength.value) + 10;
             qpgrindingPrice2.value = (length * length * 2 / 645 * grindingthickness).toFixed(2).toString();
             const element = [
-                qpgrindingPrice,
-                qpgrindingPrice2,
-                qpgrindingthickness,
-                qpgrindingthicknesslabel,
-                qpgrindingPricelabel,
-                qpgrindingPrice2label
+                qpgrindingPricediv,
             ]
             displayblock(element);
         }
@@ -414,12 +325,7 @@
             const length = parseFloat(pplength.value) + 5;
             qpgrindingPrice2.value = (length / 25.4 * 12 * 1.3).toFixed(2).toString();
             const element = [
-                qpgrindingPrice,
-                qpgrindingPrice2,
-                qpgrindingthickness,
-                qpgrindingthicknesslabel,
-                qpgrindingPricelabel,
-                qpgrindingPrice2label,
+                qpgrindingPricediv,
             ]
             displayblock(element);
         }
@@ -442,14 +348,7 @@
                 }
             }
             const element = [
-                qpbreakingKnifegrindingPrice,
-                qpbreakingKnifegrindingPrice2,
-                qptypelabel,
-                qptype,
-                qpgrindingthickness2,
-                qpgrindingthickness2label,
-                qpbreakingKnifegrindingPricelabel,
-                qpbreakingKnifegrindingPrice2label
+                qpbreakingKnifegrindingPricediv,
             ]
             displayblock(element);
         }
@@ -472,12 +371,7 @@
                 }
             }
             const element = [
-                qpheatTreatmentPrice,
-                qpheatTreatmentPrice2,
-                httype,
-                httypelabel,
-                qpheatTreatmentPricelabel,
-                qpheatTreatmentPrice2label,
+                qpheatTreatmentPricediv,
             ]
             displayblock(element);
 
@@ -502,12 +396,7 @@
                 }
             }
             const element = [
-                qpheatTreatmentPrice,
-                qpheatTreatmentPrice2,
-                httype,
-                httypelabel,
-                qpheatTreatmentPricelabel,
-                qpheatTreatmentPrice2label,
+                qpheatTreatmentPricediv,
             ]
             displayblock(element);
 
@@ -519,10 +408,7 @@
             const thickness = parseFloat(ppthickness.value) + 5;
             qpwasherProcessingPrice2.value = (length * thickness / 15).toFixed(2).toString();
             const element = [
-                qpwasherProcessingPrice,
-                qpwasherProcessingPrice2,
-                qpwasherProcessingPricelabel,
-                qpwasherProcessingPrice2label,
+                qpwasherProcessingPricediv,
             ]
             displayblock(element);
         }
@@ -549,12 +435,7 @@
                 }
             }
             const element = [
-                qpbreakingKnifeProcessingPrice,
-                qpbreakingKnifeProcessingPrice2,
-                qpbreakingKnifeProcessingPricelabel,
-                qpbreakingKnifeProcessingPrice2label,
-                qptoothCount,
-                qptoothCountlabel,
+                qpbreakingKnifeProcessingPricediv,
             ]
             displayblock(element);
         }
@@ -568,12 +449,7 @@
                 qpbreakingknifeRepairPrice2.value = ((length / 25.4 * 270) + (toothCount * 300)).toFixed(2).toString();
             }
             const element = [
-                qpbreakingknifeRepairPrice,
-                qpbreakingknifeRepairPrice2,
-                qpbreakingknifeRepairPricelabel,
-                qpbreakingknifeRepairPrice2label,
-                qptoothCount2,
-                qptoothCount2label,
+                qpbreakingknifeRepairPricediv,
             ]
             displayblock(element);
         }
@@ -585,10 +461,7 @@
             const thickness = parseFloat(ppthickness.value) + 5;
             qpcrushingKnifeProcessingPrice2.value = (length * width * thickness / 2260 * 1.3).toFixed(2).toString();
             const element = [
-                qpcrushingKnifeProcessingPrice,
-                qpcrushingKnifeProcessingPrice2,
-                qpcrushingKnifeProcessingPricelabel,
-                qpcrushingKnifeProcessingPrice2label,
+                qpcrushingKnifeProcessingPricediv,
             ]
             displayblock(element);
         }
@@ -607,12 +480,7 @@
                 qpwireCuttingPrice2.value = ((thickness * perimeter / 50 * 5) + (30 * 6.9)).toFixed(2).toString();
             }
             const element = [
-                qpwireCuttingPrice,
-                qpwireCuttingPrice2,
-                qpperimeter,
-                qpperimeterlabel,
-                qpwireCuttingPricelabel,
-                qpwireCuttingPrice2label,
+                qpwireCuttingPricediv,
             ]
             displayblock(element);
 
@@ -626,14 +494,7 @@
             qpholeMachiningPrice2.value = 35 * (holeMultiplier * 0.01 + 1) * holeCount;
 
             const element = [
-                qpholeMultiplier,
-                qpholeMultiplierlabel,
-                qpholeCount,
-                qpholeCountlabel,
-                qpholeMachiningPrice,
-                qpholeMachiningPrice2,
-                qpholeMachiningPricelabel,
-                qpholeMachiningPrice2label,
+                qpholeMachiningPricediv
             ]
             displayblock(element);
         }
@@ -700,8 +561,7 @@
                 parseFloat(qpotherProcessingPrice.value)) * customerindex;
             const element = [
                 // 合振
-                qphezhenQuotation,
-                qphezhenQuotationlabel,
+                qphezhenQuotationdiv,
             ]
             displayblock(element);
         }
@@ -729,8 +589,7 @@
                 parseFloat(qpotherProcessingPrice.value)) * customerindex;
             const element = [
                 // 合振
-                qphezhenQuotation,
-                qphezhenQuotationlabel,
+                qphezhenQuotationdiv,
             ]
             displayblock(element);
 
@@ -759,14 +618,11 @@
                 parseFloat(qpotherProcessingPrice.value)) * customerindex;
             const element = [
                 // 合振
-                qphezhenQuotation,
-                qphezhenQuotationlabel,
+                qphezhenQuotationdiv,
                 // 國豐
-                qpguofengQuotation,
-                qpguofengQuotationlabel,
+                qpguofengQuotationdiv,
                 // 國聖
-                qpguoshengQuotation,
-                qpguoshengQuotationlabel,
+                qpguoshengQuotationdiv,
             ]
             displayblock(element);
 
@@ -795,17 +651,13 @@
                 parseFloat(qpotherProcessingPrice.value)) * customerindex;
             const element = [
                 // 合振
-                qphezhenQuotation,
-                qphezhenQuotationlabel,
+                qphezhenQuotationdiv,
                 // 國聖
-                qpguoshengQuotation,
-                qpguoshengQuotationlabel,
+                qpguoshengQuotationdiv,
                 // 華泰
-                qphuataiQuotation,
-                qphuataiQuotationlabel,
+                qphuataiQuotationdiv,
                 // 進佶
-                qpjinjiQuotation,
-                qpjinjiQuotationlabel,
+                qpjinjiQuotationdiv,
             ]
             displayblock(element);
 
