@@ -59,17 +59,17 @@
                         </div>
                         <div class="mb-3">
                             <label For="categoryName${i}"
-                                   class="col-form-label">種類名稱:</label>
+                                   class="col-form-label">機械類別:</label>
                             <input type="text" class="form-control" id="categoryName${i}" value="${categoryName}">
                         </div>
                        <div class="mb-3">
                             <label For="productName${i}"
-                                   class="col-form-label">產品名稱:</label>
+                                   class="col-form-label">報價類別:</label>
                             <input type="text" class="form-control" id="productName${i}" value="${productName}">
                         </div>
                         <div class="mb-3">
                             <label For="productType${i}"
-                                   class="col-form-label">產品形式:</label>
+                                   class="col-form-label">產品名稱:</label>
                             <input type="text" class="form-control" id="productType${i}" value="${productType}">
                         </div>
                          <div class="mb-3">
@@ -95,7 +95,6 @@
                     dataTable.draw();
                     seteditbutton();
                     setdeletebutton();
-                    selected4edit();
                 });
             })
             .catch(function (err) {
@@ -112,8 +111,11 @@
         paging: false,
         pageLength: 15,
         info: false,
-        destroy: true,
+        scroller: true
     });
+
+
+
 
   // ============================ 修改資料進去 editOrder()========================
     function editOrder(i) {
@@ -147,7 +149,7 @@
                     Swal.fire({
                         position: 'center', icon: 'success', title: '修改成功!', showConfirmButton: false, timer: 1500
                     }).then(() => {
-                        location.reload()
+                        location.reload();
                     })
                 } else {
                     Swal.fire({
@@ -170,6 +172,7 @@
             })
         }
     }
+
 
 //     // ============================   newOrder()新增訂單========================
     function newOrder() {

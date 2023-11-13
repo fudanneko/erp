@@ -1,5 +1,4 @@
 (() => {
-    const tbody = document.querySelector('#tbody');
     // =========================報價分頁=========================
     const qpproductQuotationId = document.getElementById('qpproductQuotationId')
     const qporderDetailId = document.getElementById('qporderDetailId')
@@ -68,12 +67,10 @@
     const qpguoshengQuotationlabel = document.querySelector('label[for="qpguoshengQuotation"]');
     const qphuataiQuotationlabel = document.querySelector('label[for="qphuataiQuotation"]');
     const qpjinjiQuotationlabel = document.querySelector('label[for="qpjinjiQuotation"]');
-    const qpotherQuotationlabel = document.querySelector('label[for="qpotherQuotation"]');
     const qpholeMultiplierlabel = document.querySelector('label[for="qpholeMultiplier"]');
     const qpholeCountlabel = document.querySelector('label[for="qpholeCount"]');
     const qpholeMachiningPricelabel = document.querySelector('label[for="qpholeMachiningPrice"]');
     const qpholeMachiningPrice2label = document.querySelector('label[for="qpholeMachiningPrice2"]');
-    const qpotherProcessingPricelabel = document.querySelector('label[for="qpotherProcessingPrice"]');
     const qpgrindingthicknesslabel = document.querySelector('label[for="qpgrindingthickness"]');
     const qptoothCount2label = document.querySelector('label[for="qptoothCount2"]');
     const qpperimeterlabel = document.querySelector('label[for="qpperimeter"]');
@@ -319,12 +316,14 @@
 
     function setReferenceValue() {
         displaynone();
-
+        // const customerindex = customerdata.customerMultiplier;
         const productMaterial = ppproductMaterial.value;
         const categoryId = orderDetailObject.categoryId;
-        const categorytype = productTypemap.get(categoryId);
+        const categorytype = productNamemap.get(categoryId);
         // 1.料價格
-        if (categorytype === "破碎刀" || categorytype === "墊圈" || categorytype === "零件(圓)" || categorytype === "齒輪" || categorytype === "軸心") {
+        // 1-1 圓形算法
+        const circlesteelprice = ["破碎刀", "墊圈", "其他(圓)", "齒輪", "軸心"]
+        if (circlesteelprice.includes(categorytype)) {
             // 1-1.圓形算法
             // (半徑^2*24.8*厚度)/1000000 四捨五入到小數第二位
             const length = parseFloat(pplength.value) + 10;
@@ -354,7 +353,7 @@
             displayblock(element);
 
         }
-        if (categorytype === "粉碎刀" || categorytype === "清潔指板" || categorytype === "零件(方)") {
+        if (categorytype === "粉碎刀" || categorytype === "清潔指板" || categorytype === "其他(方)") {
             // 1-2.方型算法
             const length = parseFloat(pplength.value) + 5;
             const width = parseFloat(ppwidth.value) + 5;
@@ -395,7 +394,7 @@
         //    2-1 圓形算法
         const grindingthickness = qpgrindingthickness.value;
 
-        if (categorytype === "墊圈" || categorytype === "零件(圓)") {
+        if (categorytype === "墊圈" || categorytype === "其他(圓)") {
             const length = parseFloat(pplength.value) + 10;
             qpgrindingPrice2.value = (length * length * 2 / 645 * grindingthickness).toFixed(2).toString();
             const element = [
@@ -409,7 +408,7 @@
             displayblock(element);
         }
         //    2-2 方形算法
-        if (categorytype === "粉碎刀" || categorytype === "零件(方)" || categorytype === "清潔指板") {
+        if (categorytype === "粉碎刀" || categorytype === "其他(方)" || categorytype === "清潔指板") {
             const length = parseFloat(pplength.value) + 5;
             qpgrindingPrice2.value = (length / 25.4 * 12 * 1.3).toFixed(2).toString();
             const element = [
@@ -455,7 +454,7 @@
 
         // 4.熱處理
         // 4-1 圓形
-        if (categorytype === "破碎刀" || categorytype === "墊圈" || categorytype === "零件(圓)" || categorytype === "齒輪" || categorytype === "軸心") {
+        if (categorytype === "破碎刀" || categorytype === "墊圈" || categorytype === "其他(圓)" || categorytype === "齒輪" || categorytype === "軸心") {
             const length = parseFloat(pplength.value) + 10;
             const width = parseFloat(ppwidth.value);
             const thickness = parseFloat(ppthickness.value) + 5;
@@ -483,7 +482,7 @@
         }
         // 4-2 方形
 
-        if (categorytype === "粉碎刀" || categorytype === "零件(方)") {
+        if (categorytype === "粉碎刀" || categorytype === "其他(方)") {
             const length = parseFloat(pplength.value) + 5;
             const width = parseFloat(ppwidth.value) + 5;
             const thickness = parseFloat(ppthickness.value) + 5;
@@ -593,7 +592,7 @@
         }
 
         // 9.線切割加工價格
-        if (categorytype === "破碎刀" || categorytype === "墊圈" || categorytype === "零件(圓)" || categorytype === "齒輪" || categorytype === "粉碎刀" || categorytype === "零件(方)") {
+        if (categorytype === "破碎刀" || categorytype === "墊圈" || categorytype === "其他(圓)" || categorytype === "齒輪" || categorytype === "粉碎刀" || categorytype === "其他(方)") {
 
             let thickness = parseFloat(ppthickness.value);
             const perimeter = parseFloat(qpperimeter.value);
@@ -619,7 +618,7 @@
 
 
         // 10.孔加工價格
-        if (categorytype === "墊圈" || categorytype === "零件(圓)" || categorytype === "齒輪" || categorytype === "粉碎刀" || categorytype === "零件(方)" || categorytype === "軸心" || categorytype === "清潔指板") {
+        if (categorytype === "墊圈" || categorytype === "其他(圓)" || categorytype === "齒輪" || categorytype === "粉碎刀" || categorytype === "其他(方)" || categorytype === "軸心" || categorytype === "清潔指板") {
             const holeMultiplier = parseFloat(qpholeMultiplier.value);
             const holeCount = parseFloat(qpholeCount.value);
             qpholeMachiningPrice2.value = 35 * (holeMultiplier * 0.01 + 1) * holeCount;
@@ -644,7 +643,7 @@
         if (categorytype === "破碎刀") {
             // 總金額
             qptotalCost2.value =
-                (
+
                     // 材料
                     parseFloat(qpmaterialUnitPrice.value) +
                     // 破碎刀研磨
@@ -659,13 +658,13 @@
                     parseFloat(qpotherQuotation.value) +
                     // 其他加工
                     parseFloat(qpotherProcessingPrice.value)
-                );
+                ;
         }
 
         // 11-2 破碎刀悍補
         if (categorytype === "破碎刀悍補") {
             // 總金額
-            qptotalCost2.value =
+            qptotalCost2.value = (
                 // 破碎刀研磨
                 parseFloat(qpbreakingKnifegrindingPrice.value) +
                 // 破碎刀悍補
@@ -673,12 +672,12 @@
                 // 其他報價
                 parseFloat(qpotherQuotation.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value);
+                parseFloat(qpotherProcessingPrice.value)) ;
         }
         // 11-3 墊圈
         if (categorytype === "墊圈") {
             // 總金額
-            qptotalCost2.value =
+            qptotalCost2.value = (
                 // 材料
                 parseFloat(qpmaterialUnitPrice.value) +
                 // 研磨
@@ -696,7 +695,7 @@
                 // 其他報價
                 parseFloat(qpotherQuotation.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value);
+                parseFloat(qpotherProcessingPrice.value)) ;
             const element = [
                 // 合振
                 qphezhenQuotation,
@@ -704,10 +703,10 @@
             ]
             displayblock(element);
         }
-        // 11-4 零件(圓)
-        if (categorytype === "零件(圓)") {
+        // 11-4 其他(圓)
+        if (categorytype === "其他(圓)") {
             // 總金額
-            qptotalCost2.value =
+            qptotalCost2.value = (
                 // 材料
                 parseFloat(qpmaterialUnitPrice.value) +
                 // 研磨
@@ -725,7 +724,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value);
+                parseFloat(qpotherProcessingPrice.value)) ;
             const element = [
                 // 合振
                 qphezhenQuotation,
@@ -737,7 +736,7 @@
         // 11-5 齒輪
         if (categorytype === "齒輪") {
             // 總金額
-            qptotalCost2.value =
+            qptotalCost2.value = (
                 // 材料
                 parseFloat(qpmaterialUnitPrice.value) +
                 // 熱處理
@@ -755,7 +754,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value);
+                parseFloat(qpotherProcessingPrice.value)) ;
             const element = [
                 // 合振
                 qphezhenQuotation,
@@ -773,7 +772,7 @@
         // 11-6 軸心
         if (categorytype === "軸心") {
             // 總金額
-            qptotalCost2.value =
+            qptotalCost2.value = (
                 // 材料
                 parseFloat(qpmaterialUnitPrice.value) +
                 // 熱處理
@@ -791,7 +790,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value);
+                parseFloat(qpotherProcessingPrice.value)) ;
             const element = [
                 // 合振
                 qphezhenQuotation,
@@ -812,7 +811,7 @@
         // 11-7 粉碎刀
         if (categorytype === "粉碎刀") {
             // 總金額
-            qptotalCost2.value =
+            qptotalCost2.value = (
                 // 材料
                 parseFloat(qpmaterialUnitPrice.value) +
                 // 研磨
@@ -828,12 +827,12 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value);
+                parseFloat(qpotherProcessingPrice.value)) ;
         }
-        //11-8 零件(方)
-        if (categorytype === "零件(方)") {
+        //11-8 其他(方)
+        if (categorytype === "其他(方)") {
             // 總金額
-            qptotalCost2.value =
+            qptotalCost2.value = (
                 // 材料
                 parseFloat(qpmaterialUnitPrice.value) +
                 // 研磨
@@ -847,12 +846,12 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value);
+                parseFloat(qpotherProcessingPrice.value)) ;
         }
         // 11-9 清潔指板
         if (categorytype === "清潔指板") {
             // 總金額
-            qptotalCost2.value =
+            qptotalCost2.value = (
                 // 材料
                 parseFloat(qpmaterialUnitPrice.value) +
                 // 研磨
@@ -864,7 +863,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value);
+                parseFloat(qpotherProcessingPrice.value)) ;
         }
     }
 
@@ -1108,6 +1107,7 @@
                     opquotation.value = quotation;
                     opnote.value = note;
 
+                    // getcustomerdata(customerId);
                 });
             })
             .catch(function (err) {
@@ -1163,11 +1163,40 @@
         })
     }
 
+// ============================客戶資料方法=============================
+
+    // let customerdata = [];
+    //
+    // function getcustomerdata(customerId) {
+    //     fetch('getCustomerDetail', {
+    //         method: 'POST', headers: {
+    //             'Content-Type': 'application/json',
+    //         }, body: JSON.stringify({
+    //             customerId: customerId,
+    //         }),
+    //     })
+    //         .then(function (response) {
+    //             // 檢查 API 响應的狀態碼
+    //             if (response.status !== 200) {
+    //                 console.log('發生錯誤，狀態碼：' + response.status);
+    //                 return;
+    //             }
+    //             // 解析 JSON 格式的數據
+    //             response.json().then(function (data) {
+    //                 // 在此處可以處理從 API 獲取的數據
+    //                 customerdata = data;
+    //                 getHeatTreatmentPrice();
+    //             });
+    //         })
+    //         .catch(function (err) {
+    //             console.log('錯誤：', err);
+    //         });
+    // }
 
 // ============================產品資料方法=============================
 
 // ============================找熱處理=============================
-    getHeatTreatmentPrice();
+
     let heatTreatmentPriceData = [];
 
     function getHeatTreatmentPrice() {

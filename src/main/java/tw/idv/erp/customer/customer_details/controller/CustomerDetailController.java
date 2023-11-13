@@ -37,6 +37,12 @@ public class CustomerDetailController {
         return CustomerSERVICE.findAll();
     }
 
+    @PostMapping("order/order/getCustomerDetail")
+    public CustomerDetail findbyPK(@RequestBody CustomerDetail OrderRequest) {
+        Integer customerId = OrderRequest.getCustomerId();
+        return CustomerSERVICE.findByPK(customerId);
+    }
+
 
     @PostMapping("order/order/deleteCustomerDetail")
     public Boolean deleteOrder(@RequestBody CustomerDetail OrderRequest) {
