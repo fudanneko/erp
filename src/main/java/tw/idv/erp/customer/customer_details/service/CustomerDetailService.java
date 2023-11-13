@@ -12,6 +12,7 @@ public interface CustomerDetailService {
     List<CustomerDetail> findAll();
 
     CustomerDetail findByPK(Integer customerId);
+    CustomerDetail findByUk(String customeruk);
 
 
     boolean remove(Integer customerId);

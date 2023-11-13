@@ -39,8 +39,8 @@ public class CustomerDetailController {
 
     @PostMapping("order/order/getCustomerDetail")
     public CustomerDetail findbyPK(@RequestBody CustomerDetail OrderRequest) {
-        Integer customerId = OrderRequest.getCustomerId();
-        return CustomerSERVICE.findByPK(customerId);
+        String customeruk = OrderRequest.getCustomeruk();
+        return CustomerSERVICE.findByUk(customeruk);
     }
 
 

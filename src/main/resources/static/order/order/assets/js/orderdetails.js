@@ -141,9 +141,9 @@
             })
             .then(function (data) {
                 try {
-                    const jsonData = JSON.parse(data);
-                    // 在此處可以處理從 API 獲取的數據
-                    if (jsonData) {
+                    if(data){
+                        const jsonData = JSON.parse(data);
+
                         productQuotationData = jsonData;
                         console.log("這是報價資料", productQuotationData);
                         const productQuotationId = productQuotationData.productQuotationId;
@@ -198,6 +198,7 @@
                         qptoothCount2.value = toothCount ?? 0;
                     } else {
                         console.log('無報價資料');
+                        qpquotationDate.value = formattedDate ?? 0;
                         // 在这里处理数据不存在的情况
                     }
                 } catch (error) {
@@ -316,7 +317,8 @@
 
     function setReferenceValue() {
         displaynone();
-        // const customerindex = customerdata.customerMultiplier;
+        const customerindex = customerdata.customerMultiplier;
+        console.log('倍率',customerindex)
         const productMaterial = ppproductMaterial.value;
         const categoryId = orderDetailObject.categoryId;
         const categorytype = productNamemap.get(categoryId);
@@ -642,23 +644,23 @@
         // 11-1 破碎刀
         if (categorytype === "破碎刀") {
             // 總金額
-            qptotalCost2.value =
+            qptotalCost2.value = (
 
-                    // 材料
-                    parseFloat(qpmaterialUnitPrice.value) +
-                    // 破碎刀研磨
-                    parseFloat(qpbreakingKnifegrindingPrice.value) +
-                    // 熱處理
-                    parseFloat(qpheatTreatmentPrice.value) +
-                    // 破碎刀加工
-                    parseFloat(qpbreakingKnifeProcessingPrice.value) +
-                    // 線切割
-                    parseFloat(qpwireCuttingPrice.value) +
-                    // 其他報價
-                    parseFloat(qpotherQuotation.value) +
-                    // 其他加工
-                    parseFloat(qpotherProcessingPrice.value)
-                ;
+                // 材料
+                parseFloat(qpmaterialUnitPrice.value) +
+                // 破碎刀研磨
+                parseFloat(qpbreakingKnifegrindingPrice.value) +
+                // 熱處理
+                parseFloat(qpheatTreatmentPrice.value) +
+                // 破碎刀加工
+                parseFloat(qpbreakingKnifeProcessingPrice.value) +
+                // 線切割
+                parseFloat(qpwireCuttingPrice.value) +
+                // 其他報價
+                parseFloat(qpotherQuotation.value) +
+                // 其他加工
+                parseFloat(qpotherProcessingPrice.value)) * customerindex
+            ;
         }
 
         // 11-2 破碎刀悍補
@@ -672,7 +674,7 @@
                 // 其他報價
                 parseFloat(qpotherQuotation.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value)) ;
+                parseFloat(qpotherProcessingPrice.value)) * customerindex;
         }
         // 11-3 墊圈
         if (categorytype === "墊圈") {
@@ -695,7 +697,7 @@
                 // 其他報價
                 parseFloat(qpotherQuotation.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value)) ;
+                parseFloat(qpotherProcessingPrice.value)) * customerindex;
             const element = [
                 // 合振
                 qphezhenQuotation,
@@ -724,7 +726,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value)) ;
+                parseFloat(qpotherProcessingPrice.value)) * customerindex;
             const element = [
                 // 合振
                 qphezhenQuotation,
@@ -754,7 +756,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value)) ;
+                parseFloat(qpotherProcessingPrice.value)) * customerindex;
             const element = [
                 // 合振
                 qphezhenQuotation,
@@ -790,7 +792,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value)) ;
+                parseFloat(qpotherProcessingPrice.value)) * customerindex;
             const element = [
                 // 合振
                 qphezhenQuotation,
@@ -827,7 +829,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value)) ;
+                parseFloat(qpotherProcessingPrice.value))* customerindex;
         }
         //11-8 其他(方)
         if (categorytype === "其他(方)") {
@@ -846,7 +848,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value)) ;
+                parseFloat(qpotherProcessingPrice.value))* customerindex;
         }
         // 11-9 清潔指板
         if (categorytype === "清潔指板") {
@@ -863,7 +865,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value)) ;
+                parseFloat(qpotherProcessingPrice.value))* customerindex;
         }
     }
 
@@ -1107,7 +1109,7 @@
                     opquotation.value = quotation;
                     opnote.value = note;
 
-                    // getcustomerdata(customerId);
+                    getcustomerdata(customerId);
                 });
             })
             .catch(function (err) {
@@ -1165,38 +1167,39 @@
 
 // ============================客戶資料方法=============================
 
-    // let customerdata = [];
-    //
-    // function getcustomerdata(customerId) {
-    //     fetch('getCustomerDetail', {
-    //         method: 'POST', headers: {
-    //             'Content-Type': 'application/json',
-    //         }, body: JSON.stringify({
-    //             customerId: customerId,
-    //         }),
-    //     })
-    //         .then(function (response) {
-    //             // 檢查 API 响應的狀態碼
-    //             if (response.status !== 200) {
-    //                 console.log('發生錯誤，狀態碼：' + response.status);
-    //                 return;
-    //             }
-    //             // 解析 JSON 格式的數據
-    //             response.json().then(function (data) {
-    //                 // 在此處可以處理從 API 獲取的數據
-    //                 customerdata = data;
-    //                 getHeatTreatmentPrice();
-    //             });
-    //         })
-    //         .catch(function (err) {
-    //             console.log('錯誤：', err);
-    //         });
-    // }
+    let customerdata = [];
+
+    function getcustomerdata(customerId) {
+        fetch('getCustomerDetail', {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json',
+            }, body: JSON.stringify({
+                customeruk: customerId,
+            }),
+        })
+            .then(function (response) {
+                // 檢查 API 响應的狀態碼
+                if (response.status !== 200) {
+                    console.log('發生錯誤，狀態碼：' + response.status);
+                    return;
+                }
+                // 解析 JSON 格式的數據
+                response.json().then(function (data) {
+                    // 在此處可以處理從 API 獲取的數據
+                    customerdata = data;
+                    setReferenceValue();
+
+                });
+            })
+            .catch(function (err) {
+                console.log('錯誤：', err);
+            });
+    }
 
 // ============================產品資料方法=============================
 
 // ============================找熱處理=============================
-
+    getHeatTreatmentPrice()
     let heatTreatmentPriceData = [];
 
     function getHeatTreatmentPrice() {
@@ -1256,10 +1259,10 @@
                         productDefaultProcessmap.set(categoryId, productDefaultProcess);
                     }
                     storage2input();
-                    getmeterail();
                     getorderdata();
                     getproductQuotation();
                     getgrindingPrice();
+                    getmeterail();
 
                 });
 
@@ -1300,7 +1303,7 @@
                     select4edit();
                     selected4edit();
                     setqpeditbutton();
-                    setReferenceValue();
+                    // setReferenceValue();
                     setautoReferenceValue();
                     setopeditbutton();
                     setppeditbutton();

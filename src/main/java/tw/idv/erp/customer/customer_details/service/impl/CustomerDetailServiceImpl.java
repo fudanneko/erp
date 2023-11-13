@@ -89,6 +89,7 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
             return null;
         }
     }
+
     @Override
     public List<CustomerDetail> findAll() {
         return Dao.findAll();
@@ -103,14 +104,27 @@ public class CustomerDetailServiceImpl implements CustomerDetailService {
         }
         return null;
     }
+
+    @Override
+    public CustomerDetail findByUk(String customeruk) {
+        try {
+            CustomerDetail order = Dao.findByUk(customeruk);
+            return order;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
     @Override
     public boolean remove(Integer customerId) {
-            try {
-                Dao.deleteById(customerId);
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
+        try {
+            Dao.deleteById(customerId);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
