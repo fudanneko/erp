@@ -125,6 +125,7 @@
                     seteditbutton();
                     setdeletebutton();
                     selected4edit();
+                    reloadscroll();
                 });
             })
             .catch(function (err) {
@@ -136,13 +137,22 @@
     // ============================  初始化datatable函式========================
 
     let dataTable = $('#all').DataTable({
-        scrollY: '600px',
-        scrollCollapse: true,
+        // scrollY: '600px',
+        scrollCollapse: false,
         paging: false,
         pageLength: 15,
         info: false,
         destroy: true,
     });
+
+    function reloadscroll() {
+        window.addEventListener('load', function () {
+            // 从本地存储中检索滚动位置
+            let savedScrollPosition = localStorage.getItem('scrollPosition');
+            // 将页面滚动到保存的位置
+            window.scrollTo(0, savedScrollPosition);
+        });
+    };
 
 //自動選好修改內的select
     function selected4edit() {
@@ -191,6 +201,9 @@
                     Swal.fire({
                         position: 'center', icon: 'success', title: '修改成功!', showConfirmButton: false, timer: 1500
                     }).then(() => {
+                        let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+                        localStorage.setItem('scrollPosition', scrollPosition);
                         location.reload()
                     })
                 } else {
@@ -252,6 +265,9 @@
                     Swal.fire({
                         position: 'center', icon: 'success', title: '新增成功!', showConfirmButton: false, timer: 1500
                     }).then(() => {
+                        let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+                        localStorage.setItem('scrollPosition', scrollPosition);
                         location.reload()
                     })
                 } else {
@@ -304,6 +320,9 @@
                             showConfirmButton: false,
                             timer: 1500
                         }).then(() => {
+                            let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+                            localStorage.setItem('scrollPosition', scrollPosition);
                             location.reload()
                         })
                     } else {

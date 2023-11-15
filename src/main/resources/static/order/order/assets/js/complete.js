@@ -156,7 +156,8 @@
                     customerIdName();
                     customerIdName4new();
                     seteditbutton();
-                    setdeletebutton()
+                    setdeletebutton();
+                    reloadscroll();
                     // setinputinbox();
                     // addeventlistener4editbutton();
                     // addeventlistener4deletebutton();
@@ -175,8 +176,8 @@
     // ============================  初始化datatable函式========================
 
     let dataTable = $('#all').DataTable({
-        scrollY: '600px',
-        scrollCollapse: true,
+        // scrollY: '600px',
+        scrollCollapse: false,
         paging: true,
         pageLength: 15,
         info: false,
@@ -218,7 +219,14 @@
         // dom: 'Qlfrtip',
     });
 
-//
+function reloadscroll() {
+        window.addEventListener('load', function () {
+            // 从本地存储中检索滚动位置
+            let savedScrollPosition = localStorage.getItem('scrollPosition');
+            // 将页面滚动到保存的位置
+            window.scrollTo(0, savedScrollPosition);
+        });
+    };
 
 //     // ============================ 客戶代號及客戶名稱切換 ========================
     const customerId4new = $('#customerId4new');
@@ -368,7 +376,10 @@
                     Swal.fire({
                         position: 'center', icon: 'success', title: '修改成功!', showConfirmButton: false, timer: 1500
                     }).then(() => {
-                        location.reload()
+                        let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+                        localStorage.setItem('scrollPosition', scrollPosition);
+                        location.reload();
                     })
                 } else {
                     Swal.fire({
@@ -490,7 +501,10 @@
                             showConfirmButton: false,
                             timer: 1500
                         }).then(() => {
-                            location.reload()
+                            let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+                            localStorage.setItem('scrollPosition', scrollPosition);
+                            location.reload();
                         })
                     } else {
                         Swal.fire({

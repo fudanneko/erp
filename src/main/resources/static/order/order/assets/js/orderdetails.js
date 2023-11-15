@@ -123,7 +123,7 @@
             })
             .then(function (data) {
                 try {
-                    if(data){
+                    if (data) {
                         const jsonData = JSON.parse(data);
 
                         productQuotationData = jsonData;
@@ -240,7 +240,7 @@
     function setReferenceValue() {
         displaynone();
         const customerindex = customerdata.customerMultiplier;
-        console.log('倍率',customerindex)
+        console.log('倍率', customerindex)
         const productMaterial = ppproductMaterial.value;
         const categoryId = orderDetailObject.categoryId;
         const categorytype = productNamemap.get(categoryId);
@@ -274,7 +274,7 @@
             displayblock(element);
 
         }
-        if (categorytype === "粉碎刀" || categorytype === "清潔指板" || categorytype === "其他(方)") {
+        if (categorytype === "粉碎刀" || categorytype === "清潔指板" || categorytype === "其他(方)" || categorytype === "破碎刀(方)") {
             // 1-2.方型算法
             const length = parseFloat(pplength.value) + 5;
             const width = parseFloat(ppwidth.value) + 5;
@@ -681,7 +681,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value))* customerindex;
+                parseFloat(qpotherProcessingPrice.value)) * customerindex;
         }
         //11-8 其他(方)
         if (categorytype === "其他(方)") {
@@ -700,7 +700,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value))* customerindex;
+                parseFloat(qpotherProcessingPrice.value)) * customerindex;
         }
         // 11-9 清潔指板
         if (categorytype === "清潔指板") {
@@ -717,7 +717,7 @@
                 // 孔加工
                 parseFloat(qpholeMachiningPrice.value) +
                 // 其他加工
-                parseFloat(qpotherProcessingPrice.value))* customerindex;
+                parseFloat(qpotherProcessingPrice.value)) * customerindex;
         }
     }
 
@@ -1297,10 +1297,12 @@
             const optiond = new Option('請選擇', '');
             productType.append(optiond);
             const selectedValue = productName.val();
+            const selectedCategoryValue = categoryName.val();
             category.forEach(function (row) {
                 const productName = row.productName;
                 const productType1 = row.productType;
-                if (productName === selectedValue) {
+                const categoryName = row.categoryName;
+                if (categoryName === selectedCategoryValue && productName === selectedValue) {
                     const option = new Option(productType1, productType1);
                     productType.append(option);
                 }

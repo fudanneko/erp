@@ -7,7 +7,7 @@
     // ============================查資料回來getAll ========================
     let dataaccount = 0;
     getproductCategory();
-    let   ProductCategoryData = [];
+    let ProductCategoryData = [];
 
     function getproductCategory() {
         fetch("getAllProductCategory")
@@ -22,10 +22,10 @@
                 response.json().then(function (data) {
                     // 在此處可以處理從 API 獲取的數據
                     productCategoryData = data;
-                    console.log("這是研磨資料",  productCategoryData);
-                    dataaccount= productCategoryData.length;
-                    for (let i = 0; i <  productCategoryData.length; i++) {
-                        let row =  productCategoryData[i];
+                    console.log("這是研磨資料", productCategoryData);
+                    dataaccount = productCategoryData.length;
+                    for (let i = 0; i < productCategoryData.length; i++) {
+                        let row = productCategoryData[i];
                         const categoryId = row.categoryId;
                         const categoryName = row.categoryName;
                         const productName = row.productName;
@@ -95,6 +95,7 @@
                     dataTable.draw();
                     seteditbutton();
                     setdeletebutton();
+                    reloadscroll();
                 });
             })
             .catch(function (err) {
@@ -106,18 +107,25 @@
     // ============================  初始化datatable函式========================
 
     let dataTable = $('#all').DataTable({
-        scrollY: '600px',
-        scrollCollapse: true,
+        // scrollY: '600px',
+        scrollCollapse: false,
         paging: false,
         pageLength: 15,
         info: false,
         scroller: true
     });
 
+    function reloadscroll() {
+        window.addEventListener('load', function () {
+            // 从本地存储中检索滚动位置
+            let savedScrollPosition = localStorage.getItem('scrollPosition');
+            // 将页面滚动到保存的位置
+            window.scrollTo(0, savedScrollPosition);
+        });
+    };
 
 
-
-  // ============================ 修改資料進去 editOrder()========================
+    // ============================ 修改資料進去 editOrder()========================
     function editOrder(i) {
         const categoryId = document.getElementById(`categoryId${i}`).value;
         const categoryName = document.getElementById(`categoryName${i}`).value;
@@ -149,6 +157,9 @@
                     Swal.fire({
                         position: 'center', icon: 'success', title: '修改成功!', showConfirmButton: false, timer: 1500
                     }).then(() => {
+                        let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+                        localStorage.setItem('scrollPosition', scrollPosition);
                         location.reload();
                     })
                 } else {
