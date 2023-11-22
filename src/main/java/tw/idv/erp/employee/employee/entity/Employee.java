@@ -18,7 +18,7 @@ public class Employee extends Core {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employeeId", nullable = false)
-    private Integer id;
+    private Integer employeeId;
 
     @Size(max = 45)
     @Column(name = "employeeName", length = 45)
@@ -68,5 +68,21 @@ public class Employee extends Core {
     @Size(max = 45)
     @Column(name = "employeeNotes", length = 45)
     private String employeeNotes;
+
+
+    @Column(name = "enrollmentDate")
+    private Timestamp enrollmentDate;
+
+    @Size(max = 45)
+    @Column(name = "enrollmentPrice", length = 45)
+    private String enrollmentPrice;
+
+    @Column(name = "groupInsurance")
+    private Integer groupInsurance;
+
+    @Size(max = 45)
+    @Column(name = "nguyenVanA", length = 45)
+    private String nguyenVanA;
+
 
 }

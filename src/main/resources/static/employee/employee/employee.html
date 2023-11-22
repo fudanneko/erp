@@ -22,7 +22,7 @@
 
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css"/>
-    <link rel="stylesheet" href="assets/css/all.css">
+    <link rel="stylesheet" href="../../employee/employee/assets/css/all.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -30,11 +30,11 @@
             rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--分頁表頭css-->
-    <link rel="stylesheet" href="assets/css/title.css">
+    <link rel="stylesheet" href="../../employee/employee/assets/css/title.css">
     <!--搜尋選擇框select2-->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 
-    <title>訂單明細列表</title>
+    <title>員工列表</title>
     <!--    select2-->
     <style>
         #th2container {
@@ -296,17 +296,17 @@
         <div class="col-10 page-body">
             <div class="controll-box activity-order-controll-box">
                 <div class="back-end-box-title activity-order-controll-title">
-                    <h3 class="h2">訂單明細列表</h3>
+                    <h3 class="h2">員工列表</h3>
                     <!-- 燈箱 -->
                     <button type="button" class="btn btn-primary" id="newbutton2" data-bs-toggle="modal"
                             data-bs-target="#exampleModal" data-bs-whatever="@mdo">新增
                     </button>
-                    <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel"
+                    <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" tabindex="1"
                          aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">訂單明細新增
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">員工新增
                                     </h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -314,76 +314,106 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="mb-3">
-                                            <label for="orderId4new"
-                                                   class="col-form-label">訂單編號:</label>
-                                            <input type="text" class="form-control" id="orderId4new" readonly>
+                                            <label for="employeeName4new"
+                                                   class="col-form-label">姓名:</label>
+                                            <input type="text" class="form-control" id="employeeName4new">
                                         </div>
                                         <div class="mb-3">
-                                            <label For="categoryName4new"
-                                                   class="col-form-label">種類名稱:</label>
-                                            <select name="" id="categoryName4new" class="select24datatable" style="width: 200px">
+                                            <label for="nguyenVanA4new"
+                                                   class="col-form-label">越南姓名:</label>
+                                            <input type="text" class="form-control" id="nguyenVanA4new">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="employeeBrithday4new"
+                                                   class="col-form-label">生日:</label>
+                                            <input type="date" class="form-control" id="employeeBrithday4new">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="employeeHireDate4new"
+                                                   class="col-form-label">入職日:</label>
+                                            <input type="date" class="form-control" id="employeeHireDate4new">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="employeeIdCard4new"
+                                                   class="col-form-label">身分證字號:</label>
+                                            <input type="text" class="form-control" id="employeeIdCard4new">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="annualLeaveDays4new"
+                                                   class="col-form-label">特休天數:</label>
+                                            <input type="number" class="form-control" id="annualLeaveDays4new">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="remainingAnnualLeaveDays4new"
+                                                   class="col-form-label">剩餘特休天數:</label>
+                                            <input type="number" class="form-control" id="remainingAnnualLeaveDays4new">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="employeeGender4new"
+                                                   class="col-form-label">性別:</label>
+                                            <select id="employeeGender4new">
                                                 <option value="">請選擇</option>
+                                                <option value="1">男</option>
+                                                <option value="0">女</option>
                                             </select>
                                         </div>
-                                        <div class="mb-3" style="display: none" id="productName4newdiv">
-                                            <label For="productName4new"
-                                                   class="col-form-label">產品名稱:</label>
-                                            <select name="" id="productName4new" class="select24datatable" style="width: 200px;  display: inline-block ; margin-right: 10px; padding: 5px;  ">
-                                            </select>
-                                        </div>
-                                        <div class="mb-3" style="display: none" id="productType4newdiv">
-                                            <label For="productType4new"
-                                                   class="col-form-label">產品形式:</label>
-                                            <select name="" id="productType4new" class="select24datatable" style="width: 200px;  display: inline-block ; margin-right: 110px; padding: 5px; ">
-                                            </select>
-
+                                        <div class="mb-3">
+                                            <label for="employeePosition4new"
+                                                   class="col-form-label">職稱:</label>
+                                            <input type="text" class="form-control" id="employeePosition4new">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="length4new"
-                                                   class="col-form-label">長度/外徑:</label>
-                                            <input type="text" class="form-control" id="length4new">
+                                            <label for="employeeSalary4new"
+                                                   class="col-form-label">薪水:</label>
+                                            <input type="text" class="form-control" id="employeeSalary4new">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="width4new"
-                                                   class="col-form-label">寬度/內徑:</label>
-                                            <input type="text" class="form-control" id="width4new">
+                                            <label for="employeePhone4new"
+                                                   class="col-form-label">電話:</label>
+                                            <input type="text" class="form-control" id="employeePhone4new">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="thickness4new"
-                                                   class="col-form-label">厚度:</label>
-                                            <input type="text" class="form-control" id="thickness4new">
+                                            <label for="employeeEmail4new"
+                                                   class="col-form-label">Email:</label>
+                                            <input type="text" class="form-control" id="employeeEmail4new">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="productMaterial4new"
-                                                   class="col-form-label">材質:</label>
-                                            <select name="" id="productMaterial4new" class="select24datatable" style="width: 150px;  ">
+                                            <label for="employeeAddress4new"
+                                                   class="col-form-label">地址:</label>
+                                            <input type="text" class="form-control" id="employeeAddress4new">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="employeeStatus4new"
+                                                   class="col-form-label">在職狀況:</label>
+                                            <select id="employeeStatus4new">
                                                 <option value="">請選擇</option>
+                                                <option value="1">在職</option>
+                                                <option value="0">非在職</option>
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="manufacturingProcess4new"
-                                                   class="col-form-label">製作流程:</label>
-                                            <input type="text" class="form-control" id="manufacturingProcess4new">
+                                            <label for="enrollmentDate4new"
+                                                   class="col-form-label">投保日:</label>
+                                            <input type="date" class="form-control" id="enrollmentDate4new">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="productQuotationUnitPrice4new"
-                                                   class="col-form-label">單價:</label>
-                                            <input type="text" class="form-control" id="productQuotationUnitPrice4new">
+                                            <label for="enrollmentPrice4new"
+                                                   class="col-form-label">投保金額:</label>
+                                            <input type="text" class="form-control" id="enrollmentPrice4new">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="productQuantity4new"
-                                                   class="col-form-label">數量:</label>
-                                            <input type="text" class="form-control" id="productQuantity4new">
+                                            <label for="groupInsurance4new"
+                                                   class="col-form-label">團體保險:</label>
+                                            <select id="groupInsurance4new">
+                                                <option value="">請選擇</option>
+                                                <option value="1">有投保</option>
+                                                <option value="0">未投保</option>
+                                            </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="productSubtotal4new"
-                                                   class="col-form-label">小計:</label>
-                                            <input type="text" class="form-control" id="productSubtotal4new">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="note4new"
+                                            <label for="employeeNotes4new"
                                                    class="col-form-label">備註:</label>
-                                            <textarea rows="5" cols="40" class="form-control" id="note4new"></textarea>
+                                            <input type="text" class="form-control" id="employeeNotes4new">
                                         </div>
                                     </form>
                                 </div>
@@ -396,41 +426,34 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 燈箱結束 -->
                 </div>
+            </div>
+            <!-- 燈箱結束 -->
+            <div class="controll-content activity-order-controll-content">
+                <table id="all" class="display" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>姓名</th>
+                        <th>身分證</th>
+                        <th>剩餘特休</th>
+                        <th>職稱</th>
+                        <th>薪水</th>
+                        <th>電話</th>
+                        <th>狀態</th>
+                        <th>修改</th>
+                        <th>刪除</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
 
-
-                <div class="controll-content activity-order-controll-content">
-                    <table id="all" class="display" style="width:100%">
-                        <thead>
-                        <tr>
-                            <th>編號</th>
-                            <th>客戶</th>
-                            <th>種類</th>
-                            <th>長度/外徑</th>
-                            <th>寬度／內徑</th>
-                            <th>厚度</th>
-                            <th>材質</th>
-                            <th>單價</th>
-                            <th>數量</th>
-                            <th>小計</th>
-                            <th>備註</th>
-                            <th>修改</th>
-                            <th>詳情</th>
-                            <th>刪除</th>
-                        </tr>
-                        </thead>
-                        <tbody id="tbody">
-
-                        </tbody>
-                    </table>
-                    <!---------------------------------主體結束-------------------------------->
-                </div>
+                    </tbody>
+                </table>
+                <!---------------------------------主體結束-------------------------------->
             </div>
         </div>
     </div>
 </div>
-</div>
+
 
 <!-- 引入bootstrap CDN -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
@@ -438,7 +461,7 @@
         crossorigin="anonymous"></script>
 
 <!-- 新引入的JS檔案或套件請由此往下放 -->
-<script src="assets/js/orderdetailslist4new.js"></script>
+<script src="assets/js/employee.js"></script>
 <script>
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
@@ -450,7 +473,7 @@
 
 
 <!--分頁表頭js-->
-<script src="assets/js/title.js"></script>
+<script src="../../employee/employee/assets/js/title.js"></script>
 <!--    搜尋選擇框-->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
