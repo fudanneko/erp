@@ -88,6 +88,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             if (entity.getNguyenVanA() != null) {
                 oldentity.setNguyenVanA(entity.getNguyenVanA());
             }
+            if (entity.getPerformanceRatio() != null) {
+                oldentity.setPerformanceRatio(entity.getPerformanceRatio());
+            }
             final Employee result = Dao.save(oldentity);
             oldentity.setSuccessful(result != null);
             oldentity.setMessage("修改成功");

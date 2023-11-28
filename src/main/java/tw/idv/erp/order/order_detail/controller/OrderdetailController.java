@@ -35,6 +35,17 @@ public class OrderdetailController {
         return SERVICE.findAll();
     }
 
+    @GetMapping("employee/employee/getAllOrderDetail")
+    public List<OrderDetail> findAll2() {
+        return SERVICE.findAll();
+    }
+
+    @GetMapping("employee/employee/getAllOrderDetail2")
+    public List<OrderDetail> findCompletionStatus(@RequestBody  Integer Request) {
+        List<OrderDetail> result=SERVICE.findCompletionStatus(Request);
+        return result;
+    }
+
     @PostMapping("order/order/getOrderDetailByOrder")
     public List<OrderDetail> findByPk(@RequestBody  Integer Request) {
         List<OrderDetail> result=SERVICE.findByOrderId(Request);

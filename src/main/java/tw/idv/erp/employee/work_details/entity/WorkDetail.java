@@ -16,7 +16,7 @@ public class WorkDetail extends Core {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "workDetailId", nullable = false)
-    private Integer id;
+    private Integer workDetailId;
 
     @Column(name = "workRecordId")
     private Integer workRecordId;
@@ -30,5 +30,11 @@ public class WorkDetail extends Core {
 
     @Column(name = "timeSpentOnProduction", precision = 10, scale = 2)
     private BigDecimal timeSpentOnProduction;
+
+
+    @Size(max = 45)
+    @Column(name = "process", length = 45)
+    private String  process;
+
 
 }

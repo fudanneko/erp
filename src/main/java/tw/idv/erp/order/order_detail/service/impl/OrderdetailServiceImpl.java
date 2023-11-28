@@ -67,6 +67,9 @@ public class OrderdetailServiceImpl implements OrderdetailService {
             if (orderDetail.getNote() != null) {
                 oldorderDetail.setNote(orderDetail.getNote());
             }
+            if (orderDetail.getCompletionStatus() != null) {
+                oldorderDetail.setCompletionStatus(orderDetail.getCompletionStatus());
+            }
             final OrderDetail result = Dao.save(oldorderDetail);
             oldorderDetail.setSuccessful(result != null);
             oldorderDetail.setMessage("修改成功");
@@ -89,6 +92,11 @@ public class OrderdetailServiceImpl implements OrderdetailService {
             return orderDetail2;
         }
         return null;
+    }
+
+    @Override
+    public List<OrderDetail> findCompletionStatus(Integer completionStatus) {
+            return Dao.findCompletionStatus(completionStatus);
     }
 
     @Override

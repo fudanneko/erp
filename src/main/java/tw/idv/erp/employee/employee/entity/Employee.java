@@ -84,5 +84,9 @@ public class Employee extends Core {
     @Column(name = "nguyenVanA", length = 45)
     private String nguyenVanA;
 
+    @Column(name = "performanceRatio", precision = 2, scale = 1)
+    private BigDecimal performanceRatio;
+
+
 
 }

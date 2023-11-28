@@ -18,7 +18,7 @@ public class WorkRecord extends Core {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "workRecordId", nullable = false)
-    private Integer id;
+    private Integer workRecordId;
 
     @Column(name = "employeeId")
     private Integer employeeId;

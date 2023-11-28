@@ -108,7 +108,7 @@
                         const quotation = row.quotation;
                         const note = row.note;
                         const orderState = row.orderState;
-                        ordercustomermap.set(OrderId,customerName);
+                        ordercustomermap.set(OrderId, customerName);
                     }
                     ;
                 });
@@ -118,6 +118,7 @@
                 console.log('錯誤：', err);
             });
     }
+
     // ============================查資料回來getAllPromotion() 拿到字串和筆數========================
     let dataaccount = 0;
 
@@ -156,6 +157,7 @@
                         const productQuantity = row.productQuantity;
                         const productSubtotal = row.productSubtotal;
                         const note = row.note;
+                        const completionStatus = row.completionStatus;
 
                         dataTable.row.add([orderId,
                             customerName,
@@ -253,6 +255,12 @@
                             <label For="note${i}"
                                    class="col-form-label">備註:</label>
                            <textarea  class="form-control" id="note${i}" >${note}</textarea>
+                        </div>
+                        
+                         <div class="mb-3">
+                            <label For="completionStatus${i}"
+                                   class="col-form-label">完成:</label>
+                           <input type="checkbox"  class="" id="completionStatus${i}"  ${completionStatus === 1 ? 'checked' : ''} >
                         </div>
                     </form>
                 </div>
@@ -510,6 +518,7 @@
         const productQuantity = document.getElementById(`productQuantity${i}`).value;
         const productSubtotal = document.getElementById(`productSubtotal${i}`).value;
         const note = document.getElementById(`note${i}`).value;
+        const completionStatus = document.getElementById(`completionStatus${i}`).checked ? 1 : 0;
 
         // if (customerId === '') {
         //     return;
@@ -532,6 +541,7 @@
                 productQuantity: productQuantity,
                 productSubtotal: productSubtotal,
                 note: note,
+                completionStatus: completionStatus,
             }),
         })
             .then(resp => resp.json())
@@ -701,7 +711,7 @@
         for (let i = 0; i < dataaccount; i++) {
             const detailbutton = document.getElementById('detail' + i);
             detailbutton?.addEventListener('click', () => {
-                sessionStorage.setItem('Orderdetail',JSON.stringify(Orderdetail[i]));
+                sessionStorage.setItem('Orderdetail', JSON.stringify(Orderdetail[i]));
                 window.open('orderdetails.html', '_blank');
             })
         }

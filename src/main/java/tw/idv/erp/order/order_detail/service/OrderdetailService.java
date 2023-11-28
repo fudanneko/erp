@@ -11,6 +11,8 @@ public interface OrderdetailService {
 
     List<OrderDetail> findAll();
 
+    List<OrderDetail> findCompletionStatus(Integer completionStatus);
+
     OrderDetail findByPK(Integer orderDetailId);
 
     boolean remove(Integer orderDetailId);

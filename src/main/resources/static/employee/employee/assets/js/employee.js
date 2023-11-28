@@ -45,6 +45,7 @@
                         const enrollmentPrice = row.enrollmentPrice;
                         const groupInsurance = row.groupInsurance;
                         const nguyenVanA = row.nguyenVanA;
+                        const performanceRatio = row.performanceRatio;
 
                         dataTable.row.add([
                             employeeName,
@@ -171,6 +172,11 @@
                                                 <option value="0">未投保</option>
                                      </select>
                         </div>
+                        <div class="mb-3">
+                                            <label for="employeeNotes${i}"
+                                                   class="col-form-label">績效倍率:</label>
+                                            <input type="text" class="form-control" id="performanceRatio${i}"  value="${performanceRatio}">
+                                        </div>
                          <div class="mb-3">
                             <label For="employeeNotes${i}"
                                    class="col-form-label">備註:</label>
@@ -261,6 +267,7 @@
         const enrollmentPrice = document.getElementById(`enrollmentPrice${i}`).value;
         const groupInsurance = document.getElementById(`groupInsurance${i}`).value;
         const nguyenVanA = document.getElementById(`nguyenVanA${i}`).value;
+        const performanceRatio = document.getElementById(`performanceRatio${i}`).value;
 
         // if (customerId === '') {
         //     return;
@@ -290,6 +297,7 @@
                 enrollmentPrice: enrollmentPrice,
                 groupInsurance: groupInsurance,
                 nguyenVanA: nguyenVanA,
+                performanceRatio: performanceRatio,
             }),
         })
             .then(resp => resp.json())
@@ -347,6 +355,7 @@
         const enrollmentPrice = document.querySelector('#enrollmentPrice4new').value;
         const groupInsurance = document.querySelector('#groupInsurance4new').value;
         const nguyenVanA = document.querySelector('#nguyenVanA4new').value;
+        const performanceRatio = document.querySelector('#performanceRatio4new').value;
 
 
         fetch('newEmployee', {
@@ -371,6 +380,7 @@
                 enrollmentPrice: enrollmentPrice,
                 groupInsurance: groupInsurance,
                 nguyenVanA: nguyenVanA,
+                performanceRatio: performanceRatio,
             }),
         })
             .then(resp => resp.json())

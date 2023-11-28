@@ -54,6 +54,9 @@ public class OrderDetail extends Core {
     @Column(name = "productSubtotal", precision = 10, scale = 1)
     private BigDecimal productSubtotal;
 
+    @Column(name = "completionStatus")
+    private Integer completionStatus;
+
     @Size(max = 500)
     @Column(name = "note", length = 500)
     private String note;

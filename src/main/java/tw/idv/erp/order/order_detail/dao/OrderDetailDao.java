@@ -11,4 +11,7 @@ import java.util.List;
 public interface OrderDetailDao extends JpaRepository<OrderDetail, Integer> {
     @Query(value = "SELECT * FROM `order_details` WHERE OrderId =  :OrderId", nativeQuery = true)
     List<OrderDetail> findByOrderId(Integer OrderId);
+
+    @Query(value = "SELECT * FROM `order_details` WHERE completionStatus =  :completionStatus", nativeQuery = true)
+    List<OrderDetail> findCompletionStatus(Integer completionStatus);
 }
