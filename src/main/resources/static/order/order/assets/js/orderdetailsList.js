@@ -458,10 +458,12 @@
                 const optiond = new Option('請選擇', '');
                 productType.append(optiond);
                 const selectedValue = productName.val();
+                const selectedCategoryValue = categoryName.val();
                 category.forEach(function (row) {
                     const productName = row.productName;
                     const productType1 = row.productType;
-                    if (productName === selectedValue) {
+                    const categoryName = row.categoryName;
+                    if (categoryName === selectedCategoryValue && productName === selectedValue) {
                         const option = new Option(productType1, productType1);
                         productType.append(option);
                     }

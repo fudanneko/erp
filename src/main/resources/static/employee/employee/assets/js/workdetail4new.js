@@ -88,7 +88,14 @@
     let WorkDetailData = [];
 
     function getWorkDetail() {
-        fetch("getAllWorkDetail")
+        const WorkRecordData = JSON.parse(sessionStorage.getItem('WorkRecordData'));
+        const WorkRecordId = WorkRecordData.workRecordId;
+        fetch("getWorkDetailByWorkRecordId", {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json',
+            }, body: WorkRecordId,
+        })
+
             .then(function (response) {
                 // 檢查 API 响應的狀態碼
                 if (response.status !== 200) {
@@ -505,7 +512,7 @@
 
     // ===============================VVV使用方法區VVV================================
     function workRecordIdinput() {
-        const WorkRecordData =JSON.parse( sessionStorage.getItem('WorkRecordData'));
+        const WorkRecordData = JSON.parse(sessionStorage.getItem('WorkRecordData'));
 
         const workRecordId4new = document.querySelector('#workRecordId4new');
         const workRecordId4newvalue = WorkRecordData.workRecordId;

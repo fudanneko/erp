@@ -40,7 +40,7 @@ public class OrderdetailController {
         return SERVICE.findAll();
     }
 
-    @GetMapping("employee/employee/getAllOrderDetail2")
+    @PostMapping("employee/employee/getAllOrderDetail2")
     public List<OrderDetail> findCompletionStatus(@RequestBody  Integer Request) {
         List<OrderDetail> result=SERVICE.findCompletionStatus(Request);
         return result;

@@ -2,7 +2,6 @@
     const tbody = document.querySelector('#tbody');
 
 
-
     // ===============================VVV方法區VVV====================================
     // ===============================找種類===================================
     let category = [];
@@ -147,7 +146,7 @@
                     // 在此處可以處理從 API 獲取的數據
                     Orderdetail = data;
                     console.log('查到的訂單：', Orderdetail);
-                    dataaccount =Orderdetail.length;
+                    dataaccount = Orderdetail.length;
                     for (let i = 0; i < Orderdetail.length; i++) {
                         let row = Orderdetail[i];
                         const orderDetailId = row.orderDetailId;
@@ -274,7 +273,7 @@
             </div>
         </div>
     </div>`,
-                            `<a href="#"><button type="button" class="btn btn-outline-primary">詳情</button></a>`,
+                            `<button type="button" class="btn btn-outline-primary" id="detail${i}">詳情</button>`,
                             `<button type="button" class="btn btn-primary" id="delete${i}">刪除</button>`]);
 
                     }
@@ -286,6 +285,7 @@
                     select4edit();
                     selected4edit();
                     reloadscroll();
+                    detailbutton();
 
                 });
             })
@@ -340,6 +340,7 @@
         ],
         dom: 'Qlfrtip',
     });
+
     function reloadscroll() {
         window.addEventListener('load', function () {
             // 从本地存储中检索滚动位置
@@ -374,7 +375,10 @@
             const option = new Option(row, row);
             categoryName4new.append(option);
         })
-        categoryName4new.select2();
+        // categoryName4new.select2();
+        //
+
+
         //材質select動態放入
         const uniquesteelMaterial = new Set();
         meterail.forEach(function (row) {
@@ -385,7 +389,7 @@
             const option = new Option(row, row);
             productMaterial4new.append(option);
         })
-        productMaterial4new.select2();
+        // productMaterial4new.select2();
 
         // 監聽種類名稱選擇事件
         categoryName4new.on('change', function () {
@@ -408,7 +412,7 @@
                 productName4new.append(option);
             })
 
-            productName4new.select2();
+            // productName4new.select2();
         });
         // 監聽產品名稱選擇事件
         productName4new.on('change', function () {
@@ -417,15 +421,17 @@
             const optiond = new Option('請選擇', '');
             productType4new.append(optiond);
             const selectedValue = productName4new.val();
+            const selectedCategoryValue = categoryName4new.val();
             category.forEach(function (row) {
                 const productName = row.productName;
-                const productType = row.productType;
-                if (productName === selectedValue) {
-                    const option = new Option(productType, productType);
+                const productType1 = row.productType;
+                const categoryName = row.categoryName;
+                if (categoryName === selectedCategoryValue && productName === selectedValue) {
+                    const option = new Option(productType1, productType1);
                     productType4new.append(option);
                 }
             })
-            productType4new.select2();
+            // productType4new.select2();
         });
     }
 
@@ -470,7 +476,7 @@
                 const option = new Option(row, row);
                 categoryName.append(option);
             })
-            categoryName.select2();
+            // categoryName.select2();
 
             //產品名稱select動態放入
             const uniqueproductNames = new Set();
@@ -482,7 +488,7 @@
                 const option = new Option(row, row);
                 productName.append(option);
             })
-            productName.select2();
+            // productName.select2();
 
             //產品形式select動態放入
             const uniqueproductTypes = new Set();
@@ -494,7 +500,7 @@
                 const option = new Option(row, row);
                 productType.append(option);
             })
-            productType.select2();
+            // productType.select2();
 
             //材質select動態放入
             const uniquesteelMaterial = new Set();
@@ -506,7 +512,7 @@
                 const option = new Option(row, row);
                 productMaterial.append(option);
             })
-            productMaterial.select2();
+            // productMaterial.select2();
 
             // 監聽種類名稱選擇事件
             categoryName.on('change', function () {
@@ -528,7 +534,7 @@
                     const option = new Option(row, row);
                     productName.append(option);
                 })
-                productName.select2();
+                // productName.select2();
             });
             // 監聽產品名稱選擇事件
             productName.on('change', function () {
@@ -537,15 +543,17 @@
                 const optiond = new Option('請選擇', '');
                 productType.append(optiond);
                 const selectedValue = productName.val();
+                const selectedCategoryValue = categoryName.val();
                 category.forEach(function (row) {
                     const productName = row.productName;
                     const productType1 = row.productType;
-                    if (productName === selectedValue) {
+                    const categoryName = row.categoryName;
+                    if (categoryName === selectedCategoryValue && productName === selectedValue) {
                         const option = new Option(productType1, productType1);
                         productType.append(option);
                     }
                 })
-                productType.select2();
+                // productType.select2();
             });
         }
     }
@@ -661,12 +669,13 @@
     const orderId = orderData.orderId;
     const customerId = orderData.customerId;
     const customerName = orderData.customerName;
+
     function orderIdinnew() {
 
         const OrderIdinput = document.getElementById(`orderId4new`);
         OrderIdinput.value = orderId;
         const titlea = document.querySelector('#titlea');
-        titlea.textContent='訂單明細列表 訂單編號： '+orderId;
+        titlea.textContent = '訂單明細列表 訂單編號： ' + orderId;
 
     }
 
@@ -801,8 +810,16 @@
 
     // ===============================VVV使用方法區VVV================================
 
-    //=================================1. 總之先查一次=================================
-
+    //=================================1.詳情=================================
+    function detailbutton() {
+        for (let i = 0; i < dataaccount; i++) {
+            const detailbutton = document.getElementById('detail' + i);
+            detailbutton?.addEventListener('click', () => {
+                sessionStorage.setItem('Orderdetail', JSON.stringify(Orderdetail[i]));
+                window.open('orderdetails.html', '_blank');
+            })
+        }
+    }
 
     // ===============================2. 確認新增按鈕================================
 

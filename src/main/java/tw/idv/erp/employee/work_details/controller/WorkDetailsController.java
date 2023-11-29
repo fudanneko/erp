@@ -37,6 +37,11 @@ public class WorkDetailsController {
         return SERVICE.findAll();
     }
 
+    @PostMapping("employee/employee/getWorkDetailByWorkRecordId")
+    public List<WorkDetail> findByWorkRecordId(@RequestBody Integer Request) {
+        return SERVICE.findByWorkRecordId(Request);
+    }
+
 
     @PostMapping("employee/employee/deleteWorkDetail")
     public Boolean deleteOrder(@RequestBody Integer Request) {

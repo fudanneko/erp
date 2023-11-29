@@ -34,7 +34,7 @@
     <!--搜尋選擇框select2-->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 
-    <title>工作報表列表</title>
+    <title>工作報表明細列表</title>
     <!--    select2-->
     <style>
         #th2container {
@@ -296,7 +296,7 @@
         <div class="col-10 page-body">
             <div class="controll-box activity-order-controll-box">
                 <div class="back-end-box-title activity-order-controll-title">
-                    <h3 class="h2">工作報表列表</h3>
+                    <h3 class="h2">工作報表明細列表</h3>
                     <!-- 燈箱 -->
                     <button type="button" class="btn btn-primary" id="newbutton2" data-bs-toggle="modal"
                             data-bs-target="#exampleModal" data-bs-whatever="@mdo">新增
@@ -314,48 +314,60 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="mb-3">
-                                            <label for="employeeId4new"
-                                                   class="col-form-label">員工姓名:</label>
-                                            <select id="employeeId4new">
-                                                <option value="">請選擇</option>
-                                                <option value="7">詹凱程</option>
-                                                <option value="8">賴俊吉</option>
-                                                <option value="9">李天鈞</option>
-                                                <option value="10">黃國龍</option>
-                                                <option value="13">黃氏慧</option>
-                                                <option value="14">杜昶成</option>
-                                                <option value="15">吳佳鴻</option>
-                                                <option value="16">詹浩宇</option>
-                                                <option value="17">阮光興</option>
-                                                <option value="18">阮文福</option>
-                                                <option value="19">黎春寶</option>
-                                                <option value="20">寧德孟</option>
-                                                <option value="21">鄧武協</option>
-                                                <option value="22">林子翔</option>
-                                                <option value="25">李世園</option>
-<!--                                                <option value="26"></option>-->
-<!--                                                <option value="27"></option>-->
-<!--                                                <option value="28"></option>-->
-<!--                                                <option value="29"></option>-->
-<!--                                                <option value="30"></option>-->
-<!--                                                <option value="31"></option>-->
+                                            <label for="workRecordId4new"
+                                                   class="col-form-label">工作記錄編號:</label>
+                                            <input type="text" class="form-control" id="workRecordId4new">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="orderDetailId4new"
+                                                   class="col-form-label">訂單明細:</label>
+                                            <select name="" id="orderDetailId4new" class="select24datatable"
+                                                    style="width: 300px"> </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label For="productionContentCode4new"
+                                                   class="col-form-label">製作機台:</label>
+                                            <select name="" id="productionContentCode4new" class="select24datatable"
+                                                    style="width: 300px"> </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label For="process4new"
+                                                   class="col-form-label">製程:</label>
+                                            <select name="" id="process4new" class="select24datatable"
+                                                    style="width: 300px">
+                                                <option value="1.厚度">1.厚度</option>
+                                                <option value="2.寬度">2.寬度</option>
+                                                <option value="3.長度">3.長度</option>
+                                                <option value="4.外型">4.外型</option>
+                                                <option value="5.斜度">5.斜度</option>
+                                                <option value="6.槽">6.槽</option>
+                                                <option value="7.鑽孔">7.鑽孔</option>
+                                                <option value="8.長圓孔">8.長圓孔</option>
+                                                <option value="9.端直">9.端直</option>
+                                                <option value="10.齒">10.齒</option>
+                                                <option value="11.研磨">11.研磨</option>
+                                                <option value="12.包裝">12.包裝</option>
+                                                <option value="13.拆組裝">13.拆組裝</option>
+                                                <option value="14.清潔">14.清潔</option>
+                                                <option value="15.精修">15.精修</option>
+                                                <!--                                                <option value=""></option>-->
+                                                <!--                                                <option value=""></option>-->
+                                                <!--                                                <option value=""></option>-->
+                                                <!--                                                <option value=""></option>-->
+                                                <!--                                                <option value=""></option>-->
                                             </select>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="recordDate4new"
-                                                   class="col-form-label">填寫日期:</label>
-                                            <input type="date" class="form-control" id="recordDate4new">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="additionalDetails4new"
-                                                   class="col-form-label">備註:</label>
-                                            <input type="text" class="form-control" id="additionalDetails4new">
+                                            <label for="timeSpentOnProduction4new"
+                                                   class="col-form-label">花費時間(分鐘):</label>
+                                            <input type="text" class="form-control" id="timeSpentOnProduction4new">
                                         </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
                                     <div id="msg4new"></div>
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消
+                                    </button>
                                     <button type="button" class="btn btn-primary" id="newbutton">新增</button>
                                 </div>
                             </div>
@@ -368,13 +380,12 @@
                 <table id="all" class="display" style="width:100%">
                     <thead>
                     <tr>
-                        <th>編號</th>
-                        <th>姓名</th>
-                        <th>日期</th>
-                        <th>績效</th>
-                        <th>備註</th>
+                        <th>工作明細編號</th>
+                        <th>訂單明細</th>
+                        <th>製作機台</th>
+                        <th>製程</th>
+                        <th>時間</th>
                         <th>修改</th>
-                        <th>詳情</th>
                         <th>刪除</th>
                     </tr>
                     </thead>
@@ -395,7 +406,7 @@
         crossorigin="anonymous"></script>
 
 <!-- 新引入的JS檔案或套件請由此往下放 -->
-<script src="assets/js/workrecord.js"></script>
+<script src="assets/js/workdetail4new.js"></script>
 <script>
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))

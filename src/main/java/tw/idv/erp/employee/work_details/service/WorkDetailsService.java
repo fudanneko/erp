@@ -14,9 +14,11 @@ public interface WorkDetailsService {
 
     List<WorkDetail> findAll();
 
-    WorkDetail findByPK(Integer getWorkDetailId);
+    List<WorkDetail> findByWorkRecordId(Integer  workRecordId);
+
+    WorkDetail findByPK(Integer workDetailId);
 
 
-    boolean remove(Integer getWorkDetailId);
+    boolean remove(Integer workDetailId);
 
 }

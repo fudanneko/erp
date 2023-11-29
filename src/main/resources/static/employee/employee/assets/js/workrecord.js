@@ -64,9 +64,7 @@
                             if(employeeId===employeeIda){
                                 employeename=employeenamea;
                             }
-
                         }
-
                         dataTable.row.add([
                             workRecordId,
                             employeename,
@@ -148,7 +146,7 @@
             </div>
         </div>
     `,
-                            `<a href="#"><button type="button" class="btn btn-outline-primary">詳情</button></a>`,
+                            `<button type="button" class="btn btn-outline-primary" id="detail${i}">詳情</button>`,
                             `<button type="button" class="btn btn-primary" id="delete${i}">刪除</button>`]);
 
                     }
@@ -157,6 +155,7 @@
                     setdeletebutton();
                     selected4edit();
                     reloadscroll();
+                    detailbutton();
                 });
             })
             .catch(function (err) {
@@ -386,7 +385,15 @@
     }
 
     // ===============================詳情按鈕 資料寫入storage===================================
-
+    function detailbutton() {
+        for (let i = 0; i < dataaccount; i++) {
+            const detailbutton = document.getElementById('detail' + i);
+            detailbutton?.addEventListener('click', () => {
+                sessionStorage.setItem('WorkRecordData', JSON.stringify(WorkRecordData[i]));
+                window.open('workdetail4new.html', '_blank');
+            })
+        }
+    }
     // ===============================^^^方法區^^^====================================
 
     // ===============================VVV使用方法區VVV================================
