@@ -6,6 +6,7 @@
     // ============================查資料回來getAll ========================
     getOrderDetail2();
     let OrderDetailData2 = [];
+    let WorkRecordData = [];
 
     function getOrderDetail2() {
         fetch("getAllOrderDetail2", {
@@ -24,6 +25,10 @@
                     // 在此處可以處理從 API 獲取的數據
                     OrderDetailData2 = data;
                     console.log("這是未完成的訂單明細資料", OrderDetailData2);
+                    const WorkRecordDataString = sessionStorage.getItem('WorkRecordData');
+                    if (WorkRecordDataString !== null) {
+                        WorkRecordData = JSON.parse(WorkRecordDataString);
+                    }
                     getOrderDetail();
                 });
             })
@@ -60,6 +65,7 @@
     // ============================查資料回來getAll ========================
 
     let ProductionContentCodeData = [];
+    let Multipliermap = new Map();
 
     function getProductionContentCode() {
         fetch("getAllProductionContentCode")
@@ -74,6 +80,13 @@
                     // 在此處可以處理從 API 獲取的數據
                     ProductionContentCodeData = data;
                     console.log("這是代號資料", ProductionContentCodeData);
+                    data.forEach(function (row) {
+                        const productionContentCode = row.productionContentCode;
+                        const productionContentName = row.productionContentName;
+                        const productionPerformanceMultiplier = row.productionPerformanceMultiplier;
+                        Multipliermap.set(productionContentName, productionPerformanceMultiplier)
+                    })
+                    console.log(Multipliermap)
                     getWorkDetail();
                 });
             })
@@ -88,7 +101,6 @@
     let WorkDetailData = [];
 
     function getWorkDetail() {
-        const WorkRecordData = JSON.parse(sessionStorage.getItem('WorkRecordData'));
         const WorkRecordId = WorkRecordData.workRecordId;
         fetch("getWorkDetailByWorkRecordId", {
             method: 'POST', headers: {
@@ -128,6 +140,7 @@
                         const productionContentCode = row.productionContentCode;
                         const timeSpentOnProduction = row.timeSpentOnProduction;
                         const process = row.process;
+                        const quantity = row.quantity;
 
                         dataTable.row.add([
                             workDetailId,
@@ -135,6 +148,8 @@
                             productionContentCode,
                             process,
                             timeSpentOnProduction,
+                            quantity,
+
                             `
             <button type="button" class="btn btn-primary"  data-bs-toggle="modal"
                     data-bs-target="#exampleModal${i}" data-bs-whatever="@mdo" id="editbutton${i}"  >修改</button>
@@ -153,7 +168,7 @@
                         <div class="mb-3">
                             <label For="workDetailId${i}"
                                    class="col-form-label">工作明細編號:</label>
-                            <input type="text" class="form-control" id="workRecordId${i}" value="${workDetailId}" readonly>
+                            <input type="text" class="form-control" id="workDetailId${i}" value="${workDetailId}" readonly>
                         </div>
                        <div class="mb-3">
                             <label For="workRecordId${i}"
@@ -201,6 +216,11 @@
                                    class="col-form-label">製作花費時間:</label>
                             <input type="text" class="form-control" id="timeSpentOnProduction${i}" value="${timeSpentOnProduction}">
                         </div>
+                         <div class="mb-3">
+                            <label For="quantity${i}"
+                                   class="col-form-label">數量:</label>
+                            <input type="text" class="form-control" id="quantity${i}" value="${quantity}">
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -225,6 +245,8 @@
                     workRecordIdinput();
                     reloadscroll();
                     select4edit();
+                    selected4edit();
+                    editOrde2();
                 });
             })
             .catch(function (err) {
@@ -254,24 +276,27 @@
     };
 
 // 自動選好修改內的select
-//     function selected4edit() {
-//         for (let i = 0; i < dataaccount; i++) {
-//             const employeeIdselect = $(`#employeeId${i}`);
-//             let row = WorkDetailData[i];
-//             const employeeIda = row.employeeId;
-//             console.log(employeeIda)
-//             employeeIdselect.val(employeeIda).trigger('change.select2');
-//         }
-//     }
+    function selected4edit() {
+        for (let i = 0; i < dataaccount; i++) {
+            const productionContentCodeselect = $(`#productionContentCode${i}`);
+            const processselect = $(`#process${i}`);
+            let row = WorkDetailData[i];
+            const productionContentCode = row.productionContentCode;
+            const process = row.process;
+            productionContentCodeselect.val(productionContentCode).trigger('change.select2');
+            processselect.val(process).trigger('change.select2');
+        }
+    }
 
     // ============================ 修改資料進去 editOrder()========================
     function editOrder(i) {
-        const workDetailId = document.getElementById(`workRecordId${i}`).value;
+        const workDetailId = document.getElementById(`workDetailId${i}`).value;
         const workRecordId = document.getElementById(`workRecordId${i}`).value;
         const orderDetailId = document.getElementById(`orderDetailId${i}`).value;
         const process = document.getElementById(`process${i}`).value;
         const productionContentCode = document.getElementById(`productionContentCode${i}`).value;
         const timeSpentOnProduction = document.getElementById(`timeSpentOnProduction${i}`).value;
+        const quantity = document.getElementById(`quantity${i}`).value;
 
 
         // if (customerId === '') {
@@ -289,6 +314,7 @@
                 productionContentCode: productionContentCode,
                 timeSpentOnProduction: timeSpentOnProduction,
                 process: process,
+                quantity: quantity,
             }),
         })
             .then(resp => resp.json())
@@ -356,10 +382,10 @@
     function newOrder() {
         const workRecordId = document.querySelector('#workRecordId4new').value;
         const orderDetailId = document.querySelector('#orderDetailId4new').value;
-        // 應該要從session拿
         const productionContentCode = document.querySelector('#productionContentCode4new').value;
         const process = document.querySelector('#process4new').value;
         const timeSpentOnProduction = document.querySelector('#timeSpentOnProduction4new').value;
+        const quantity = document.querySelector('#quantity4new').value;
 
 
         fetch('newWorkDetail', {
@@ -371,6 +397,8 @@
                 productionContentCode: productionContentCode,
                 process: process,
                 timeSpentOnProduction: timeSpentOnProduction,
+                quantity: quantity,
+
             }),
         })
             .then(resp => resp.json())
@@ -421,7 +449,6 @@
     // ============================9. 刪除方法========================
     function deledtbyPK(workDetailId) {
         const confirmed = confirm("確定要刪除嗎？");
-        console.log(workDetailId)
         if (confirmed) {
             fetch('deleteWorkDetail', {
                 method: 'POST', headers: {
@@ -512,15 +539,52 @@
 
     // ===============================VVV使用方法區VVV================================
     function workRecordIdinput() {
-        const WorkRecordData = JSON.parse(sessionStorage.getItem('WorkRecordData'));
-
         const workRecordId4new = document.querySelector('#workRecordId4new');
+        const title = document.querySelector('#title');
         const workRecordId4newvalue = WorkRecordData.workRecordId;
-        console.log(workRecordId4newvalue)
         workRecordId4new.value = workRecordId4newvalue;
+        title.textContent = "編號"+workRecordId4newvalue;
     }
 
-    //=================================1. 總之先查一次=================================
+    //=================================修改績效=================================
+    function editOrde2() {
+        const workRecordId2 = WorkRecordData.workRecordId;
+        let totalScore = 0;
+        WorkDetailData.forEach(function (row) {
+            const timeSpentOnProduction = row.timeSpentOnProduction;
+            const productionContentCode = row.productionContentCode;
+            const Multiplier = Multipliermap.get(productionContentCode);
+            const quantity = row.quantity;
+            totalScore += (timeSpentOnProduction * Multiplier * quantity);
+        })
+        console.log(totalScore)
+        fetch('editWorkRecord', {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json',
+            }, body: JSON.stringify({
+                workRecordId: workRecordId2,
+                performanceScore: totalScore,
+            }),
+        })
+            .then(resp => resp.json())
+            .then(body => {
+                console.log(body);
+                const {successful} = body;
+                if (successful) {
+                    Swal.fire({
+                        position: 'center', icon: 'success', title: '修改成功!', showConfirmButton: false, timer: 1
+                    }).then(() => {
+                        let scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+                        localStorage.setItem('scrollPosition', scrollPosition);
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error', title: 'Oops...', text: '修改失敗!', footer: '<a href=""></a>'
+                    })
+                }
+            });
+
+    }
 
     // ===============================2. 確認新增按鈕================================
 

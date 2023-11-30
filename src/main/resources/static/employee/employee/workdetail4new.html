@@ -297,6 +297,8 @@
             <div class="controll-box activity-order-controll-box">
                 <div class="back-end-box-title activity-order-controll-title">
                     <h3 class="h2">工作報表明細列表</h3>
+                    <h2 id="title"></h2>
+
                     <!-- 燈箱 -->
                     <button type="button" class="btn btn-primary" id="newbutton2" data-bs-toggle="modal"
                             data-bs-target="#exampleModal" data-bs-whatever="@mdo">新增
@@ -362,6 +364,11 @@
                                                    class="col-form-label">花費時間(分鐘):</label>
                                             <input type="text" class="form-control" id="timeSpentOnProduction4new">
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="quantity4new"
+                                                   class="col-form-label">數量:</label>
+                                            <input type="text" class="form-control" id="quantity4new">
+                                        </div>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -385,6 +392,7 @@
                         <th>製作機台</th>
                         <th>製程</th>
                         <th>時間</th>
+                        <th>數量</th>
                         <th>修改</th>
                         <th>刪除</th>
                     </tr>

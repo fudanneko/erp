@@ -36,5 +36,9 @@ public class WorkDetail extends Core {
     @Column(name = "process", length = 45)
     private String  process;
 
+    @Column(name = "quantity")
+    private Integer quantity;
+
+
 
 }

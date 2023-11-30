@@ -49,9 +49,9 @@ public class WorkDetailsServiceImpl implements WorkDetailsService {
             if (entity.getProcess() != null) {
                 oldentity.setProcess(entity.getProcess());
             }
-
-
-
+            if (entity.getQuantity() != null) {
+                oldentity.setQuantity(entity.getQuantity());
+            }
             final WorkDetail result = Dao.save(oldentity);
             oldentity.setSuccessful(result != null);
             oldentity.setMessage("修改成功");

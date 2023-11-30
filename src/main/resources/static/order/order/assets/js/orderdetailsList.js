@@ -300,7 +300,7 @@
     let dataTable = $('#all').DataTable({
         // scrollY: '600px',
         scrollCollapse: false,
-        paging: true,
+        paging: false,
         pageLength: 15,
         info: false,
         destroy: true,
