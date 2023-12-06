@@ -84,12 +84,17 @@
     const ppproductSubtotal = document.getElementById('ppproductSubtotal')
     const ppnote = document.getElementById('ppnote')
     // =========================工作明細分頁=========================
-    const wpworkDetailId = document.getElementById('wpworkDetailId')
-    const wpworkRecordId = document.getElementById('wpworkRecordId')
-    const wporderDetailId = document.getElementById('wporderDetailId')
-    const wpproductionContentCode = document.getElementById('wpproductionContentCode')
-    const wpproductionContentName = document.getElementById('wpproductionContentName')
-    const wptimeSpentOnProduction = document.getElementById('wptimeSpentOnProduction')
+
+    // ============================  初始化datatable函式========================
+    let dataTable = $('#all').DataTable({
+        scrollCollapse: false,
+        paging: true,
+        pageLength: 15,
+        info: false,
+        destroy: true,
+        dom: 'Qlfrtip',
+    });
+
     // =========================讀取sessionstorage=========================
 
     const Orderdetail = sessionStorage.getItem('Orderdetail');
@@ -1115,7 +1120,9 @@
                     getproductQuotation();
                     getgrindingPrice();
                     getmeterail();
-
+                    getEmployee();
+                    getWorkRecord();
+                    getOrderDetail();
                 });
 
             })
@@ -1468,6 +1475,149 @@
             editppOrder();
         })
     }
+
+
+    // ===================工作報表填入==========================
+    let EmployeeData = [];
+    let EmployeeNamemap = new Map();
+
+    function getEmployee() {
+        fetch("getAllEmployee")
+            .then(function (response) {
+                // 檢查 API 响應的狀態碼
+                if (response.status !== 200) {
+                    console.log('發生錯誤，狀態碼：' + response.status);
+                    return;
+                }
+                // 解析 JSON 格式的數據
+                response.json().then(function (data) {
+                    // 在此處可以處理從 API 獲取的數據
+                    EmployeeData = data;
+                    console.log("這是員工資料", EmployeeData);
+                    for (let i = 0; i < EmployeeData.length; i++) {
+                        let row = EmployeeData[i];
+                        const employeeId = row.employeeId;
+                        const employeeName = row.employeeName;
+                        EmployeeNamemap.set(employeeId,employeeName)
+                    }
+                });
+            })
+            .catch(function (err) {
+                console.log('錯誤：', err);
+            });
+    }
+
+    let WorkRecordData = [];
+    let  WorkRecordmap = new Map();
+
+    function getWorkRecord() {
+        fetch("getAllWorkRecord")
+            .then(function (response) {
+                // 檢查 API 响應的狀態碼
+                if (response.status !== 200) {
+                    console.log('發生錯誤，狀態碼：' + response.status);
+                    return;
+                }
+
+                // 解析 JSON 格式的數據
+                response.json().then(function (data) {
+                    // 在此處可以處理從 API 獲取的數據
+                    WorkRecordData = data;
+                    console.log("這是工作報表資料", WorkRecordData);
+                    for (let i = 0; i < WorkRecordData.length; i++) {
+                        let row = WorkRecordData[i];
+                        const workRecordId = row.workRecordId;
+                        const employeeId = row.employeeId;
+                        WorkRecordmap.set(workRecordId,employeeId)
+                    }
+                });
+            })
+            .catch(function (err) {
+                console.log('錯誤：', err);
+            });
+    }
+
+    let OrderDetailData = [];
+
+    function getOrderDetail() {
+        fetch("getAllOrderDetail")
+            .then(function (response) {
+                // 檢查 API 响應的狀態碼
+                if (response.status !== 200) {
+                    console.log('發生錯誤，狀態碼：' + response.status);
+                    return;
+                }
+                // 解析 JSON 格式的數據
+                response.json().then(function (data) {
+                    // 在此處可以處理從 API 獲取的數據
+                    OrderDetailData = data;
+                    console.log("這是訂單明細資料", OrderDetailData);
+                    getWorkDetail();
+                });
+            })
+            .catch(function (err) {
+                console.log('錯誤：', err);
+            });
+    }
+
+    let WorkDetailData = [];
+
+    function getWorkDetail() {
+        fetch("getWorkDetailByOrderDetailId", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(orderDetailId),
+        })
+
+
+            .then(function (response) {
+                // 檢查 API 响應的狀態碼
+                if (response.status !== 200) {
+                    console.log('發生錯誤，狀態碼：' + response.status);
+                    return;
+                }
+
+                // 解析 JSON 格式的數據
+                response.json().then(function (data) {
+                    // 在此處可以處理從 API 獲取的數據
+                    WorkDetailData = data;
+                    console.log("這是工作報表資料", WorkDetailData);
+                    dataaccount = WorkDetailData.length;
+                    for (let i = 0; i < WorkDetailData.length; i++) {
+                        let row = WorkDetailData[i];
+                        const workDetailId = row.workDetailId;
+                        const workRecordId = row.workRecordId;
+                        const employeeId=WorkRecordmap.get(workRecordId)
+                        const employeeName=EmployeeNamemap.get(employeeId)
+
+                        const orderDetailId = row.orderDetailId;
+
+
+                        const productionContentCode = row.productionContentCode;
+                        const timeSpentOnProduction = row.timeSpentOnProduction;
+                        const process = row.process;
+                        const quantity = row.quantity;
+
+                        dataTable.row.add([
+                            workDetailId,
+                            employeeName,
+                            productionContentCode,
+                            process,
+                            timeSpentOnProduction,
+                            quantity,
+                        ]);
+
+                    }
+                    dataTable.draw();
+                });
+            })
+            .catch(function (err) {
+                console.log('錯誤：', err);
+            });
+    }
+
 
 
 })();

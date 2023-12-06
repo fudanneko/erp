@@ -14,6 +14,23 @@
     <!-- 引入bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- datatable  css-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/searchbuilder/1.5.0/css/searchBuilder.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.7.0/css/select.dataTables.min.css"/>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <script src="https://cdn.datatables.net/searchbuilder/1.5.0/js/dataTables.searchBuilder.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" href="assets/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400;500;600;700;800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&display=swap"
+            rel="stylesheet">
     <!-- 引入Google font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -381,49 +398,29 @@
 </div>
 <!--工作明細資料分頁 workdetailpage-->
 <div id="workdetailpage" style="display: none" class="paging">
-    <div class="col-8 page-body">
+    <div class="col-16 page-body">
         <div class="container2 d-flex">
-            <div class="col-8">
+            <div class="col-12">
                 <div class="controll-box counter-alter-controll-box">
                     <div class="controll-content counter-alter-controll-content">
-                        <form action="" id="workdetailpageform">
+                        <div class="controll-content activity-order-controll-content">
+                            <table id="all" class="display" style="width:100%">
+                                <thead>
+                                <tr>
+                                    <th>工作明細編號</th>
+                                    <th>姓名</th>
+                                    <th>製作機台</th>
+                                    <th>製程</th>
+                                    <th>時間</th>
+                                    <th>數量</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tbody">
 
-                            <div class="input-group mt-3">
-                                <label for="wpworkDetailId" class="input-group-text">工作明細編號</label>
-                                <input type="text" class="form-control" id="wpworkDetailId" readonly>
-                            </div>
-                            <div class="input-group mt-3">
-                                <label for="wpworkRecordId" class="input-group-text">工作記錄編號</label>
-                                <input type="text" class="form-control" id="wpworkRecordId" readonly>
-                            </div>
-                            <div class="input-group mt-3">
-                                <label for="wporderDetailId" class="input-group-text">訂單明細編號</label>
-                                <input type="text" class="form-control" id="wporderDetailId" readonly>
-                            </div>
-                            <div class="input-group mt-3">
-                                <label for="wpproductionContentCode" class="input-group-text">製作內容代號</label>
-                                <input type="text" class="form-control" id="wpproductionContentCode" readonly>
-                            </div>
-                            <div class="input-group mt-3">
-                                <label for="wpproductionContentName" class="input-group-text">製作內容名稱</label>
-                                <input type="text" class="form-control" id="wpproductionContentName" readonly>
-                            </div>
-                            <div class="input-group mt-3">
-                                <label for="wptimeSpentOnProduction" class="input-group-text">製作花費時間</label>
-                                <input type="text" class="form-control" id="wptimeSpentOnProduction" readonly>
-                            </div>
-
-                            <!-- 按鈕區-->
-                            <!--                            <div class="button-group mt-2">-->
-                            <!--                                <button type="button" class="btn revise-btn btn-outline-primary"-->
-                            <!--                                        id="confirmbtn">-->
-                            <!--                                    確認修改-->
-                            <!--                                </button>-->
-                            <!--                                <button type="button" class="btn btn-outline-secondary ml-2" id="canslebtn">重設-->
-                            <!--                                </button>-->
-                            <!--                            </div>-->
-                            <hr>
-                        </form>
+                                </tbody>
+                            </table>
+                            <!---------------------------------主體結束-------------------------------->
+                        </div>
                     </div>
                 </div>
             </div>

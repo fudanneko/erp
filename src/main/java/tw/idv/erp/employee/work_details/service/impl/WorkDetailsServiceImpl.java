@@ -72,6 +72,12 @@ public class WorkDetailsServiceImpl implements WorkDetailsService {
     }
 
 
+    @Override
+    public List<WorkDetail> findByOrderDetailId(Integer orderDetailId) {
+        return Dao.findByOrderDetailId(orderDetailId);
+    }
+
+
 
     @Override
     public WorkDetail findByPK(Integer WorkDetailId) {

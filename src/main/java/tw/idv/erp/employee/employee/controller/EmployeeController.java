@@ -36,6 +36,10 @@ public class EmployeeController {
     public List<Employee> findAll() {
         return SERVICE.findAll();
     }
+    @GetMapping("order/order/getAllEmployee")
+    public List<Employee> findAll2() {
+        return SERVICE.findAll();
+    }
 
 
     @PostMapping("employee/employee/deleteEmployee")

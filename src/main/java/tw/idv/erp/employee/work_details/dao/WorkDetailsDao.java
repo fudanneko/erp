@@ -13,4 +13,7 @@ public interface WorkDetailsDao extends JpaRepository<WorkDetail, Integer> {
     @Query(value = "SELECT * FROM `work_details` WHERE workRecordId =  :workRecordId", nativeQuery = true)
     List<WorkDetail> findByWorkRecordId(Integer workRecordId);
 
+    @Query(value = "SELECT * FROM `work_details` WHERE orderDetailId =  :orderDetailId", nativeQuery = true)
+    List<WorkDetail> findByOrderDetailId(Integer orderDetailId);
+
 }

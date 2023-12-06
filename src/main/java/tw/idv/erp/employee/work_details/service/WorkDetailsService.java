@@ -16,6 +16,10 @@ public interface WorkDetailsService {
 
     List<WorkDetail> findByWorkRecordId(Integer  workRecordId);
 
+    List<WorkDetail> findByOrderDetailId(Integer  orderDetailId);
+
+
+
     WorkDetail findByPK(Integer workDetailId);
 
 
