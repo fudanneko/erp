@@ -128,7 +128,7 @@
         fetch("getAllOrderDetail2", {
             method: 'POST', headers: {
                 'Content-Type': 'application/json',
-            }, body: (0),
+            }, body: (1),
         })
             .then(function (response) {
                 // 檢查 API 响應的狀態碼

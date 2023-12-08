@@ -47,6 +47,14 @@ public class OrderdetailController {
     }
 
 
+//訂單明細列表
+    @PostMapping("order/order/getAllOrderDetail2")
+    public List<OrderDetail> findCompletionStatus2(@RequestBody  Integer Request) {
+        List<OrderDetail> result=SERVICE.findCompletionStatus(Request);
+        return result;
+    }
+
+
 
     @PostMapping("order/order/getOrderDetailByOrder")
     public List<OrderDetail> findByPk(@RequestBody  Integer Request) {
