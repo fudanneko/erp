@@ -34,7 +34,7 @@
     <!--搜尋選擇框select2-->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
 
-    <title>客戶聯絡人管理</title>
+    <title>客戶列表</title>
     <!--    select2-->
     <style>
         #th2container {
@@ -141,7 +141,7 @@
             <div class="list-group rounded-bottom-0">
                 <a href="#" class="list-group-item list-group-item-action fw-bold p-3 sidebar-menu">
                     <i class="fa-solid fa-users me-2"></i>
-                    平台後台管理
+                    昶鋒刀具
                 </a>
             </div>
             <div class="accordion accordion-flush border-start border-end" id="accordionFlushSidebar">
@@ -151,7 +151,7 @@
                                 data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false"
                                 aria-controls="flush-collapseOne">
                             <i class="fa-solid fa-store me-2"></i>
-                            櫃位資料管理
+                            客戶資料管理
                         </button>
                     </h2>
                     <div id="flush-collapseOne" class="accordion-collapse collapse"
@@ -296,7 +296,7 @@
         <div class="col-10 page-body">
             <div class="controll-box activity-order-controll-box">
                 <div class="back-end-box-title activity-order-controll-title">
-                    <h3 class="h2">客戶聯絡人列表</h3>
+                    <h3 class="h2">客戶列表</h3>
                     <!-- 燈箱 -->
                     <button type="button" class="btn btn-primary" id="newbutton2" data-bs-toggle="modal"
                             data-bs-target="#exampleModal" data-bs-whatever="@mdo">新增
@@ -306,7 +306,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">新增客戶聯絡人資料
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">新增客戶資料
                                     </h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
@@ -314,26 +314,40 @@
                                 <div class="modal-body">
                                     <form>
                                         <div class="mb-3">
-                                            <label For="customerId4new"
+                                            <label for="customeruk4new"
+                                                   class="col-form-label">客戶代號:</label>
+                                            <input type="text" class="form-control" id="customeruk4new">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="customerName4new"
                                                    class="col-form-label">客戶名稱:</label>
-                                            <select name="" id="customerId4new" class="select24datatable" style="width: 200px">
-                                                <option value="">請選擇</option>
-                                            </select>
+                                            <input type="text" class="form-control" id="customerName4new">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="contactName4new"
-                                                   class="col-form-label">聯絡人名稱:</label>
-                                            <input type="text" class="form-control" id="contactName4new">
+                                            <label for="customerPhone4new"
+                                                   class="col-form-label">電話:</label>
+                                            <input type="text" class="form-control" id="customerPhone4new">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="contactTitle4new"
-                                                   class="col-form-label">聯絡人職稱:</label>
-                                            <input type="text" class="form-control" id="contactTitle4new">
+                                            <label for="customerFax4new"
+                                                   class="col-form-label">傳真:</label>
+                                            <input type="text" class="form-control" id="customerFax4new">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="contactMobile4new"
-                                                   class="col-form-label">聯絡人電話:</label>
-                                            <input type="text" class="form-control" id="contactMobile4new">
+                                            <label for="customerAddress4new"
+                                                   class="col-form-label">地址:</label>
+                                            <input type="text" class="form-control" id="customerAddress4new">
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="customerMultiplier4new"
+                                                   class="col-form-label">倍率:</label>
+                                            <input type="number" class="form-control" id="customerMultiplier4new">
+                                        </div>
+                                                  <div class="mb-3">
+                                            <label for="note4new"
+                                                   class="col-form-label">備註:</label>
+                                            <textarea rows="5" cols="40" class="form-control" id="note4new"></textarea>
                                         </div>
                                     </form>
                                 </div>
@@ -354,12 +368,15 @@
                     <table id="all" class="display" style="width:100%">
                         <thead>
                         <tr>
-                            <th>編號</th>
+                            <th>代號</th>
                             <th>客戶</th>
-                            <th>名稱</th>
-                            <th>職稱</th>
                             <th>電話</th>
+                            <th>傳真</th>
+                            <th>地址</th>
+                            <th>倍率</th>
+                            <th>備註</th>
                             <th>修改</th>
+                            <th>聯絡人</th>
                             <th>刪除</th>
                         </tr>
                         </thead>
@@ -381,7 +398,7 @@
         crossorigin="anonymous"></script>
 
 <!-- 新引入的JS檔案或套件請由此往下放 -->
-<script src="assets/js/contact.js"></script>
+<script src="assets/js/customer.js"></script>
 <script>
     const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
     const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))

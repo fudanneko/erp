@@ -13,6 +13,8 @@ public interface ContactDetailService {
 
     Contact findByPK(Integer contactId);
 
+    List<Contact> findByCustomerId(Integer CustomerId);
+
 
     boolean remove(Integer contactId);
 

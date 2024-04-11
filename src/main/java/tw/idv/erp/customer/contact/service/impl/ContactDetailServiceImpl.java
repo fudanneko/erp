@@ -71,6 +71,11 @@ public class ContactDetailServiceImpl implements ContactDetailService {
     }
 
     @Override
+    public List<Contact> findByCustomerId(Integer customerId) {
+        return Dao.findContactsByCustomerId(customerId);
+    }
+
+    @Override
     public boolean remove(Integer contactId) {
             try {
                 Dao.deleteById(contactId);

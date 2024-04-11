@@ -30,6 +30,12 @@ public class ContactController {
         return contact;
     }
 
+    @PostMapping("customer/customer/getcustomerByData")
+    public List<Contact> getcustomerByData(@RequestBody Integer OrderRequest) {
+        System.out.println(OrderRequest);
+        List<Contact> contact = SERVICE.findByCustomerId(OrderRequest);
+        return contact;
+    }
 
 
     @GetMapping("customer/customer/getAllContact")
@@ -43,7 +49,6 @@ public class ContactController {
         Boolean deletesucceed = SERVICE.remove(OrderRequest);
         return deletesucceed;
     }
-
 
 
 }

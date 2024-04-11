@@ -112,13 +112,14 @@
             </div>
         </div>
     </div>`,
-                            `<a href="#"><button type="button" class="btn btn-outline-primary">聯絡人</button></a>`,
+                            `<button type="button" class="btn btn-outline-primary" id="contact${i}">聯絡人</button>`,
                             `<button type="button" class="btn btn-primary" id="delete${i}">刪除</button>`]);
 
                     }
                     dataTable.draw();
                     seteditbutton();
-                    setdeletebutton()
+                    setdeletebutton();
+                    setcontactbutton();
                 });
             })
             .catch(function (err) {
@@ -305,6 +306,17 @@
             })
         }
     }
+
+    function setcontactbutton() {
+        for (let i = 0; i <= dataaccount; i++) {
+            const contactbutton = document.getElementById('contact' + i);
+            contactbutton?.addEventListener('click', () => {
+                sessionStorage.setItem('customer', JSON.stringify(customer[i]));
+                window.open('contact4new.html', '_blank');
+            })
+        }
+    }
+
 
     // ============================9. 刪除方法========================
     function deledtbyPK(customerId) {
